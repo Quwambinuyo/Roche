@@ -56,12 +56,12 @@ const LandingShopTheLook = () => {
       </Reveal>
 
       <div className="grid md:grid-cols-[1.1fr_0.9fr] gap-10 items-stretch">
-        <Reveal className="relative rounded-2xl overflow-hidden h-full min-h-[280px] max-h-[340px]">
+        <Reveal className="relative rounded-2xl overflow-hidden h-full min-h-[500px] max-h-[550px] bg-secondary/5">
           <RevealImage
             src={look.image}
             alt={look.name}
             className="w-full h-full"
-            imgClassName="w-full h-full object-cover"
+            imgClassName="w-full h-full object-contain"
           />
           {look.pieces.map((piece) => (
             <button

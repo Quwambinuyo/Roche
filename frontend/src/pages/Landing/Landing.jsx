@@ -6,7 +6,7 @@ import LandingTrustBar from "./LandingTrustBar";
 import LandingCategoryGrid from "./LandingCategoryGrid";
 import LandingProductGrid from "./LandingProductGrid";
 import LandingShopTheLook from "./LandingShopTheLook";
-import LandingLookbook from "./LandingLookbook";
+import LandingLookBook from "./LandingLookBook";
 import LandingCraftSection from "./LandingCraftSection";
 import LandingTestimonials from "./LandingTestimonials";
 import LandingFAQPreview from "./LandingFAQPreview";
