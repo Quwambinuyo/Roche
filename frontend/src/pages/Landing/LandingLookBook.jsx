@@ -138,15 +138,15 @@ const LandingLookBook = () => {
                     className="w-full h-full"
                     imgClassName="transition-transform duration-700 hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary-900/80 via-primary-900/10 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <p className="text-secondary/60 text-xs font-semibold tracking-widest">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-6 pt-10 bg-gradient-to-t from-black/70 to-transparent">
+                    <p className="text-white/70 text-xs font-semibold tracking-widest">
                       {entry.number}
                     </p>
-                    <p className="text-secondary font-bold text-xl mt-1">
+                    <p className="text-white font-bold text-xl mt-1 drop-shadow-sm">
                       {entry.title}
                     </p>
-                    <p className="text-secondary/70 text-sm mt-2 max-w-sm leading-relaxed">
+                    <p className="text-white/85 text-sm mt-2 max-w-sm leading-relaxed">
                       {entry.copy}
                     </p>
                   </div>
