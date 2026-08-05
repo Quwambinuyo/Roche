@@ -12,6 +12,7 @@ import LandingTestimonials from "./LandingTestimonials";
 import LandingFAQPreview from "./LandingFAQPreview";
 import LandingNewsletter from "./LandingNewsletter";
 import LandingFooter from "./LandingFooter";
+import Divider from "../../components/UI/Divider";
 
 const Landing = () => {
   return (
@@ -20,12 +21,19 @@ const Landing = () => {
       <LandingMarquee />
       <LandingHero />
       <LandingTrustBar />
+      <Divider />
       <LandingCategoryGrid />
+      <Divider />
       <LandingProductGrid />
+      <Divider />
       <LandingShopTheLook />
+      <Divider />
       <LandingLookBook />
+      <Divider />
       <LandingCraftSection />
+      <Divider />
       <LandingTestimonials />
+      <Divider />
       <LandingFAQPreview />
       <LandingNewsletter />
       <LandingFooter />
