@@ -11,11 +11,11 @@ const LandingHero = () => {
         muted
         loop
         playsInline
-        poster="https://images.pexels.com/videos/9512048/pexels-photo-9512048.jpeg?auto=compress&w=1260&h=750&dpr=1"
+        poster="https://images.pexels.com/videos/9512045/pexels-photo-9512045.jpeg?auto=compress&w=1260&h=750&dpr=1"
         className="absolute inset-0 w-full h-full object-cover"
       >
         <source
-          src="https://videos.pexels.com/video-files/9512048/9512048-uhd_1440_2732_25fps.mp4"
+          src="https://videos.pexels.com/video-files/9512045/9512045-uhd_2732_1440_25fps.mp4"
           type="video/mp4"
         />
       </video>

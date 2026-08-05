@@ -38,28 +38,16 @@ export const CATEGORIES = [
       "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=600&q=80",
   },
   {
-    name: "Hats",
-    count: 12,
-    image:
-      "https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=600&q=80",
-  },
-  {
     name: "Caps",
     count: 17,
     image:
       "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=600&q=80",
   },
   {
-    name: "Boxers",
-    count: 20,
+    name: "Glasses",
+    count: 12,
     image:
-      "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    name: "Armless Singlets",
-    count: 15,
-    image:
-      "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80",
   },
 ];
 

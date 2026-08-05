@@ -164,7 +164,7 @@ const LandingFooter = () => {
               ))}
             </select>
           </div>
-          <p className="text-xs text-secondary/40">© 2026 Field Co.</p>
+          <p className="text-xs text-secondary/40">© 2026 Roche Co.</p>
         </Reveal>
       </div>
 
