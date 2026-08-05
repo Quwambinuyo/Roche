@@ -2,10 +2,14 @@ import React from "react";
 import LandingNavbar from "./LandingNavbar";
 import LandingMarquee from "./LandingMarquee";
 import LandingHero from "./LandingHero";
+import LandingTrustBar from "./LandingTrustBar";
 import LandingCategoryGrid from "./LandingCategoryGrid";
 import LandingProductGrid from "./LandingProductGrid";
+import LandingShopTheLook from "./LandingShopTheLook";
+import LandingLookbook from "./LandingLookbook";
 import LandingCraftSection from "./LandingCraftSection";
 import LandingTestimonials from "./LandingTestimonials";
+import LandingFAQPreview from "./LandingFAQPreview";
 import LandingNewsletter from "./LandingNewsletter";
 import LandingFooter from "./LandingFooter";
 
@@ -15,10 +19,14 @@ const Landing = () => {
       <LandingNavbar />
       <LandingMarquee />
       <LandingHero />
+      <LandingTrustBar />
       <LandingCategoryGrid />
       <LandingProductGrid />
+      <LandingShopTheLook />
+      <LandingLookbook />
       <LandingCraftSection />
       <LandingTestimonials />
+      <LandingFAQPreview />
       <LandingNewsletter />
       <LandingFooter />
     </div>

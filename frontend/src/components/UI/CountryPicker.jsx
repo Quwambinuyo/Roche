@@ -48,7 +48,7 @@ const CountryPicker = ({ value, onChange }) => {
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
-        className="flex items-center gap-2 bg-transparent border border-primary/20 rounded-full text-xs px-4 py-2 outline-none hover:border-primary/50 transition-colors duration-300"
+        className="flex items-center gap-2 bg-transparent border border-secondary/20 rounded-full text-xs px-4 py-2 outline-none hover:border-secondary/50 transition-colors duration-300"
       >
         {selected ? (
           <span className="text-sm leading-none">
@@ -65,20 +65,20 @@ const CountryPicker = ({ value, onChange }) => {
       </button>
 
       {open && (
-        <div className="absolute bottom-full mb-2 left-0 w-64 max-h-72 bg-secondary border border-primary/15 rounded-2xl shadow-2xl overflow-hidden origin-bottom-left animate-dropdownIn z-50">
-          <div className="flex items-center gap-2 px-3 py-2.5 border-b border-primary/10">
-            <FiSearch size={14} className="text-primary/40 shrink-0" />
+        <div className="absolute bottom-full mb-2 left-0 w-64 max-h-72 bg-primary border border-secondary/15 rounded-2xl shadow-2xl overflow-hidden origin-bottom-left animate-dropdownIn z-50">
+          <div className="flex items-center gap-2 px-3 py-2.5 border-b border-secondary/10">
+            <FiSearch size={14} className="text-secondary/40 shrink-0" />
             <input
               autoFocus
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search country..."
-              className="w-full bg-transparent text-xs outline-none placeholder:text-primary/30"
+              className="w-full bg-transparent text-xs outline-none placeholder:text-secondary/30"
             />
           </div>
           <div className="max-h-56 overflow-y-auto py-1">
             {filtered.length === 0 && (
-              <p className="text-xs text-primary/40 px-4 py-3">
+              <p className="text-xs text-secondary/40 px-4 py-3">
                 No matches found.
               </p>
             )}
@@ -93,8 +93,8 @@ const CountryPicker = ({ value, onChange }) => {
                     setOpen(false);
                     setQuery("");
                   }}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs text-left hover:bg-primary/5 transition-colors duration-150 ${
-                    isSelected ? "bg-primary/5" : ""
+                  className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs text-left hover:bg-secondary/5 transition-colors duration-150 ${
+                    isSelected ? "bg-secondary/5" : ""
                   }`}
                 >
                   <span className="text-sm leading-none w-4 shrink-0">
