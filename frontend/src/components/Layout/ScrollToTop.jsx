@@ -34,7 +34,7 @@ const ScrollToTop = ({ threshold = 400, scrollContainerRef = null }) => {
     <button
       onClick={handleClick}
       aria-label="Scroll to top"
-      className={`fixed bottom-6 right-6 z-[60] w-11 h-11 flex items-center justify-center rounded-full bg-secondary text-primary shadow-lg transition-all duration-300 hover:bg-tertiary-900 ${
+      className={`fixed bottom-20 right-6 z-[60] w-11 h-11 flex items-center justify-center rounded-full bg-secondary text-primary shadow-lg transition-all duration-300 hover:bg-tertiary-900 ${
         visible
           ? "opacity-100 translate-y-0 pointer-events-auto"
           : "opacity-0 translate-y-3 pointer-events-none"
