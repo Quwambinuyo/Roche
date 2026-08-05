@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Check } from "lucide-react";
 import Reveal from "./Reveal";
 import RevealImage from "../../components/UI/RevealImage";
+import shopthelook from "../../assets/images/landing/shopthelook.jfif";
+import shopthelook1 from "../../assets/images/landing/shopthelook1.jfif";
+import shopthelook2 from "../../assets/images/landing/shopthelook2.jfif";
 
 const LOOKS = [
   {
@@ -11,22 +14,19 @@ const LOOKS = [
         id: 1,
         name: "Waxed Canvas Jacket",
         price: "₦68,000",
-        image:
-          "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=500&q=80",
+        image: shopthelook,
       },
       {
         id: 2,
         name: "Heavyweight Tee",
         price: "₦21,500",
-        image:
-          "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=500&q=80",
+        image: shopthelook1,
       },
       {
         id: 3,
         name: "Straight Fit Chino",
         price: "₦39,000",
-        image:
-          "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?auto=format&fit=crop&w=500&q=80",
+        image: shopthelook2,
       },
     ],
   },

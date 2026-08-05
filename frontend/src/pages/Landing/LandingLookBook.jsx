@@ -7,49 +7,50 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Reveal from "./Reveal";
 import RevealImage from "../../components/UI/RevealImage";
+import studio from "../../assets/images/landing/studio.jfif";
+import rooftop from "../../assets/images/landing/rooftop.jfif";
+import waxxed from "../../assets/images/landing/waxxed.jfif";
+import loadingdock from "../../assets/images/landing/loadingdock.jfif";
+import footwear from "../../assets/images/landing/footwear1.jfif";
+import bottom from "../../assets/images/landing/bottom.jfif";
+import outwear from "../../assets/images/landing/outwear.jfif";
 
 const ENTRIES = [
   {
     number: "01",
     title: "Waxed for the Coast",
     copy: "Shot on the Lagos waterfront in the canvas jacket that started it all. Salt air, low light, no retouching.",
-    image:
-      "https://images.unsplash.com/photo-1516826957135-700dedea698c?auto=format&fit=crop&w=1200&q=80",
+    image: waxxed,
   },
   {
     number: "02",
     title: "Studio, Late",
     copy: "The heavyweight cotton set, styled the way it's actually worn after a twelve hour shoot.",
-    image:
-      "https://images.unsplash.com/photo-1520975954732-35dd22299614?auto=format&fit=crop&w=1200&q=80",
+    image: studio,
   },
   {
     number: "03",
     title: "Morning Run",
     copy: "Testing the chino's give at 6am before the light turned flat.",
-    image:
-      "https://images.unsplash.com/photo-1490114538077-0a7f8cb49891?auto=format&fit=crop&w=1200&q=80",
+    image: footwear,
   },
   {
     number: "04",
     title: "Back Alley",
     copy: "Raw concrete, raw denim. No styling beyond what was already in the bag.",
-    image:
-      "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=1200&q=80",
+    image: bottom,
   },
   {
     number: "05",
     title: "Rooftop, Dusk",
     copy: "Last frames of the day, shot on the roof of the studio building.",
-    image:
-      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1200&q=80",
+    image: loadingdock,
   },
   {
     number: "06",
     title: "Loading Dock",
     copy: "Where the canvas jacket actually gets worn, not just photographed.",
-    image:
-      "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?auto=format&fit=crop&w=1200&q=80",
+    image: outwear,
   },
 ];
 
@@ -78,7 +79,7 @@ const LandingLookBook = () => {
         <Reveal className="flex items-end justify-between mb-10">
           <div>
             <p className="text-xs font-semibold tracking-widest text-secondary/50 uppercase">
-              Field Notes
+              Roche Notes
             </p>
             <h2 className="font-bold text-2xl md:text-3xl text-secondary mt-2">
               Dispatches from the last shoot
