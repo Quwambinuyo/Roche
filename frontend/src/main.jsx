@@ -7,13 +7,16 @@ import "./styles/index.css";
 import App from "./App.jsx";
 import { store } from "./redux/store";
 import { ThemeProvider } from "./context/ThemeContext";
+import { CountryProvider } from "./context/CountryContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <Provider store={store}>
         <ThemeProvider>
-          <App />
+          <CountryProvider>
+            <App />
+          </CountryProvider>
         </ThemeProvider>
       </Provider>
     </BrowserRouter>
