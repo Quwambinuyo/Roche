@@ -12,4 +12,4 @@ export { default as Products } from "./Product/Products";
 export { default as Cart } from "./Cart/Cart";
 export { default as Wishlist } from "./Wishlist/Wishlist";
 export { default as Shop } from "./Shop/Shop";
-export { default as Landing } from "./landing/Landing";
+export { default as Landing } from "./Landing/Landing";
