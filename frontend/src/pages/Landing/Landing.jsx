@@ -23,7 +23,7 @@ const Landing = () => {
       <LandingCategoryGrid />
       <LandingProductGrid />
       <LandingShopTheLook />
-      <LandingLookbook />
+      <LandingLookBook />
       <LandingCraftSection />
       <LandingTestimonials />
       <LandingFAQPreview />

@@ -53,7 +53,7 @@ const ENTRIES = [
   },
 ];
 
-const LandingLookbook = () => {
+const LandingLookBook = () => {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
 
@@ -159,4 +159,4 @@ const LandingLookbook = () => {
   );
 };
 
-export default LandingLookbook;
+export default LandingLookBook;
