@@ -3,9 +3,11 @@ import countryList from "react-select-country-list";
 import { getItem, setItem } from "../utils/localStorage";
 
 const STORAGE_KEY_COUNTRY = "selectedCountry";
+const STORAGE_KEY_COUNTRY_NAME = "selectedCountryName";
 const STORAGE_KEY_CURRENCY = "selectedCurrency";
 
 const DEFAULT_COUNTRY = "NG";
+const DEFAULT_COUNTRY_NAME = "Nigeria";
 const DEFAULT_CURRENCY = "NGN";
 
 const EUROZONE = new Set([
@@ -59,12 +61,27 @@ export const getCurrencyForCountry = (countryInput) => {
   }
 };
 
+const getCountryName = (isoCode) => {
+  if (!isoCode) return "";
+  const found = countryList()
+    .getData()
+    .find((c) => c.value === isoCode);
+  return found ? found.label : isoCode;
+};
+
 const CountryContext = createContext(undefined);
 
 export const CountryProvider = ({ children }) => {
   const [country, setCountryState] = useState(() =>
     getItem(STORAGE_KEY_COUNTRY, DEFAULT_COUNTRY),
   );
+
+  const [countryName, setCountryNameState] = useState(() => {
+    const savedName = getItem(STORAGE_KEY_COUNTRY_NAME, null);
+    if (savedName) return savedName;
+    const initialCountry = getItem(STORAGE_KEY_COUNTRY, DEFAULT_COUNTRY);
+    return getCountryName(initialCountry) || DEFAULT_COUNTRY_NAME;
+  });
 
   const [currency, setCurrencyState] = useState(() => {
     const savedCurrency = getItem(STORAGE_KEY_CURRENCY, null);
@@ -75,11 +92,15 @@ export const CountryProvider = ({ children }) => {
   });
 
   const setCountry = (isoCode, name) => {
-    const derivedCurrency = getCurrencyForCountry(isoCode || name);
+    const resolvedName = name || getCountryName(isoCode);
+    const derivedCurrency = getCurrencyForCountry(isoCode || resolvedName);
+
     setCountryState(isoCode);
+    setCountryNameState(resolvedName);
     setCurrencyState(derivedCurrency);
 
     setItem(STORAGE_KEY_COUNTRY, isoCode);
+    setItem(STORAGE_KEY_COUNTRY_NAME, resolvedName);
     setItem(STORAGE_KEY_CURRENCY, derivedCurrency);
   };
 
@@ -91,11 +112,12 @@ export const CountryProvider = ({ children }) => {
   const value = useMemo(
     () => ({
       country,
+      countryName,
       currency,
       setCountry,
       setCurrency: setCurrencyManually,
     }),
-    [country, currency],
+    [country, countryName, currency],
   );
 
   return (

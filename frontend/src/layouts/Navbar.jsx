@@ -12,11 +12,13 @@ import {
 
 import { useTheme } from "../context/ThemeContext";
 import { useCart } from "../context/CartContext";
+import { useWishlist } from "../context/WishlistContext";
 import { ROUTES, PRIMARY_NAV_LINKS } from "../constants/navLinks";
 
 const Navbar = () => {
   const { theme, toggleTheme, toggleSidebar } = useTheme();
   const { itemCount } = useCart();
+  const { itemCount: wishlistCount } = useWishlist();
 
   return (
     <header className="hidden md:flex sticky top-0 z-30 w-full items-center justify-between border-b border-tertiary-100 bg-primary px-8 py-4">
@@ -75,9 +77,14 @@ const Navbar = () => {
         <Link
           to={ROUTES.WISHLIST}
           aria-label="Wishlist"
-          className="rounded-full p-2 text-secondary hover:bg-tertiary-50"
+          className="relative rounded-full p-2 text-secondary hover:bg-tertiary-50"
         >
           <FiHeart size={19} />
+          {wishlistCount > 0 && (
+            <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-tertiary-600 text-[10px] font-semibold text-primary">
+              {wishlistCount}
+            </span>
+          )}
         </Link>
         <Link
           to={ROUTES.CART}

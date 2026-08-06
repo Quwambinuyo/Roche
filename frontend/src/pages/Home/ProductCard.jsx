@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { BsCart4 } from "react-icons/bs";
-import { Plus, Minus } from "lucide-react";
+import { Plus, Minus, Heart } from "lucide-react";
 import RevealImage from "../../components/UI/RevealImage";
 import { useCart, buildLineId } from "../../context/CartContext";
+import { useWishlist } from "../../context/WishlistContext";
 
 const ProductCard = ({ product, selectedColor, onColorChange }) => {
   const { items, addToCart, updateQty } = useCart();
+  const { isInWishlist, toggleWishlist } = useWishlist();
 
   const [internalColor, setInternalColor] = useState(
     product.colors?.find((c) => c.stock > 0)?.name ??
@@ -43,6 +45,8 @@ const ProductCard = ({ product, selectedColor, onColorChange }) => {
   const cartLine = items.find((line) => line.id === lineId);
   const cartCount = cartLine?.qty ?? 0;
 
+  const wishlisted = isInWishlist(product.slug);
+
   const handleAdd = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -59,6 +63,12 @@ const ProductCard = ({ product, selectedColor, onColorChange }) => {
     updateQty(lineId, cartCount - 1);
   };
 
+  const handleToggleWishlist = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleWishlist(product);
+  };
+
   return (
     <div className="group">
       <div className="relative rounded-lg overflow-hidden aspect-[3/4] bg-secondary/5">
@@ -70,6 +80,15 @@ const ProductCard = ({ product, selectedColor, onColorChange }) => {
           }`}
           imgClassName="transition-transform duration-500 group-hover:scale-105"
         />
+
+        <button
+          type="button"
+          onClick={handleToggleWishlist}
+          aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
+          className="absolute top-3 left-3 w-9 h-9 rounded-full flex items-center justify-center shadow-lg bg-primary text-secondary hover:bg-secondary hover:text-primary transition-all duration-300"
+        >
+          <Heart size={15} className={wishlisted ? "fill-current" : ""} />
+        </button>
 
         {showOutOfStock && (
           <>

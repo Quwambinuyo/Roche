@@ -10,6 +10,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 import { CountryProvider } from "./context/CountryContext.jsx";
 import { CartProvider } from "./context/CartContext.jsx";
 import { ToastProvider } from "./context/ToastContext.jsx";
+import { WishlistProvider } from "./context/WishlistContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -19,7 +20,9 @@ createRoot(document.getElementById("root")).render(
           <CountryProvider>
             <ToastProvider>
               <CartProvider>
-                <App />
+                <WishlistProvider>
+                  <App />
+                </WishlistProvider>
               </CartProvider>
             </ToastProvider>
           </CountryProvider>

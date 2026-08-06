@@ -3,26 +3,32 @@ import { Link, useParams } from "react-router-dom";
 import {
   ArrowLeft,
   Check,
+  Heart,
   Minus,
   Plus,
   ShieldCheck,
   Truck,
 } from "lucide-react";
 import Reveal from "../Landing/Reveal";
+import ProductGallery from "./ProductGallery";
+import SizeGuide from "../../pages/Shop/SizeGuide";
 import RevealImage from "../../components/UI/RevealImage";
 import { PRODUCTS, getProductBySlug } from "../../mock/clothing";
 import { useCart, buildLineId } from "../../context/CartContext";
+import { useWishlist } from "../../context/WishlistContext";
 
 const ProductDetails = () => {
   const { slug } = useParams();
   const product = getProductBySlug(slug);
   const { items, addToCart, updateQty } = useCart();
+  const { isInWishlist, toggleWishlist } = useWishlist();
 
   const [selectedColor, setSelectedColor] = useState(
     () => product?.colors?.find((c) => c.stock > 0) || product?.colors?.[0],
   );
   const [selectedSize, setSelectedSize] = useState(product?.sizes?.[0] || "");
   const [qty, setQty] = useState(1);
+  const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
 
   const related = useMemo(() => {
     if (!product) return [];
@@ -49,6 +55,7 @@ const ProductDetails = () => {
   }
 
   const isOutOfStock = !selectedColor || selectedColor.stock === 0;
+  const wishlisted = isInWishlist(product.slug);
 
   const currentLineId = buildLineId(
     product,
@@ -90,13 +97,11 @@ const ProductDetails = () => {
         </div>
       </Reveal>
 
-      <div className="grid md:grid-cols-2 gap-10 md:gap-14">
+      <div className="grid md:grid-cols-2 gap-10 md:gap-14 ">
         <Reveal>
-          <RevealImage
-            src={product.image}
+          <ProductGallery
+            images={product.images || [product.image]}
             alt={product.name}
-            className="w-full aspect-square rounded-2xl"
-            imgClassName="object-cover"
           />
         </Reveal>
 
@@ -157,9 +162,17 @@ const ProductDetails = () => {
 
           {product.sizes?.length > 0 && (
             <div className="mt-6">
-              <p className="text-xs font-semibold tracking-widest text-secondary/50 uppercase mb-3">
-                Size — {selectedSize || "Select"}
-              </p>
+              <div className="flex items-center justify-between mb-3">
+                <p className="text-xs font-semibold tracking-widest text-secondary/50 uppercase">
+                  Size — {selectedSize || "Select"}
+                </p>
+                <button
+                  onClick={() => setIsSizeGuideOpen(true)}
+                  className="text-xs font-semibold text-secondary underline underline-offset-2 hover:text-tertiary-600 transition-colors"
+                >
+                  Size guide
+                </button>
+              </div>
               <div className="flex flex-wrap gap-2">
                 {product.sizes.map((size) => (
                   <button
@@ -211,6 +224,20 @@ const ProductDetails = () => {
                 : currentLineQty > 0
                   ? `Add more (${currentLineQty} in cart)`
                   : "Add to cart"}
+            </button>
+
+            <button
+              onClick={() => toggleWishlist(product)}
+              aria-label={
+                wishlisted ? "Remove from wishlist" : "Add to wishlist"
+              }
+              className={`w-11 h-11 shrink-0 rounded-full flex items-center justify-center border transition-colors ${
+                wishlisted
+                  ? "bg-secondary text-primary border-secondary"
+                  : "border-secondary/15 text-secondary hover:bg-secondary/5"
+              }`}
+            >
+              <Heart size={18} className={wishlisted ? "fill-current" : ""} />
             </button>
           </div>
 
@@ -280,6 +307,12 @@ const ProductDetails = () => {
           </div>
         </Reveal>
       )}
+
+      <SizeGuide
+        category={product.category}
+        isOpen={isSizeGuideOpen}
+        onClose={() => setIsSizeGuideOpen(false)}
+      />
     </div>
   );
 };

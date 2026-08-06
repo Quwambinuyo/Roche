@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { Trash2, ShoppingBag } from "lucide-react";
+import { Trash2, ShoppingCart } from "lucide-react";
 import Reveal from "../Landing/Reveal";
 import RevealImage from "../../components/UI/RevealImage";
 import RailEmptyState from "../Home/RailEmptyState";
-import { PRODUCTS } from "../../mock/clothing";
-
-const MOCK_WISHLIST = PRODUCTS.slice(0, 4);
+import { useWishlist } from "../../context/WishlistContext";
+import { useCart } from "../../context/CartContext";
 
 const WishlistCard = ({ product, onRemove, onAddToCart }) => {
   const hasColors = product.colors && product.colors.length > 0;
@@ -48,7 +47,7 @@ const WishlistCard = ({ product, onRemove, onAddToCart }) => {
         <button
           onClick={handleRemoveClick}
           aria-label="Remove from wishlist"
-          className="absolute top-3 right-3 w-8 h-8 rounded-full bg-primary/90 backdrop-blur flex items-center justify-center text-secondary/60 hover:text-secondary hover:bg-primary transition-all duration-200 opacity-0 group-hover:opacity-100"
+          className="absolute top-3 right-3 w-8 h-8 rounded-full bg-primary/90 backdrop-blur flex items-center justify-center text-secondary/60 hover:text-secondary hover:bg-primary transition-colors duration-200"
         >
           <Trash2 size={13} />
         </button>
@@ -69,7 +68,7 @@ const WishlistCard = ({ product, onRemove, onAddToCart }) => {
             aria-label="Add to cart"
             className="flex items-center gap-1.5 text-xs font-semibold text-secondary/70 hover:text-secondary transition-colors duration-200"
           >
-            <ShoppingBag size={13} />
+            <ShoppingCart size={13} />
             Add
           </button>
         )}
@@ -79,14 +78,19 @@ const WishlistCard = ({ product, onRemove, onAddToCart }) => {
 };
 
 const Wishlist = () => {
-  const [items, setItems] = useState(MOCK_WISHLIST);
+  const { items, removeFromWishlist } = useWishlist();
+  const { addToCart } = useCart();
+
+  const products = items.map((line) => line.product);
 
   const handleRemove = (product) => {
-    setItems((prev) => prev.filter((p) => p.slug !== product.slug));
+    removeFromWishlist(product);
   };
 
   const handleAddToCart = (product) => {
-    console.log("add to cart", product);
+    const color = product.colors?.find((c) => c.stock > 0) || null;
+    addToCart({ product, color });
+    removeFromWishlist(product);
   };
 
   return (
@@ -98,14 +102,14 @@ const Wishlist = () => {
         <h1 className="font-bold text-2xl md:text-3xl text-secondary mt-2">
           Your Wishlist
         </h1>
-        {items.length > 0 && (
+        {products.length > 0 && (
           <p className="text-sm text-secondary/50 mt-2">
-            {items.length} {items.length === 1 ? "item" : "items"} saved
+            {products.length} {products.length === 1 ? "item" : "items"} saved
           </p>
         )}
       </Reveal>
 
-      {items.length === 0 ? (
+      {products.length === 0 ? (
         <RailEmptyState
           message="Nothing saved yet. Tap the heart on any product to add it here."
           ctaLabel="Discover Products"
@@ -113,7 +117,7 @@ const Wishlist = () => {
         />
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-10">
-          {items.map((product) => (
+          {products.map((product) => (
             <WishlistCard
               key={product.slug}
               product={product}

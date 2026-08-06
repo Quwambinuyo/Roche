@@ -55,13 +55,16 @@ const AccordionRow = ({ label, open, onToggle, children }) => (
 const LandingFooter = () => {
   const [supportOpen, setSupportOpen] = useState(false);
   const [addressOpen, setAddressOpen] = useState(false);
-  const { country, setCountry, currency, setCurrency } = useCountry();
+  const { country, setCountry, currency, setCurrency, countryName } =
+    useCountry();
 
   const socials = [
     { icon: FiInstagram, label: "Instagram", size: 16 },
     { icon: FiTwitter, label: "X", size: 16 },
     { icon: FaTiktok, label: "TikTok", size: 14 },
   ];
+
+  // console.log(countryName);
 
   return (
     <footer className="bg-primary text-secondary dark:bg-black pt-14 pb-20 md:pb-6 overflow-hidden">
