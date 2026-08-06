@@ -8,6 +8,7 @@ import App from "./App.jsx";
 import { store } from "./redux/store";
 import { ThemeProvider } from "./context/ThemeContext";
 import { CountryProvider } from "./context/CountryContext.jsx";
+import CartContext from "./context/CartContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -15,7 +16,9 @@ createRoot(document.getElementById("root")).render(
       <Provider store={store}>
         <ThemeProvider>
           <CountryProvider>
-            <App />
+            <CartContext>
+              <App />
+            </CartContext>
           </CountryProvider>
         </ThemeProvider>
       </Provider>
