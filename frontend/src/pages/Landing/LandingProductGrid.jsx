@@ -39,12 +39,6 @@ const ProductCard = ({ product }) => {
           {product.soldOut ? "Sold Out" : product.price}
         </span>
       </div>
-
-      {product.colors && (
-        <p className="text-xs text-secondary/40 italic mt-0.5">
-          {product.colors} Colors
-        </p>
-      )}
     </Reveal>
   );
 };
@@ -62,7 +56,10 @@ const LandingProductGrid = () => {
           slidesPerView={2}
           spaceBetween={20}
           breakpoints={{
-            768: { slidesPerView: 4, spaceBetween: 20 },
+            768: {
+              slidesPerView: 4,
+              spaceBetween: 20,
+            },
           }}
           pagination={{
             clickable: true,

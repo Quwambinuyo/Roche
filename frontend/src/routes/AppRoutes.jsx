@@ -59,9 +59,10 @@ const AppRoutes = () => {
         <Route
           path="orders"
           element={
-            <PrivateRoute>
-              <OrderHistory />
-            </PrivateRoute>
+            // <PrivateRoute>
+            //   <OrderHistory />
+            // </PrivateRoute>
+            <OrderHistory />
           }
         />
         <Route
