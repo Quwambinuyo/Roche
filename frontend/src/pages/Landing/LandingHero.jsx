@@ -1,13 +1,15 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import SplitText from "../../components/UI/SplitText";
 import MagneticButton from "../../components/UI/MagneticButton";
 
 const LandingHero = () => {
+  const navigate = useNavigate();
+
   return (
     <section
       className="relative h-[92vh] min-h-[560px] w-full overflow-hidden"
-      /* Hardcodes Light Mode tokens locally for this section */
       style={{
         "--color-primary": "#ffffff",
         "--color-secondary": "#000000",
@@ -27,7 +29,6 @@ const LandingHero = () => {
         />
       </video>
 
-      {/* Dark overlay ensuring white text always stays clear over the video */}
       <div className="absolute inset-0 bg-black/40 pointer-events-none" />
 
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
@@ -49,7 +50,10 @@ const LandingHero = () => {
               to { opacity: 1; transform: translateY(0); }
             }
           `}</style>
-          <MagneticButton className="inline-flex items-center gap-2 border border-primary text-primary text-xs font-semibold tracking-widest uppercase px-6 py-3 rounded-full hover:bg-primary hover:text-secondary transition-colors duration-300">
+          <MagneticButton
+            onClick={() => navigate("/register")}
+            className="inline-flex items-center gap-2 border border-primary text-primary text-xs font-semibold tracking-widest uppercase px-6 py-3 rounded-full hover:bg-primary hover:text-secondary transition-colors duration-300"
+          >
             View
             <ArrowRight size={14} />
           </MagneticButton>

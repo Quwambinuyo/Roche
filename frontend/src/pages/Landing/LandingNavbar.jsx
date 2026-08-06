@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Menu, X, Sun, Moon, ShoppingBag } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "../../context/ThemeContext";
 import { NAV_LINKS } from "../../mock/clothing";
+
+const scrollToSection = (id) => {
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+};
 
 const LandingNavbar = () => {
   const { theme, toggleTheme } = useTheme();
@@ -14,6 +21,11 @@ const LandingNavbar = () => {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const handleNavClick = (id) => {
+    setOpen(false);
+    scrollToSection(id);
+  };
 
   return (
     <header
@@ -34,14 +46,15 @@ const LandingNavbar = () => {
 
         <nav className="hidden md:flex items-center gap-8">
           {NAV_LINKS.map((link) => (
-            <a
-              key={link}
-              href="#"
+            <button
+              key={link.id}
+              type="button"
+              onClick={() => handleNavClick(link.id)}
               className="relative text-sm font-medium text-secondary/70 hover:text-tertiary-700 transition-colors duration-200 group py-1"
             >
-              {link}
+              {link.label}
               <span className="absolute left-0 -bottom-0.5 h-[1.5px] w-0 bg-tertiary-700 transition-all duration-300 ease-out group-hover:w-full" />
-            </a>
+            </button>
           ))}
         </nav>
 
@@ -53,9 +66,7 @@ const LandingNavbar = () => {
           >
             {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
           </button>
-          <button className="w-9 h-9 flex items-center justify-center rounded-full border border-secondary/10 text-secondary hover:border-tertiary-700 transition-all duration-300 hover:scale-110">
-            <ShoppingBag size={16} />
-          </button>
+
           <button
             onClick={() => setOpen(!open)}
             className="md:hidden w-9 h-9 flex items-center justify-center text-secondary relative"
@@ -87,18 +98,19 @@ const LandingNavbar = () => {
         <div className="overflow-hidden">
           <div className="px-6 py-4 flex flex-col gap-4">
             {NAV_LINKS.map((link, i) => (
-              <a
-                key={link}
-                href="#"
-                className="text-sm font-medium text-secondary"
+              <button
+                key={link.id}
+                type="button"
+                onClick={() => handleNavClick(link.id)}
+                className="text-sm font-medium text-secondary text-left"
                 style={{
                   opacity: open ? 1 : 0,
                   transform: open ? "translateX(0)" : "translateX(-8px)",
                   transition: `opacity 300ms ease-out ${open ? i * 60 : 0}ms, transform 300ms ease-out ${open ? i * 60 : 0}ms`,
                 }}
               >
-                {link}
-              </a>
+                {link.label}
+              </button>
             ))}
           </div>
         </div>

@@ -27,7 +27,12 @@ import accessoryshop from "../assets/images/shop/accessoryshop.jfif";
 import accessoryshop1 from "../assets/images/shop/accessoryshop1.jfif";
 import accessoryshop2 from "../assets/images/shop/accessoryshop2.jfif";
 
-export const NAV_LINKS = ["New Arrivals", "Collections", "Fabric", "Journal"];
+export const NAV_LINKS = [
+  { label: "New Arrivals", id: "new-arrivals" },
+  { label: "Collections", id: "collections" },
+  { label: "Fabric", id: "fabric" },
+  { label: "Journal", id: "journal" },
+];
 
 export const CATEGORIES = [
   { name: "Outerwear", slug: "outerwear", count: 18, image: outwear },

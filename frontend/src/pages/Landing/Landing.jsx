@@ -22,15 +22,23 @@ const Landing = () => {
       <LandingHero />
       <LandingTrustBar />
       <Divider />
-      <LandingCategoryGrid />
+      <div id="collections" className="scroll-mt-24">
+        <LandingCategoryGrid />
+      </div>
       <Divider />
-      <LandingProductGrid />
+      <div id="new-arrivals" className="scroll-mt-24">
+        <LandingProductGrid />
+      </div>
       <Divider />
       <LandingShopTheLook />
       <Divider />
-      <LandingLookBook />
+      <div id="journal" className="scroll-mt-24">
+        <LandingLookBook />
+      </div>
       <Divider />
-      <LandingCraftSection />
+      <div id="fabric" className="scroll-mt-24">
+        <LandingCraftSection />
+      </div>
       <Divider />
       <LandingTestimonials />
       <Divider />

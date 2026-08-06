@@ -31,6 +31,23 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<Landing />} />
 
+      <Route
+        path="login"
+        element={
+          <PublicRoute>
+            <Login />
+          </PublicRoute>
+        }
+      />
+      <Route
+        path="register"
+        element={
+          <PublicRoute>
+            <Register />
+          </PublicRoute>
+        }
+      />
+
       <Route element={<MainLayout />}>
         <Route path="home" element={<Home />} />
         <Route path="new-arrivals" element={<NewArrival />} />
@@ -59,23 +76,6 @@ const AppRoutes = () => {
             <PrivateRoute>
               <Profile />
             </PrivateRoute>
-          }
-        />
-
-        <Route
-          path="login"
-          element={
-            <PublicRoute>
-              <Login />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path="register"
-          element={
-            <PublicRoute>
-              <Register />
-            </PublicRoute>
           }
         />
 
