@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import { getItem, setItem } from "../utils/localStorage";
 import { useToast } from "./ToastContext";
@@ -6,6 +12,7 @@ import { useToast } from "./ToastContext";
 const CartContext = createContext(undefined);
 
 const CART_STORAGE_KEY = "cart";
+const SELECTED_STORAGE_KEY = "cartSelectedIds";
 
 export const buildLineId = (product, color, size) =>
   [product.slug, color?.name ?? "no-color", size ?? "no-size"].join("::");
@@ -14,10 +21,44 @@ const parsePrice = (price) => Number(price.replace(/[₦,]/g, ""));
 
 export const CartProvider = ({ children }) => {
   const [items, setItems] = useState(() => getItem(CART_STORAGE_KEY, []));
+  const [selectedIds, setSelectedIds] = useState(() => {
+    const saved = getItem(SELECTED_STORAGE_KEY, null);
+    if (saved) return new Set(saved);
+    const initialItems = getItem(CART_STORAGE_KEY, []);
+    return new Set(initialItems.map((line) => line.id));
+  });
   const { showToast } = useToast();
+
+  const knownItemIdsRef = useRef(new Set(items.map((line) => line.id)));
 
   useEffect(() => {
     setItem(CART_STORAGE_KEY, items);
+  }, [items]);
+
+  useEffect(() => {
+    setItem(SELECTED_STORAGE_KEY, [...selectedIds]);
+  }, [selectedIds]);
+
+  useEffect(() => {
+    const currentIds = new Set(items.map((line) => line.id));
+    const knownIds = knownItemIdsRef.current;
+
+    setSelectedIds((prev) => {
+      const next = new Set([...prev].filter((id) => currentIds.has(id)));
+
+      items.forEach((line) => {
+        if (!knownIds.has(line.id)) {
+          next.add(line.id);
+        }
+      });
+
+      if (next.size === prev.size && [...next].every((id) => prev.has(id))) {
+        return prev;
+      }
+      return next;
+    });
+
+    knownItemIdsRef.current = currentIds;
   }, [items]);
 
   const addToCart = ({ product, color = null, size = null, qty = 1 }) => {
@@ -75,12 +116,56 @@ export const CartProvider = ({ children }) => {
 
   const clearCart = () => setItems([]);
 
+  const toggleSelect = (lineId) => {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(lineId)) {
+        next.delete(lineId);
+      } else {
+        next.add(lineId);
+      }
+      return next;
+    });
+  };
+
+  const toggleSelectAll = () => {
+    setSelectedIds((prev) => {
+      const currentlyAllSelected =
+        items.length > 0 && items.every((line) => prev.has(line.id));
+
+      return currentlyAllSelected
+        ? new Set()
+        : new Set(items.map((line) => line.id));
+    });
+  };
+
+  const removeSelected = () => {
+    if (selectedIds.size === 0) return;
+    removeItems([...selectedIds]);
+    setSelectedIds(new Set());
+  };
+
   const itemCount = items.reduce((sum, line) => sum + line.qty, 0);
 
   const subtotal = items.reduce(
     (sum, line) => sum + parsePrice(line.product.price) * line.qty,
     0,
   );
+
+  const selectedLines = items.filter((line) => selectedIds.has(line.id));
+
+  const selectedSubtotal = selectedLines.reduce(
+    (sum, line) => sum + parsePrice(line.product.price) * line.qty,
+    0,
+  );
+
+  const selectedItemCount = selectedLines.reduce(
+    (sum, line) => sum + line.qty,
+    0,
+  );
+
+  const allSelected =
+    items.length > 0 && items.every((line) => selectedIds.has(line.id));
 
   const value = {
     items,
@@ -91,6 +176,14 @@ export const CartProvider = ({ children }) => {
     clearCart,
     itemCount,
     subtotal,
+    selectedIds,
+    toggleSelect,
+    toggleSelectAll,
+    removeSelected,
+    selectedLines,
+    selectedSubtotal,
+    selectedItemCount,
+    allSelected,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
