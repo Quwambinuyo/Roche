@@ -150,3 +150,29 @@ body {
   opacity: 0.3 !important;
   transform: scale(0.66) !important;
 }
+
+/* Thin, theme-aware scrollbar (WebKit: Chrome, Edge, Safari, Opera) */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: color-mix(in srgb, var(--color-secondary) 20%, transparent);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: color-mix(in srgb, var(--color-secondary) 40%, transparent);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--color-secondary) 20%, transparent)
+    transparent;
+}
