@@ -7,7 +7,7 @@ export { default as Profile } from "./Profile/Profile";
 export { default as Login } from "./Login/Login";
 export { default as Register } from "./Register/Register";
 export { default as NotFound } from "./NotFound";
-export { default as ProductDetails } from "./Product/ProductDetails";
+export { default as ProductDetails } from "./Product/detail/ProductDetails";
 export { default as NewArrival } from "./Product/NewArrival";
 export { default as RecentlyViewed } from "./Product/RecentlyViewed";
 export { default as ForYou } from "./Product/ForYou";

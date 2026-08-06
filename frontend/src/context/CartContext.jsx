@@ -28,6 +28,12 @@ export const buildLineId = (product, color, size, colors) => {
 
 const parsePrice = (price) => Number(price.replace(/[₦,]/g, ""));
 
+const getUnitPrice = (product) => {
+  const base = parsePrice(product.price);
+  const discount = product.discount ?? 0;
+  return discount > 0 ? Math.round(base - (base * discount) / 100) : base;
+};
+
 export const CartProvider = ({ children }) => {
   const [items, setItems] = useState(() => getItem(CART_STORAGE_KEY, []));
   const [selectedIds, setSelectedIds] = useState(() => {
@@ -163,14 +169,14 @@ export const CartProvider = ({ children }) => {
   const itemCount = items.reduce((sum, line) => sum + line.qty, 0);
 
   const subtotal = items.reduce(
-    (sum, line) => sum + parsePrice(line.product.price) * line.qty,
+    (sum, line) => sum + getUnitPrice(line.product) * line.qty,
     0,
   );
 
   const selectedLines = items.filter((line) => selectedIds.has(line.id));
 
   const selectedSubtotal = selectedLines.reduce(
-    (sum, line) => sum + parsePrice(line.product.price) * line.qty,
+    (sum, line) => sum + getUnitPrice(line.product) * line.qty,
     0,
   );
 
@@ -199,6 +205,7 @@ export const CartProvider = ({ children }) => {
     selectedSubtotal,
     selectedItemCount,
     allSelected,
+    getUnitPrice,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

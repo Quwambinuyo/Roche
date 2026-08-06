@@ -6,6 +6,9 @@ import RevealImage from "../../components/UI/RevealImage";
 import { useCart, buildLineId } from "../../context/CartContext";
 import { useWishlist } from "../../context/WishlistContext";
 
+const parsePrice = (price) => Number(String(price).replace(/[^\d]/g, ""));
+const formatNaira = (value) => `₦${Math.round(value).toLocaleString("en-NG")}`;
+
 const ProductCard = ({ product, selectedColor, onColorChange }) => {
   const { items, addToCart, updateQty } = useCart();
   const { isInWishlist, toggleWishlist } = useWishlist();
@@ -43,6 +46,12 @@ const ProductCard = ({ product, selectedColor, onColorChange }) => {
   const showOutOfStock = isFullyOutOfStock || isSelectedColorOutOfStock;
 
   const canAddToCart = !showOutOfStock && (!hasColors || activeColorName);
+
+  const hasDiscount = product.discount > 0;
+  const basePrice = parsePrice(product.price);
+  const discountedPrice = hasDiscount
+    ? basePrice - (basePrice * product.discount) / 100
+    : basePrice;
 
   const lineId = buildLineId(product, activeColorData ?? null, null);
   const cartLine = items.find((line) => line.id === lineId);
@@ -93,13 +102,19 @@ const ProductCard = ({ product, selectedColor, onColorChange }) => {
           <FiHeart size={15} className={wishlisted ? "fill-current" : ""} />
         </button>
 
-        {showOutOfStock && (
+        {showOutOfStock ? (
           <>
             <span className="absolute top-3 right-3 bg-secondary text-primary text-[10px] font-semibold tracking-widest uppercase px-3 py-1.5 rounded-full">
               Out of Stock
             </span>
             <div className="absolute inset-0 bg-primary/10" />
           </>
+        ) : (
+          hasDiscount && (
+            <span className="absolute top-3 right-3 bg-red-500 text-white text-[10px] font-semibold tracking-widest uppercase px-3 py-1.5 rounded-full">
+              -{product.discount}%
+            </span>
+          )
         )}
 
         {!showOutOfStock && (
@@ -151,9 +166,9 @@ const ProductCard = ({ product, selectedColor, onColorChange }) => {
       </p>
 
       <div className="flex items-center gap-2 mt-1">
-        {product.originalPrice && (
+        {hasDiscount && !showOutOfStock && (
           <span className="text-xs text-secondary/40 line-through">
-            {product.originalPrice}
+            {formatNaira(basePrice)}
           </span>
         )}
         <span
@@ -161,7 +176,11 @@ const ProductCard = ({ product, selectedColor, onColorChange }) => {
             showOutOfStock ? "text-secondary/40" : "text-secondary/70"
           }`}
         >
-          {showOutOfStock ? "Out of Stock" : product.price}
+          {showOutOfStock
+            ? "Out of Stock"
+            : hasDiscount
+              ? formatNaira(discountedPrice)
+              : product.price}
         </span>
       </div>
 

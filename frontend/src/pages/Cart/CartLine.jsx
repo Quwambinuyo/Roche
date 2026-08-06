@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FiMinus, FiPlus, FiTrash2, FiCheck } from "react-icons/fi";
 import RevealImage from "../../components/UI/RevealImage";
+import { useCart } from "../../context/CartContext";
 
-const parsePrice = (price) => Number(price.replace(/[₦,]/g, ""));
 const formatNaira = (value) => `₦${value.toLocaleString("en-NG")}`;
 
 export const SelectCircle = ({ checked, onClick, ariaLabel }) => (
@@ -29,8 +29,11 @@ const CartLine = ({
   isSelected,
   onToggleSelect,
 }) => {
+  const { getUnitPrice } = useCart();
   const { id, product, color, colors, size, qty } = line;
-  const lineTotal = parsePrice(product.price) * qty;
+  const unitPrice = getUnitPrice(product);
+  const lineTotal = unitPrice * qty;
+  const hasDiscount = (product.discount ?? 0) > 0;
 
   const colorLabel =
     colors && colors.length > 0
@@ -115,14 +118,23 @@ const CartLine = ({
               </button>
             </div>
 
-            <p className="text-sm font-semibold text-secondary">
-              {formatNaira(lineTotal)}
-            </p>
+            <div className="flex items-center gap-2">
+              {hasDiscount && (
+                <span className="text-xs text-secondary/40 line-through">
+                  {formatNaira(parsePriceOriginal(product.price) * qty)}
+                </span>
+              )}
+              <p className="text-sm font-semibold text-secondary">
+                {formatNaira(lineTotal)}
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
 };
+
+const parsePriceOriginal = (price) => Number(price.replace(/[₦,]/g, ""));
 
 export default CartLine;
