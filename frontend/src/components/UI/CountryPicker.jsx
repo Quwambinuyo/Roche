@@ -41,7 +41,9 @@ const CountryPicker = ({ value, onChange }) => {
     };
   }, []);
 
-  const selected = countries.find((c) => c.value === value);
+  const selected = countries.find(
+    (c) => c.value === value || c.label === value,
+  );
 
   return (
     <div ref={wrapperRef} className="relative">
@@ -85,13 +87,13 @@ const CountryPicker = ({ value, onChange }) => {
               </p>
             )}
             {filtered.map((c) => {
-              const isSelected = c.value === value;
+              const isSelected = c.value === value || c.label === value;
               return (
                 <button
                   key={c.value}
                   type="button"
                   onClick={() => {
-                    onChange(c.value);
+                    onChange(c.value, c.label);
                     setOpen(false);
                     setQuery("");
                   }}

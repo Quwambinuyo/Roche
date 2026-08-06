@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useMemo, useState } from "react";
+import countryList from "react-select-country-list";
 import { getItem, setItem } from "../utils/localStorage";
 
 const STORAGE_KEY_COUNTRY = "selectedCountry";
@@ -37,7 +38,15 @@ export const CURRENCY_OPTIONS = [
   { code: "EUR", label: "EUR €" },
 ];
 
-export const getCurrencyForCountry = (isoCode) => {
+export const getCurrencyForCountry = (countryInput) => {
+  let isoCode = countryInput;
+  if (countryInput && countryInput.length > 2) {
+    const found = countryList()
+      .getData()
+      .find((c) => c.label === countryInput);
+    isoCode = found ? found.value : countryInput;
+  }
+
   switch (isoCode) {
     case "NG":
       return "NGN";
@@ -58,17 +67,15 @@ export const CountryProvider = ({ children }) => {
   );
 
   const [currency, setCurrencyState] = useState(() => {
-    // Check if user manually saved a currency preference first
     const savedCurrency = getItem(STORAGE_KEY_CURRENCY, null);
     if (savedCurrency) return savedCurrency;
 
-    // Otherwise derive from saved/default country
     const initialCountry = getItem(STORAGE_KEY_COUNTRY, DEFAULT_COUNTRY);
     return getCurrencyForCountry(initialCountry);
   });
 
-  const setCountry = (isoCode) => {
-    const derivedCurrency = getCurrencyForCountry(isoCode);
+  const setCountry = (isoCode, name) => {
+    const derivedCurrency = getCurrencyForCountry(isoCode || name);
     setCountryState(isoCode);
     setCurrencyState(derivedCurrency);
 
