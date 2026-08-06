@@ -4,6 +4,9 @@ export const CATEGORIES = [
   { label: "Bottoms", value: "bottoms" },
   { label: "Footwear", value: "footwear" },
   { label: "Accessories", value: "accessories" },
+  { label: "Watches", value: "watches" },
+  { label: "Caps", value: "caps" },
+  { label: "Glasses", value: "glasses" },
 ];
 
 export const SIZES = ["XS", "S", "M", "L", "XL"];
@@ -26,7 +29,7 @@ export const SORT_OPTIONS = [
   { label: "Price: High to Low", value: "price-desc" },
 ];
 
-export const PRODUCTS_PER_PAGE = 9;
+export const PRODUCTS_PER_PAGE = 8;
 
 export const parsePrice = (price) =>
   Number(String(price).replace(/[^\d]/g, ""));

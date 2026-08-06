@@ -13,3 +13,4 @@ export { default as Cart } from "./Cart/Cart";
 export { default as Wishlist } from "./Wishlist/Wishlist";
 export { default as Shop } from "./Shop/Shop";
 export { default as Landing } from "./Landing/Landing";
+export { default as Categories } from "./Categories/Categories";

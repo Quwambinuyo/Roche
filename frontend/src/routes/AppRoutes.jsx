@@ -20,6 +20,7 @@ import {
   Contact,
   NotFound,
   Wishlist,
+  Categories,
 } from "../pages/index";
 
 const AppRoutes = () => {
@@ -34,7 +35,7 @@ const AppRoutes = () => {
         <Route path="shop" element={<Shop />} />
         <Route path="shop/:id" element={<ProductDetails />} />
         {/* Categories reuses Shop with a category filter until a dedicated page exists */}
-        <Route path="categories" element={<Shop />} />
+        <Route path="categories" element={<Categories />} />
         <Route path="cart" element={<Cart />} />
         <Route path="wishlist" element={<Wishlist />} />
         <Route path="contact" element={<Contact />} />

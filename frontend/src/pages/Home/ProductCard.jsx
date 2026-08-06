@@ -154,7 +154,7 @@ const ProductCard = ({
       </div>
 
       {hasColors && (
-        <div className="flex items-center gap-1.5 mt-2">
+        <div className="flex items-center gap-1.5 my-2">
           {product.colors.map((color) => {
             const colorOutOfStock = color.stock <= 0;
             const isActive = activeColorName === color.name;

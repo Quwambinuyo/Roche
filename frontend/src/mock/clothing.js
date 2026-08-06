@@ -25,18 +25,19 @@ import watchshop1 from "../assets/images/shop/watchshop1.jfif";
 import wearshop from "../assets/images/shop/wearshop.jfif";
 import accessoryshop from "../assets/images/shop/accessoryshop.jfif";
 import accessoryshop1 from "../assets/images/shop/accessoryshop1.jfif";
+import accessoryshop2 from "../assets/images/shop/accessoryshop2.jfif";
 
 export const NAV_LINKS = ["New Arrivals", "Collections", "Fabric", "Journal"];
 
 export const CATEGORIES = [
-  { name: "Outerwear", count: 18, image: outwear },
-  { name: "Tops", count: 32, image: tops },
-  { name: "Bottoms", count: 21, image: bottoms },
-  { name: "Accessories", count: 14, image: accessories },
-  { name: "Watches", count: 9, image: watches },
-  { name: "Foot wear", count: 26, image: footwear },
-  { name: "Caps", count: 17, image: caps },
-  { name: "Glasses", count: 12, image: glasses },
+  { name: "Outerwear", slug: "outerwear", count: 18, image: outwear },
+  { name: "Tops", slug: "tops", count: 32, image: tops },
+  { name: "Bottoms", slug: "bottoms", count: 21, image: bottoms },
+  { name: "Accessories", slug: "accessories", count: 14, image: accessories },
+  { name: "Watches", slug: "watches", count: 9, image: watches },
+  { name: "Foot wear", slug: "footwear", count: 26, image: footwear },
+  { name: "Caps", slug: "caps", count: 17, image: caps },
+  { name: "Glasses", slug: "glasses", count: 12, image: glasses },
 ];
 
 export const PRODUCTS = [
@@ -45,6 +46,8 @@ export const PRODUCTS = [
     price: "₦48,500",
     fabric: "COTTON TWILL",
     size: "S — XL",
+    sizes: ["S", "M", "L", "XL"],
+    category: "outerwear",
     image: overshirt,
     colors: [
       { name: "Olive", hex: "#4a4f36", stock: 12 },
@@ -57,6 +60,8 @@ export const PRODUCTS = [
     price: "₦18,500",
     fabric: "HEAVY COTTON",
     size: "S — XL",
+    sizes: ["S", "M", "L", "XL"],
+    category: "tops",
     image: ribbedTee,
     colors: [
       { name: "Black", hex: "#0a0a0a", stock: 20 },
@@ -68,6 +73,8 @@ export const PRODUCTS = [
     price: "₦52,000",
     fabric: "RIPSTOP CANVAS",
     size: "28 — 36",
+    sizes: ["S", "M", "L", "XL"],
+    category: "bottoms",
     image: overshirt1,
     colors: [
       { name: "Khaki", hex: "#a89a72", stock: 0 },
@@ -79,6 +86,8 @@ export const PRODUCTS = [
     price: "₦74,000",
     fabric: "WAXED CANVAS",
     size: "S — XXL",
+    sizes: ["S", "M", "L", "XL"],
+    category: "outerwear",
     image: jacket,
     colors: [
       { name: "Rust", hex: "#8a3b23", stock: 6 },
@@ -87,10 +96,12 @@ export const PRODUCTS = [
     ],
   },
   {
-    name: "Ribbed Tee",
+    name: "Heavyweight Ribbed Tee",
     price: "₦18,500",
     fabric: "HEAVY COTTON",
     size: "S — XL",
+    sizes: ["XS", "S", "M", "L"],
+    category: "tops",
     image: ribbedTee,
     colors: [
       { name: "Black", hex: "#0a0a0a", stock: 20 },
@@ -102,6 +113,8 @@ export const PRODUCTS = [
     price: "₦14,000",
     fabric: "COTTON TWILL",
     size: "One Size",
+    sizes: ["M"],
+    category: "caps",
     image: capshop,
     colors: [
       { name: "Black", hex: "#0a0a0a", stock: 22 },
@@ -113,6 +126,8 @@ export const PRODUCTS = [
     price: "₦15,500",
     fabric: "WAXED CANVAS",
     size: "One Size",
+    sizes: ["M"],
+    category: "caps",
     image: capshop1,
     colors: [{ name: "Rust", hex: "#8a3b23", stock: 7 }],
   },
@@ -121,6 +136,8 @@ export const PRODUCTS = [
     price: "₦12,000",
     fabric: "HEAVY JERSEY",
     size: "One Size",
+    sizes: ["M"],
+    category: "caps",
     image: capshop2,
     colors: [
       { name: "Black", hex: "#0a0a0a", stock: 15 },
@@ -132,6 +149,8 @@ export const PRODUCTS = [
     price: "₦13,500",
     fabric: "RIPSTOP CANVAS",
     size: "One Size",
+    sizes: ["M"],
+    category: "caps",
     image: capshop3,
     colors: [{ name: "Khaki", hex: "#a89a72", stock: 11 }],
   },
@@ -140,6 +159,8 @@ export const PRODUCTS = [
     price: "₦128,000",
     fabric: "MIXED",
     size: "S — XL",
+    sizes: ["S", "M", "L", "XL"],
+    category: "outerwear",
     image: fullkitshop,
     colors: [
       { name: "Black", hex: "#0a0a0a", stock: 4 },
@@ -151,6 +172,8 @@ export const PRODUCTS = [
     price: "₦22,000",
     fabric: "ACETATE",
     size: "One Size",
+    sizes: ["M"],
+    category: "glasses",
     image: glassesshop,
     colors: [{ name: "Black", hex: "#0a0a0a", stock: 18 }],
   },
@@ -159,6 +182,8 @@ export const PRODUCTS = [
     price: "₦24,500",
     fabric: "ACETATE",
     size: "One Size",
+    sizes: ["M"],
+    category: "glasses",
     image: glassesshop1,
     colors: [
       { name: "Tortoise", hex: "#6b4a2c", stock: 6 },
@@ -170,6 +195,8 @@ export const PRODUCTS = [
     price: "₦81,000",
     fabric: "WAXED CANVAS",
     size: "S — XXL",
+    sizes: ["S", "M", "L", "XL"],
+    category: "outerwear",
     image: jacketshop,
     colors: [
       { name: "Forest", hex: "#2e3b2c", stock: 5 },
@@ -181,6 +208,8 @@ export const PRODUCTS = [
     price: "₦63,500",
     fabric: "FULL GRAIN LEATHER",
     size: "40 — 45",
+    sizes: ["M", "L", "XL"],
+    category: "footwear",
     image: shoeshop,
     colors: [{ name: "Black", hex: "#0a0a0a", stock: 8 }],
   },
@@ -189,6 +218,8 @@ export const PRODUCTS = [
     price: "₦59,000",
     fabric: "COTTON TWILL",
     size: "S — XL",
+    sizes: ["S", "M", "L", "XL"],
+    category: "tops",
     image: topbottomshop,
     colors: [
       { name: "Sand", hex: "#c8b89e", stock: 9 },
@@ -200,6 +231,8 @@ export const PRODUCTS = [
     price: "₦96,000",
     fabric: "STAINLESS STEEL",
     size: "One Size",
+    sizes: ["M"],
+    category: "watches",
     image: watchshop,
     colors: [{ name: "Steel", hex: "#7a7f85", stock: 5 }],
   },
@@ -208,6 +241,8 @@ export const PRODUCTS = [
     price: "₦112,000",
     fabric: "STAINLESS STEEL",
     size: "One Size",
+    sizes: ["M"],
+    category: "watches",
     image: watchshop1,
     colors: [
       { name: "Black", hex: "#0a0a0a", stock: 3 },
@@ -219,6 +254,8 @@ export const PRODUCTS = [
     price: "₦45,000",
     fabric: "RIPSTOP",
     size: "S — XXL",
+    sizes: ["S", "M", "L", "XL"],
+    category: "outerwear",
     image: wearshop,
     colors: [
       { name: "Black", hex: "#0a0a0a", stock: 12 },
@@ -230,6 +267,8 @@ export const PRODUCTS = [
     price: "₦16,500",
     fabric: "CANVAS",
     size: "One Size",
+    sizes: ["M"],
+    category: "accessories",
     image: accessoryshop,
     colors: [{ name: "Sand", hex: "#c8b89e", stock: 20 }],
   },
@@ -238,10 +277,25 @@ export const PRODUCTS = [
     price: "₦11,000",
     fabric: "WAXED LEATHER",
     size: "One Size",
+    sizes: ["S", "M", "L"],
+    category: "accessories",
     image: accessoryshop1,
     colors: [
       { name: "Black", hex: "#0a0a0a", stock: 25 },
       { name: "Brown", hex: "#5a4634", stock: 14 },
+    ],
+  },
+  {
+    name: "Ring",
+    price: "₦11,000",
+    fabric: "WAXED LEATHER",
+    size: "One Size",
+    sizes: ["S", "M", "L"],
+    category: "accessories",
+    image: accessoryshop2,
+    colors: [
+      { name: "Black", hex: "#0a0a0a", stock: 25 },
+      { name: "Green", hex: "#90EE90", stock: 14 },
     ],
   },
 ];
