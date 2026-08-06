@@ -4,10 +4,10 @@ import ActiveOrderBanner from "./ActiveOrderBanner";
 import ProductRail from "./ProductRail";
 import QuickLinks from "./QuickLinks";
 import { useTheme } from "../../context/ThemeContext";
+import { useWishlist } from "../../context/WishlistContext";
 import {
   USER,
   ACTIVE_ORDER,
-  WISHLIST,
   RECENTLY_VIEWED,
   FOR_YOU,
   NEW_ARRIVALS,
@@ -15,6 +15,11 @@ import {
 
 const Home = () => {
   const { theme } = useTheme();
+  const { items: wishlistItems } = useWishlist();
+
+  const wishlistProducts = wishlistItems
+    .map((line) => line.product)
+    .filter(Boolean);
 
   return (
     <div className="min-h-screen bg-primary transition-colors duration-300">
@@ -50,7 +55,7 @@ const Home = () => {
       <ProductRail
         title="Saved For Later"
         subtitle="Your Wishlist"
-        products={WISHLIST}
+        products={wishlistProducts}
         emptyMessage="Nothing saved yet. Tap the heart on any product to add it here."
         emptyCtaLabel="Discover Products"
         viewAllHref="/wishlist"

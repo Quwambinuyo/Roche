@@ -14,8 +14,17 @@ const CartContext = createContext(undefined);
 const CART_STORAGE_KEY = "cart";
 const SELECTED_STORAGE_KEY = "cartSelectedIds";
 
-export const buildLineId = (product, color, size) =>
-  [product.slug, color?.name ?? "no-color", size ?? "no-size"].join("::");
+export const buildLineId = (product, color, size, colors) => {
+  const colorPart =
+    colors && colors.length > 0
+      ? [...colors]
+          .map((c) => c.name)
+          .sort()
+          .join("+")
+      : (color?.name ?? "no-color");
+
+  return [product.slug, colorPart, size ?? "no-size"].join("::");
+};
 
 const parsePrice = (price) => Number(price.replace(/[₦,]/g, ""));
 
@@ -61,8 +70,14 @@ export const CartProvider = ({ children }) => {
     knownItemIdsRef.current = currentIds;
   }, [items]);
 
-  const addToCart = ({ product, color = null, size = null, qty = 1 }) => {
-    const lineId = buildLineId(product, color, size);
+  const addToCart = ({
+    product,
+    color = null,
+    colors = null,
+    size = null,
+    qty = 1,
+  }) => {
+    const lineId = buildLineId(product, color, size, colors);
 
     setItems((prev) => {
       const existing = prev.find((line) => line.id === lineId);
@@ -73,7 +88,7 @@ export const CartProvider = ({ children }) => {
         );
       }
 
-      return [...prev, { id: lineId, product, color, size, qty }];
+      return [...prev, { id: lineId, product, color, colors, size, qty }];
     });
 
     showToast(`${product.name} added to cart`, { type: "success" });

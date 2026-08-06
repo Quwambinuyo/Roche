@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Minus, Plus, Trash2, Check } from "lucide-react";
+import { FiMinus, FiPlus, FiTrash2, FiCheck } from "react-icons/fi";
 import RevealImage from "../../components/UI/RevealImage";
 
 const parsePrice = (price) => Number(price.replace(/[₦,]/g, ""));
@@ -18,9 +18,10 @@ export const SelectCircle = ({ checked, onClick, ariaLabel }) => (
         : "border-secondary/25 hover:border-secondary/50"
     }`}
   >
-    {checked && <Check size={12} className="text-primary" />}
+    {checked && <FiCheck size={12} className="text-primary" />}
   </button>
 );
+
 const CartLine = ({
   line,
   onQtyChange,
@@ -28,8 +29,13 @@ const CartLine = ({
   isSelected,
   onToggleSelect,
 }) => {
-  const { id, product, color, size, qty } = line;
+  const { id, product, color, colors, size, qty } = line;
   const lineTotal = parsePrice(product.price) * qty;
+
+  const colorLabel =
+    colors && colors.length > 0
+      ? colors.map((c) => c.name).join(", ")
+      : color?.name;
 
   return (
     <div className="flex items-start gap-3 py-5 border-b border-secondary/10">
@@ -64,14 +70,31 @@ const CartLine = ({
               aria-label="Remove item"
               className="text-secondary/40 hover:text-secondary transition-colors shrink-0"
             >
-              <Trash2 size={15} />
+              <FiTrash2 size={15} />
             </button>
           </div>
 
-          <p className="text-xs text-secondary/50 mt-1">
-            {color?.name}
-            {size ? ` · Size ${size}` : ""}
-          </p>
+          {colors && colors.length > 0 ? (
+            <div className="flex items-center gap-1.5 mt-1.5">
+              {colors.map((c) => (
+                <span
+                  key={c.name}
+                  title={c.name}
+                  className="w-3.5 h-3.5 rounded-full ring-1 ring-secondary/15"
+                  style={{ backgroundColor: c.hex }}
+                />
+              ))}
+              <span className="text-xs text-secondary/50">
+                {colorLabel}
+                {size ? ` · Size ${size}` : ""}
+              </span>
+            </div>
+          ) : (
+            <p className="text-xs text-secondary/50 mt-1">
+              {colorLabel}
+              {size ? ` · Size ${size}` : ""}
+            </p>
+          )}
 
           <div className="flex items-center justify-between mt-3">
             <div className="flex items-center rounded-full border border-secondary/15">
@@ -79,7 +102,7 @@ const CartLine = ({
                 onClick={() => onQtyChange(id, Math.max(1, qty - 1))}
                 className="w-7 h-7 flex items-center justify-center text-secondary/60 hover:text-secondary transition-colors"
               >
-                <Minus size={12} />
+                <FiMinus size={12} />
               </button>
               <span className="w-6 text-center text-xs font-semibold text-secondary">
                 {qty}
@@ -88,7 +111,7 @@ const CartLine = ({
                 onClick={() => onQtyChange(id, qty + 1)}
                 className="w-7 h-7 flex items-center justify-center text-secondary/60 hover:text-secondary transition-colors"
               >
-                <Plus size={12} />
+                <FiPlus size={12} />
               </button>
             </div>
 

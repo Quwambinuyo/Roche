@@ -38,6 +38,7 @@ export const CATEGORIES = [
   { name: "Foot wear", slug: "footwear", count: 26, image: footwear },
   { name: "Caps", slug: "caps", count: 17, image: caps },
   { name: "Glasses", slug: "glasses", count: 12, image: glasses },
+  { name: "Bundles", slug: "bundles", count: 4, image: fullkitshop },
 ];
 
 export const PRODUCTS = [
@@ -45,6 +46,7 @@ export const PRODUCTS = [
     slug: "roche-overshirt",
     name: "Roche Overshirt",
     price: "₦48,500",
+    discount: 10,
     fabric: "COTTON TWILL",
     size: "S — XL",
     sizes: ["S", "M", "L", "XL"],
@@ -61,6 +63,7 @@ export const PRODUCTS = [
     slug: "ribbed-tee",
     name: "Ribbed Tee",
     price: "₦18,500",
+    discount: 0,
     fabric: "HEAVY COTTON",
     size: "S — XL",
     sizes: ["S", "M", "L", "XL"],
@@ -76,6 +79,7 @@ export const PRODUCTS = [
     slug: "utility-cargo",
     name: "Utility Cargo",
     price: "₦52,000",
+    discount: 15,
     fabric: "RIPSTOP CANVAS",
     size: "28 — 36",
     sizes: ["S", "M", "L", "XL"],
@@ -91,6 +95,7 @@ export const PRODUCTS = [
     slug: "waxed-roche-jacket",
     name: "Waxed Roche Jacket",
     price: "₦74,000",
+    discount: 0,
     fabric: "WAXED CANVAS",
     size: "S — XXL",
     sizes: ["S", "M", "L", "XL"],
@@ -107,6 +112,7 @@ export const PRODUCTS = [
     slug: "heavyweight-ribbed-tee",
     name: "Heavyweight Ribbed Tee",
     price: "₦18,500",
+    discount: 5,
     fabric: "HEAVY COTTON",
     size: "S — XL",
     sizes: ["XS", "S", "M", "L"],
@@ -122,6 +128,7 @@ export const PRODUCTS = [
     slug: "roche-field-cap",
     name: "Roche Field Cap",
     price: "₦14,000",
+    discount: 0,
     fabric: "COTTON TWILL",
     size: "One Size",
     sizes: ["M"],
@@ -137,6 +144,7 @@ export const PRODUCTS = [
     slug: "waxed-trail-cap",
     name: "Waxed Trail Cap",
     price: "₦15,500",
+    discount: 12,
     fabric: "WAXED CANVAS",
     size: "One Size",
     sizes: ["M"],
@@ -149,6 +157,7 @@ export const PRODUCTS = [
     slug: "ribbed-beanie",
     name: "Ribbed Beanie",
     price: "₦12,000",
+    discount: 0,
     fabric: "HEAVY JERSEY",
     size: "One Size",
     sizes: ["M"],
@@ -164,6 +173,7 @@ export const PRODUCTS = [
     slug: "utility-bucket-hat",
     name: "Utility Bucket Hat",
     price: "₦13,500",
+    discount: 8,
     fabric: "RIPSTOP CANVAS",
     size: "One Size",
     sizes: ["M"],
@@ -176,6 +186,7 @@ export const PRODUCTS = [
     slug: "the-full-kit-bundle",
     name: "The Full Kit Bundle",
     price: "₦128,000",
+    discount: 20,
     fabric: "MIXED",
     size: "S — XL",
     sizes: ["S", "M", "L", "XL"],
@@ -191,6 +202,7 @@ export const PRODUCTS = [
     slug: "roche-aviators",
     name: "Roche Aviators",
     price: "₦22,000",
+    discount: 0,
     fabric: "ACETATE",
     size: "One Size",
     sizes: ["M"],
@@ -203,6 +215,7 @@ export const PRODUCTS = [
     slug: "studio-round-frames",
     name: "Studio Round Frames",
     price: "₦24,500",
+    discount: 10,
     fabric: "ACETATE",
     size: "One Size",
     sizes: ["M"],
@@ -218,6 +231,7 @@ export const PRODUCTS = [
     slug: "waxed-field-jacket",
     name: "Waxed Field Jacket",
     price: "₦81,000",
+    discount: 0,
     fabric: "WAXED CANVAS",
     size: "S — XXL",
     sizes: ["S", "M", "L", "XL"],
@@ -233,6 +247,7 @@ export const PRODUCTS = [
     slug: "loading-dock-boot",
     name: "Loading Dock Boot",
     price: "₦63,500",
+    discount: 18,
     fabric: "FULL GRAIN LEATHER",
     size: "40 — 45",
     sizes: ["M", "L", "XL"],
@@ -245,6 +260,7 @@ export const PRODUCTS = [
     slug: "rooftop-set",
     name: "Rooftop Set",
     price: "₦59,000",
+    discount: 0,
     fabric: "COTTON TWILL",
     size: "S — XL",
     sizes: ["S", "M", "L", "XL"],
@@ -260,6 +276,7 @@ export const PRODUCTS = [
     slug: "dockside-field-watch",
     name: "Dockside Field Watch",
     price: "₦96,000",
+    discount: 0,
     fabric: "STAINLESS STEEL",
     size: "One Size",
     sizes: ["M"],
@@ -272,6 +289,7 @@ export const PRODUCTS = [
     slug: "roche-chrono",
     name: "Roche Chrono",
     price: "₦112,000",
+    discount: 7,
     fabric: "STAINLESS STEEL",
     size: "One Size",
     sizes: ["M"],
@@ -287,6 +305,7 @@ export const PRODUCTS = [
     slug: "waterfront-windbreaker",
     name: "Waterfront Windbreaker",
     price: "₦45,000",
+    discount: 0,
     fabric: "RIPSTOP",
     size: "S — XXL",
     sizes: ["S", "M", "L", "XL"],
@@ -302,6 +321,7 @@ export const PRODUCTS = [
     slug: "canvas-tote",
     name: "Canvas Tote",
     price: "₦16,500",
+    discount: 0,
     fabric: "CANVAS",
     size: "One Size",
     sizes: ["M"],
@@ -314,6 +334,7 @@ export const PRODUCTS = [
     slug: "waxed-belt",
     name: "Waxed Belt",
     price: "₦11,000",
+    discount: 10,
     fabric: "WAXED LEATHER",
     size: "One Size",
     sizes: ["S", "M", "L"],
@@ -329,6 +350,7 @@ export const PRODUCTS = [
     slug: "ring",
     name: "Ring",
     price: "₦11,000",
+    discount: 0,
     fabric: "WAXED LEATHER",
     size: "One Size",
     sizes: ["S", "M", "L"],
@@ -342,7 +364,109 @@ export const PRODUCTS = [
   },
 ];
 
+export const BUNDLES = [
+  {
+    slug: "starter-wholesale-kit",
+    name: "Starter Wholesale Kit",
+    price: "₦420,000",
+    discount: 25,
+    fabric: "MIXED",
+    size: "Assorted",
+    sizes: ["S", "M", "L", "XL"],
+    category: "bundles",
+    minUnits: 10,
+    items: ["ribbed-tee", "utility-cargo", "roche-field-cap"],
+    image: fullkitshop,
+    images: [fullkitshop, wearshop],
+    colors: [
+      { name: "Black", hex: "#0a0a0a", stock: 42 },
+      { name: "White", hex: "#f5f5f0", stock: 14 },
+      { name: "Khaki", hex: "#a89a72", stock: 0 },
+      { name: "Olive", hex: "#4a4f36", stock: 9 },
+    ],
+  },
+  {
+    slug: "outerwear-wholesale-crate",
+    name: "Outerwear Wholesale Crate",
+    price: "₦960,000",
+    discount: 30,
+    fabric: "MIXED",
+    size: "Assorted",
+    sizes: ["S", "M", "L", "XL"],
+    category: "bundles",
+    minUnits: 20,
+    items: ["roche-overshirt", "waxed-roche-jacket", "waterfront-windbreaker"],
+    image: jacketshop,
+    images: [jacketshop, outwear],
+    colors: [
+      { name: "Olive", hex: "#4a4f36", stock: 12 },
+      { name: "Black", hex: "#0a0a0a", stock: 21 },
+      { name: "Sand", hex: "#c8b89e", stock: 5 },
+      { name: "Rust", hex: "#8a3b23", stock: 13 },
+      { name: "Forest", hex: "#2e3b2c", stock: 3 },
+    ],
+  },
+  {
+    slug: "accessories-wholesale-box",
+    name: "Accessories Wholesale Box",
+    price: "₦310,000",
+    discount: 20,
+    fabric: "MIXED",
+    size: "One Size",
+    sizes: ["M"],
+    category: "bundles",
+    minUnits: 25,
+    items: ["canvas-tote", "waxed-belt", "roche-field-cap", "roche-aviators"],
+    image: accessoryshop,
+    images: [accessoryshop, accessoryshop1],
+    colors: [
+      { name: "Sand", hex: "#c8b89e", stock: 20 },
+      { name: "Black", hex: "#0a0a0a", stock: 65 },
+      { name: "Brown", hex: "#5a4634", stock: 14 },
+      { name: "Olive", hex: "#4a4f36", stock: 9 },
+    ],
+  },
+  {
+    slug: "footwear-watch-wholesale-set",
+    name: "Footwear & Watch Wholesale Set",
+    price: "₦1,240,000",
+    discount: 22,
+    fabric: "MIXED",
+    size: "Assorted",
+    sizes: ["M", "L", "XL"],
+    category: "bundles",
+    minUnits: 15,
+    items: ["loading-dock-boot", "dockside-field-watch", "roche-chrono"],
+    image: shoeshop,
+    images: [shoeshop, watchshop],
+    colors: [
+      { name: "Black", hex: "#0a0a0a", stock: 11 },
+      { name: "Steel", hex: "#7a7f85", stock: 5 },
+    ],
+  },
+];
+
 export const getProductBySlug = (slug) => PRODUCTS.find((p) => p.slug === slug);
+
+export const getBundleBySlug = (slug) => BUNDLES.find((b) => b.slug === slug);
+
+export const getBundleColors = (bundle) => {
+  const seen = new Map();
+
+  bundle.items?.forEach((itemSlug) => {
+    const item = getProductBySlug(itemSlug);
+    item?.colors?.forEach((c) => {
+      const existing = seen.get(c.name);
+      if (existing) {
+        existing.stock += c.stock;
+      } else {
+        seen.set(c.name, { ...c });
+      }
+    });
+  });
+
+  return Array.from(seen.values());
+};
 
 export const FABRIC_WORDS = [
   "COTTON TWILL",

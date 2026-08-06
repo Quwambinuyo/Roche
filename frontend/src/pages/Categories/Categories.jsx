@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
+import { FiArrowUpRight } from "react-icons/fi";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
@@ -48,7 +48,7 @@ const Categories = () => {
                       className="w-full h-full"
                     >
                       {items.map((item) => (
-                        <SwiperSlide key={item.name}>
+                        <SwiperSlide key={item.slug}>
                           <RevealImage
                             src={item.image}
                             alt={item.name}
@@ -77,7 +77,7 @@ const Categories = () => {
                   <div className="flex items-center justify-between mt-1">
                     <p className="text-white/70 text-xs">{cat.count} pieces</p>
                     <span className="w-7 h-7 rounded-full bg-white/10 backdrop-blur flex items-center justify-center opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
-                      <ArrowUpRight size={13} className="text-white" />
+                      <FiArrowUpRight size={13} className="text-white" />
                     </span>
                   </div>
                 </div>

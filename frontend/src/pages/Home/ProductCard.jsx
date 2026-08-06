@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { BsCart4 } from "react-icons/bs";
-import { Plus, Minus, Heart } from "lucide-react";
+import { FiPlus, FiMinus, FiHeart } from "react-icons/fi";
 import RevealImage from "../../components/UI/RevealImage";
 import { useCart, buildLineId } from "../../context/CartContext";
 import { useWishlist } from "../../context/WishlistContext";
@@ -10,10 +11,12 @@ const ProductCard = ({ product, selectedColor, onColorChange }) => {
   const { isInWishlist, toggleWishlist } = useWishlist();
 
   const [internalColor, setInternalColor] = useState(
-    product.colors?.find((c) => c.stock > 0)?.name ??
-      product.colors?.[0]?.name ??
+    product?.colors?.find((c) => c.stock > 0)?.name ??
+      product?.colors?.[0]?.name ??
       null,
   );
+
+  if (!product) return null;
 
   const isControlled = selectedColor !== undefined;
   const activeColorName = isControlled ? selectedColor : internalColor;
@@ -70,7 +73,7 @@ const ProductCard = ({ product, selectedColor, onColorChange }) => {
   };
 
   return (
-    <div className="group">
+    <Link to={`/shop/${product.slug}`} className="group block">
       <div className="relative rounded-lg overflow-hidden aspect-[3/4] bg-secondary/5">
         <RevealImage
           src={product.image}
@@ -87,7 +90,7 @@ const ProductCard = ({ product, selectedColor, onColorChange }) => {
           aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
           className="absolute top-3 left-3 w-9 h-9 rounded-full flex items-center justify-center shadow-lg bg-primary text-secondary hover:bg-secondary hover:text-primary transition-all duration-300"
         >
-          <Heart size={15} className={wishlisted ? "fill-current" : ""} />
+          <FiHeart size={15} className={wishlisted ? "fill-current" : ""} />
         </button>
 
         {showOutOfStock && (
@@ -118,7 +121,7 @@ const ProductCard = ({ product, selectedColor, onColorChange }) => {
                   aria-label="Decrease quantity"
                   className="w-8 h-8 rounded-full flex items-center justify-center text-secondary hover:bg-secondary hover:text-primary transition-colors duration-200"
                 >
-                  <Minus size={14} />
+                  <FiMinus size={14} />
                 </button>
                 <span className="text-xs font-semibold text-secondary w-4 text-center">
                   {cartCount}
@@ -129,7 +132,7 @@ const ProductCard = ({ product, selectedColor, onColorChange }) => {
                   aria-label="Increase quantity"
                   className="w-8 h-8 rounded-full flex items-center justify-center text-secondary hover:bg-secondary hover:text-primary transition-colors duration-200"
                 >
-                  <Plus size={14} />
+                  <FiPlus size={14} />
                 </button>
               </div>
             )}
@@ -203,7 +206,7 @@ const ProductCard = ({ product, selectedColor, onColorChange }) => {
           })}
         </div>
       )}
-    </div>
+    </Link>
   );
 };
 

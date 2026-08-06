@@ -1,5 +1,5 @@
 import React from "react";
-import { X } from "lucide-react";
+import { FiX } from "react-icons/fi";
 import { CATEGORIES, PRICE_RANGES } from "./shopFilterConfig";
 
 const Chip = ({ label, onRemove }) => (
@@ -8,7 +8,7 @@ const Chip = ({ label, onRemove }) => (
     className="inline-flex items-center gap-1.5 text-xs font-medium text-secondary bg-secondary/5 border border-secondary/10 rounded-full pl-3 pr-2 py-1.5 hover:border-secondary/30 transition-colors duration-200"
   >
     {label}
-    <X size={12} />
+    <FiX size={12} />
   </button>
 );
 
@@ -21,6 +21,10 @@ const ShopActiveFilters = ({
 }) => {
   const categoryLabel = CATEGORIES.find((c) => c.value === category)?.label;
   const priceLabel = PRICE_RANGES.find((r) => r.value === priceRange)?.label;
+
+  const hasActiveFilters = Boolean(categoryLabel || size || priceLabel);
+
+  if (!hasActiveFilters) return null;
 
   return (
     <div className="flex flex-wrap items-center gap-2 mb-6">

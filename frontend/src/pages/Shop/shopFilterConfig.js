@@ -7,6 +7,7 @@ export const CATEGORIES = [
   { label: "Watches", value: "watches" },
   { label: "Caps", value: "caps" },
   { label: "Glasses", value: "glasses" },
+  { label: "Bundles", value: "bundles" },
 ];
 
 export const SIZES = ["XS", "S", "M", "L", "XL"];

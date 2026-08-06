@@ -5,12 +5,14 @@ import ShopSortDropdown from "./ShopSortDropdown";
 import ShopActiveFilters from "./ShopActiveFilters";
 import ShopProductGrid from "./ShopProductGrid";
 import ShopPagination from "./ShopPagination";
-import { PRODUCTS } from "../../mock/clothing";
+import { PRODUCTS, BUNDLES } from "../../mock/clothing";
 import {
   PRICE_RANGES,
   PRODUCTS_PER_PAGE,
   parsePrice,
 } from "./shopFilterConfig";
+
+const ALL_ITEMS = [...PRODUCTS, ...BUNDLES];
 
 const Shop = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -43,7 +45,7 @@ const Shop = () => {
   };
 
   const filtered = useMemo(() => {
-    let result = [...PRODUCTS];
+    let result = [...ALL_ITEMS];
 
     if (category) {
       result = result.filter((p) => p.category === category);

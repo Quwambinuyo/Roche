@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { SlidersHorizontal, X } from "lucide-react";
+import { FiSliders, FiX } from "react-icons/fi";
 import { CATEGORIES, SIZES, PRICE_RANGES } from "./shopFilterConfig";
 
 const FilterGroup = ({ title, children }) => (
@@ -111,7 +111,7 @@ const ShopFilters = ({ category, size, priceRange, onChange }) => {
         onClick={() => setDrawerOpen(true)}
         className="md:hidden flex items-center gap-2 text-sm font-semibold text-secondary border border-secondary/20 rounded-full px-4 py-2 mb-6 w-fit hover:border-secondary transition-colors duration-200"
       >
-        <SlidersHorizontal size={14} />
+        <FiSliders size={14} />
         Filters
       </button>
 
@@ -148,7 +148,7 @@ const ShopFilters = ({ category, size, priceRange, onChange }) => {
                 aria-label="Close filters"
                 className="group rounded-full p-2 text-secondary/60 hover:text-secondary hover:bg-secondary/5 transition-colors duration-200"
               >
-                <X
+                <FiX
                   size={18}
                   className="transition-transform duration-300 group-hover:rotate-90"
                 />

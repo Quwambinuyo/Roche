@@ -19,7 +19,8 @@ const ProductRail = ({
   emptyCtaHref = "#",
 }) => {
   const [paginationEl, setPaginationEl] = useState(null);
-  const isEmpty = !products || products.length === 0;
+  const safeProducts = (products || []).filter(Boolean);
+  const isEmpty = safeProducts.length === 0;
 
   return (
     <section className="mx-auto py-10">
@@ -70,10 +71,10 @@ const ProductRail = ({
                 disableOnInteraction: false,
                 pauseOnMouseEnter: true,
               }}
-              loop={products.length > 4}
+              loop={safeProducts.length > 4}
             >
-              {products.map((product, i) => (
-                <SwiperSlide key={`${product.name}-${i}`}>
+              {safeProducts.map((product, i) => (
+                <SwiperSlide key={`${product.slug ?? product.name ?? i}-${i}`}>
                   <ProductCard product={product} />
                 </SwiperSlide>
               ))}

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Trash2 } from "lucide-react";
+import { FiTrash2 } from "react-icons/fi";
 import Reveal from "../Landing/Reveal";
 import RailEmptyState from "../Home/RailEmptyState";
 import { useCart } from "../../context/CartContext";
@@ -66,7 +66,7 @@ const Cart = () => {
                   aria-label="Delete selected items"
                   className="flex items-center gap-1.5 text-sm font-medium text-secondary/60 hover:text-secondary transition-colors cursor-pointer"
                 >
-                  <Trash2 size={15} />
+                  <FiTrash2 size={15} />
                   Delete ({selectedIds.size})
                 </button>
               )}
