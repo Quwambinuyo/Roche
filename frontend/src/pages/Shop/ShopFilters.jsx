@@ -125,55 +125,47 @@ const ShopFilters = ({ category, size, priceRange, onChange }) => {
       </aside>
 
       {mounted && (
-        <div className="fixed inset-0 z-50 md:hidden">
-          <div
-            onClick={() => setDrawerOpen(false)}
-            className={`absolute inset-0 backdrop-blur-sm bg-black/40 transition-opacity duration-500 ease-out ${
-              drawerOpen ? "opacity-100" : "opacity-0"
-            }`}
-          />
-          <div
-            className={`absolute right-0 top-0 bottom-0 w-[85%] max-w-sm bg-primary shadow-2xl flex flex-col transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] ${
-              drawerOpen
-                ? "translate-x-0 opacity-100"
-                : "translate-x-full opacity-0"
-            }`}
-          >
-            <div className="flex items-center justify-between px-6 py-6">
-              <p className="font-bold text-lg text-secondary tracking-tight">
-                Filters
-              </p>
-              <button
-                onClick={() => setDrawerOpen(false)}
-                aria-label="Close filters"
-                className="group rounded-full p-2 text-secondary/60 hover:text-secondary hover:bg-secondary/5 transition-colors duration-200"
-              >
-                <FiX
-                  size={18}
-                  className="transition-transform duration-300 group-hover:rotate-90"
-                />
-              </button>
-            </div>
-
-            <div className="h-px mx-6 bg-gradient-to-r from-secondary/10 via-secondary/5 to-transparent" />
-
-            <div className="flex-1 overflow-y-auto px-6 py-4">
-              <FilterContent
-                category={category}
-                size={size}
-                priceRange={priceRange}
-                onChange={onChange}
+        <div
+          className={`fixed inset-0 z-50 md:hidden w-full h-full bg-primary flex flex-col transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] ${
+            drawerOpen
+              ? "translate-x-0 opacity-100"
+              : "translate-x-full opacity-0"
+          }`}
+        >
+          <div className="flex items-center justify-between px-6 py-6">
+            <p className="font-bold text-lg text-secondary tracking-tight">
+              Filters
+            </p>
+            <button
+              onClick={() => setDrawerOpen(false)}
+              aria-label="Close filters"
+              className="group rounded-full p-2 text-secondary/60 hover:text-secondary hover:bg-secondary/5 transition-colors duration-200"
+            >
+              <FiX
+                size={18}
+                className="transition-transform duration-300 group-hover:rotate-90"
               />
-            </div>
+            </button>
+          </div>
 
-            <div className="px-6 py-5 border-t border-secondary/10">
-              <button
-                onClick={() => setDrawerOpen(false)}
-                className="w-full bg-secondary text-primary text-sm font-semibold tracking-widest uppercase py-3.5 rounded-full hover:opacity-90 transition-opacity duration-300"
-              >
-                Show Results
-              </button>
-            </div>
+          <div className="h-px mx-6 bg-gradient-to-r from-secondary/10 via-secondary/5 to-transparent" />
+
+          <div className="flex-1 overflow-y-auto px-6 py-4">
+            <FilterContent
+              category={category}
+              size={size}
+              priceRange={priceRange}
+              onChange={onChange}
+            />
+          </div>
+
+          <div className="px-6 py-5 border-t border-secondary/10">
+            <button
+              onClick={() => setDrawerOpen(false)}
+              className="w-full bg-secondary text-primary text-sm font-semibold tracking-widest uppercase py-3.5 rounded-full hover:opacity-90 transition-opacity duration-300"
+            >
+              Show Results
+            </button>
           </div>
         </div>
       )}
