@@ -45,7 +45,7 @@ const Sidebar = () => {
       >
         <div className="flex items-center justify-between px-6 py-6">
           <div className="flex items-center gap-2.5">
-            <span className="w-2 h-2 rounded-full bg-tertiary-700" />
+            <span className="w-2 h-2 rounded-full bg-secondary" />
             <span className="bricolage-grotesqu text-lg font-semibold text-secondary tracking-tight">
               Menu
             </span>

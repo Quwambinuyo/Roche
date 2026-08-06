@@ -36,8 +36,8 @@ const SidebarLinks = ({ onLinkClick }) => {
             [
               "flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-colors",
               isActive
-                ? "bg-tertiary-500 text-primary"
-                : "text-secondary hover:bg-tertiary-50",
+                ? "bg-secondary text-primary"
+                : "text-secondary hover:bg-secondary/5",
             ].join(" ")
           }
         >
