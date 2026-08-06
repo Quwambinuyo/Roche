@@ -35,6 +35,7 @@ const Home = () => {
         products={RECENTLY_VIEWED}
         emptyMessage="You haven't viewed anything yet. Start browsing to see items here."
         emptyCtaLabel="Browse Products"
+        viewAllHref="/recently-viewed"
       />
 
       <ProductRail
@@ -43,6 +44,7 @@ const Home = () => {
         products={FOR_YOU}
         emptyMessage="We're still learning your style. Explore a few pieces so we can tailor this for you."
         emptyCtaLabel="Explore Products"
+        viewAllHref="/for-you"
       />
 
       <ProductRail
@@ -51,6 +53,7 @@ const Home = () => {
         products={WISHLIST}
         emptyMessage="Nothing saved yet. Tap the heart on any product to add it here."
         emptyCtaLabel="Discover Products"
+        viewAllHref="/wishlist"
       />
 
       <ProductRail
@@ -58,6 +61,7 @@ const Home = () => {
         subtitle="New Arrivals"
         products={NEW_ARRIVALS}
         emptyMessage="New arrivals will show up here soon."
+        viewAllHref="/new-arrivals"
       />
 
       <QuickLinks />

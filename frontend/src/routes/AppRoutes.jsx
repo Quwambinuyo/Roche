@@ -9,6 +9,9 @@ import {
   Landing,
   Home,
   Shop,
+  NewArrival,
+  RecentlyViewed,
+  ForYou,
   ProductDetails,
   Cart,
   Checkout,
@@ -26,15 +29,15 @@ import {
 const AppRoutes = () => {
   return (
     <Routes>
-      {/* Landing sits outside MainLayout entirely — its own full page,
-          no shared Navbar/Sidebar/MobileNavbar/MobileSidebar. */}
       <Route path="/" element={<Landing />} />
 
       <Route element={<MainLayout />}>
         <Route path="home" element={<Home />} />
+        <Route path="new-arrivals" element={<NewArrival />} />
+        <Route path="recently-viewed" element={<RecentlyViewed />} />
+        <Route path="for-you" element={<ForYou />} />
         <Route path="shop" element={<Shop />} />
-        <Route path="shop/:id" element={<ProductDetails />} />
-        {/* Categories reuses Shop with a category filter until a dedicated page exists */}
+        <Route path="shop/:slug" element={<ProductDetails />} />
         <Route path="categories" element={<Categories />} />
         <Route path="cart" element={<Cart />} />
         <Route path="wishlist" element={<Wishlist />} />
@@ -56,15 +59,7 @@ const AppRoutes = () => {
             </PrivateRoute>
           }
         />
-        <Route
-          path="orders"
-          element={
-            // <PrivateRoute>
-            //   <OrderHistory />
-            // </PrivateRoute>
-            <OrderHistory />
-          }
-        />
+        <Route path="orders" element={<OrderHistory />} />
         <Route
           path="profile"
           element={

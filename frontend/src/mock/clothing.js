@@ -42,6 +42,7 @@ export const CATEGORIES = [
 
 export const PRODUCTS = [
   {
+    slug: "roche-overshirt",
     name: "Roche Overshirt",
     price: "₦48,500",
     fabric: "COTTON TWILL",
@@ -56,6 +57,7 @@ export const PRODUCTS = [
     ],
   },
   {
+    slug: "ribbed-tee",
     name: "Ribbed Tee",
     price: "₦18,500",
     fabric: "HEAVY COTTON",
@@ -69,6 +71,7 @@ export const PRODUCTS = [
     ],
   },
   {
+    slug: "utility-cargo",
     name: "Utility Cargo",
     price: "₦52,000",
     fabric: "RIPSTOP CANVAS",
@@ -82,6 +85,7 @@ export const PRODUCTS = [
     ],
   },
   {
+    slug: "waxed-roche-jacket",
     name: "Waxed Roche Jacket",
     price: "₦74,000",
     fabric: "WAXED CANVAS",
@@ -96,6 +100,7 @@ export const PRODUCTS = [
     ],
   },
   {
+    slug: "heavyweight-ribbed-tee",
     name: "Heavyweight Ribbed Tee",
     price: "₦18,500",
     fabric: "HEAVY COTTON",
@@ -109,6 +114,7 @@ export const PRODUCTS = [
     ],
   },
   {
+    slug: "roche-field-cap",
     name: "Roche Field Cap",
     price: "₦14,000",
     fabric: "COTTON TWILL",
@@ -122,6 +128,7 @@ export const PRODUCTS = [
     ],
   },
   {
+    slug: "waxed-trail-cap",
     name: "Waxed Trail Cap",
     price: "₦15,500",
     fabric: "WAXED CANVAS",
@@ -132,6 +139,7 @@ export const PRODUCTS = [
     colors: [{ name: "Rust", hex: "#8a3b23", stock: 7 }],
   },
   {
+    slug: "ribbed-beanie",
     name: "Ribbed Beanie",
     price: "₦12,000",
     fabric: "HEAVY JERSEY",
@@ -145,6 +153,7 @@ export const PRODUCTS = [
     ],
   },
   {
+    slug: "utility-bucket-hat",
     name: "Utility Bucket Hat",
     price: "₦13,500",
     fabric: "RIPSTOP CANVAS",
@@ -155,6 +164,7 @@ export const PRODUCTS = [
     colors: [{ name: "Khaki", hex: "#a89a72", stock: 11 }],
   },
   {
+    slug: "the-full-kit-bundle",
     name: "The Full Kit Bundle",
     price: "₦128,000",
     fabric: "MIXED",
@@ -168,6 +178,7 @@ export const PRODUCTS = [
     ],
   },
   {
+    slug: "roche-aviators",
     name: "Roche Aviators",
     price: "₦22,000",
     fabric: "ACETATE",
@@ -178,6 +189,7 @@ export const PRODUCTS = [
     colors: [{ name: "Black", hex: "#0a0a0a", stock: 18 }],
   },
   {
+    slug: "studio-round-frames",
     name: "Studio Round Frames",
     price: "₦24,500",
     fabric: "ACETATE",
@@ -191,6 +203,7 @@ export const PRODUCTS = [
     ],
   },
   {
+    slug: "waxed-field-jacket",
     name: "Waxed Field Jacket",
     price: "₦81,000",
     fabric: "WAXED CANVAS",
@@ -204,6 +217,7 @@ export const PRODUCTS = [
     ],
   },
   {
+    slug: "loading-dock-boot",
     name: "Loading Dock Boot",
     price: "₦63,500",
     fabric: "FULL GRAIN LEATHER",
@@ -214,6 +228,7 @@ export const PRODUCTS = [
     colors: [{ name: "Black", hex: "#0a0a0a", stock: 8 }],
   },
   {
+    slug: "rooftop-set",
     name: "Rooftop Set",
     price: "₦59,000",
     fabric: "COTTON TWILL",
@@ -227,6 +242,7 @@ export const PRODUCTS = [
     ],
   },
   {
+    slug: "dockside-field-watch",
     name: "Dockside Field Watch",
     price: "₦96,000",
     fabric: "STAINLESS STEEL",
@@ -237,6 +253,7 @@ export const PRODUCTS = [
     colors: [{ name: "Steel", hex: "#7a7f85", stock: 5 }],
   },
   {
+    slug: "roche-chrono",
     name: "Roche Chrono",
     price: "₦112,000",
     fabric: "STAINLESS STEEL",
@@ -250,6 +267,7 @@ export const PRODUCTS = [
     ],
   },
   {
+    slug: "waterfront-windbreaker",
     name: "Waterfront Windbreaker",
     price: "₦45,000",
     fabric: "RIPSTOP",
@@ -263,6 +281,7 @@ export const PRODUCTS = [
     ],
   },
   {
+    slug: "canvas-tote",
     name: "Canvas Tote",
     price: "₦16,500",
     fabric: "CANVAS",
@@ -273,6 +292,7 @@ export const PRODUCTS = [
     colors: [{ name: "Sand", hex: "#c8b89e", stock: 20 }],
   },
   {
+    slug: "waxed-belt",
     name: "Waxed Belt",
     price: "₦11,000",
     fabric: "WAXED LEATHER",
@@ -286,6 +306,7 @@ export const PRODUCTS = [
     ],
   },
   {
+    slug: "ring",
     name: "Ring",
     price: "₦11,000",
     fabric: "WAXED LEATHER",
@@ -299,6 +320,8 @@ export const PRODUCTS = [
     ],
   },
 ];
+
+export const getProductBySlug = (slug) => PRODUCTS.find((p) => p.slug === slug);
 
 export const FABRIC_WORDS = [
   "COTTON TWILL",

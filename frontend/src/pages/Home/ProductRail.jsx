@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
@@ -34,12 +35,12 @@ const ProductRail = ({
           </h2>
         </div>
         {!isEmpty && (
-          <animateMotion
-            href={viewAllHref}
+          <Link
+            to={viewAllHref}
             className="hidden sm:inline-flex items-center gap-1 text-sm font-semibold text-tertiary-700"
           >
             View all <ArrowUpRight size={14} />
-          </animateMotion>
+          </Link>
         )}
       </Reveal>
 

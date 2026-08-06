@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Trash2, ShoppingBag } from "lucide-react";
 import Reveal from "../Landing/Reveal";
 import RevealImage from "../../components/UI/RevealImage";
@@ -14,8 +15,20 @@ const WishlistCard = ({ product, onRemove, onAddToCart }) => {
     : (product.stock ?? 1);
   const isOutOfStock = totalStock <= 0;
 
+  const handleRemoveClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onRemove(product);
+  };
+
+  const handleAddClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onAddToCart(product);
+  };
+
   return (
-    <div className="group relative">
+    <Link to={`/shop/${product.slug}`} className="group relative block">
       <div className="relative rounded-lg overflow-hidden aspect-[3/4] bg-secondary/5">
         <RevealImage
           src={product.image}
@@ -33,7 +46,7 @@ const WishlistCard = ({ product, onRemove, onAddToCart }) => {
         )}
 
         <button
-          onClick={() => onRemove(product)}
+          onClick={handleRemoveClick}
           aria-label="Remove from wishlist"
           className="absolute top-3 right-3 w-8 h-8 rounded-full bg-primary/90 backdrop-blur flex items-center justify-center text-secondary/60 hover:text-secondary hover:bg-primary transition-all duration-200 opacity-0 group-hover:opacity-100"
         >
@@ -52,7 +65,7 @@ const WishlistCard = ({ product, onRemove, onAddToCart }) => {
 
         {!isOutOfStock && (
           <button
-            onClick={() => onAddToCart(product)}
+            onClick={handleAddClick}
             aria-label="Add to cart"
             className="flex items-center gap-1.5 text-xs font-semibold text-secondary/70 hover:text-secondary transition-colors duration-200"
           >
@@ -61,7 +74,7 @@ const WishlistCard = ({ product, onRemove, onAddToCart }) => {
           </button>
         )}
       </div>
-    </div>
+    </Link>
   );
 };
 
@@ -69,7 +82,7 @@ const Wishlist = () => {
   const [items, setItems] = useState(MOCK_WISHLIST);
 
   const handleRemove = (product) => {
-    setItems((prev) => prev.filter((p) => p.name !== product.name));
+    setItems((prev) => prev.filter((p) => p.slug !== product.slug));
   };
 
   const handleAddToCart = (product) => {
@@ -102,7 +115,7 @@ const Wishlist = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-10">
           {items.map((product) => (
             <WishlistCard
-              key={product.name}
+              key={product.slug}
               product={product}
               onRemove={handleRemove}
               onAddToCart={handleAddToCart}
