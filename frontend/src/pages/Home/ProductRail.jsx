@@ -37,7 +37,7 @@ const ProductRail = ({
         {!isEmpty && (
           <Link
             to={viewAllHref}
-            className="hidden sm:inline-flex items-center gap-1 text-sm font-semibold text-tertiary-700"
+            className="inline-flex items-center gap-1 text-sm font-semibold text-tertiary-700"
           >
             View all <ArrowUpRight size={14} />
           </Link>
