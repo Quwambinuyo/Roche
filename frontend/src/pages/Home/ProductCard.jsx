@@ -2,20 +2,16 @@ import React, { useState } from "react";
 import { BsCart4 } from "react-icons/bs";
 import { Plus, Minus } from "lucide-react";
 import RevealImage from "../../components/UI/RevealImage";
+import { useCart, buildLineId } from "../../context/CartContext";
 
-const ProductCard = ({
-  product,
-  selectedColor,
-  onColorChange,
-  onAddToCart,
-  onRemoveFromCart,
-}) => {
+const ProductCard = ({ product, selectedColor, onColorChange }) => {
+  const { items, addToCart, updateQty } = useCart();
+
   const [internalColor, setInternalColor] = useState(
     product.colors?.find((c) => c.stock > 0)?.name ??
       product.colors?.[0]?.name ??
       null,
   );
-  const [cartCount, setCartCount] = useState(0);
 
   const isControlled = selectedColor !== undefined;
   const activeColorName = isControlled ? selectedColor : internalColor;
@@ -43,17 +39,16 @@ const ProductCard = ({
 
   const canAddToCart = !showOutOfStock && (!hasColors || activeColorName);
 
+  const lineId = buildLineId(product, activeColorData ?? null, null);
+  const cartLine = items.find((line) => line.id === lineId);
+  const cartCount = cartLine?.qty ?? 0;
+
   const handleAdd = (e) => {
     e.preventDefault();
     e.stopPropagation();
     if (!canAddToCart) return;
 
-    onAddToCart?.({
-      product,
-      color: activeColorData ?? null,
-    });
-
-    setCartCount((prev) => prev + 1);
+    addToCart({ product, color: activeColorData ?? null });
   };
 
   const handleRemove = (e) => {
@@ -61,12 +56,7 @@ const ProductCard = ({
     e.stopPropagation();
     if (cartCount === 0) return;
 
-    onRemoveFromCart?.({
-      product,
-      color: activeColorData ?? null,
-    });
-
-    setCartCount((prev) => Math.max(0, prev - 1));
+    updateQty(lineId, cartCount - 1);
   };
 
   return (

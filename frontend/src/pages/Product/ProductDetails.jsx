@@ -11,10 +11,12 @@ import {
 import Reveal from "../Landing/Reveal";
 import RevealImage from "../../components/UI/RevealImage";
 import { PRODUCTS, getProductBySlug } from "../../mock/clothing";
+import { useCart, buildLineId } from "../../context/CartContext";
 
 const ProductDetails = () => {
   const { slug } = useParams();
   const product = getProductBySlug(slug);
+  const { items, addToCart, updateQty } = useCart();
 
   const [selectedColor, setSelectedColor] = useState(
     () => product?.colors?.find((c) => c.stock > 0) || product?.colors?.[0],
@@ -47,6 +49,27 @@ const ProductDetails = () => {
   }
 
   const isOutOfStock = !selectedColor || selectedColor.stock === 0;
+
+  const currentLineId = buildLineId(
+    product,
+    selectedColor ?? null,
+    selectedSize || null,
+  );
+  const currentLineQty =
+    items.find((line) => line.id === currentLineId)?.qty ?? 0;
+
+  const handleAddToCart = () => {
+    if (isOutOfStock) return;
+
+    addToCart({
+      product,
+      color: selectedColor ?? null,
+      size: selectedSize || null,
+      qty,
+    });
+
+    setQty(1);
+  };
 
   return (
     <div className="">
@@ -135,7 +158,7 @@ const ProductDetails = () => {
           {product.sizes?.length > 0 && (
             <div className="mt-6">
               <p className="text-xs font-semibold tracking-widest text-secondary/50 uppercase mb-3">
-                Size — {product.size}
+                Size — {selectedSize || "Select"}
               </p>
               <div className="flex flex-wrap gap-2">
                 {product.sizes.map((size) => (
@@ -175,6 +198,7 @@ const ProductDetails = () => {
             </div>
 
             <button
+              onClick={handleAddToCart}
               disabled={isOutOfStock}
               className={`flex-1 h-11 rounded-full text-sm font-semibold transition-colors ${
                 isOutOfStock
@@ -182,7 +206,11 @@ const ProductDetails = () => {
                   : "bg-secondary text-primary hover:bg-tertiary-800"
               }`}
             >
-              {isOutOfStock ? "Out of stock" : "Add to cart"}
+              {isOutOfStock
+                ? "Out of stock"
+                : currentLineQty > 0
+                  ? `Add more (${currentLineQty} in cart)`
+                  : "Add to cart"}
             </button>
           </div>
 

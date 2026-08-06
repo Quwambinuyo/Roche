@@ -1,18 +1,20 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 import { getItem, setItem } from "../utils/localStorage";
+import { useToast } from "./ToastContext";
 
 const CartContext = createContext(undefined);
 
 const CART_STORAGE_KEY = "cart";
 
-const buildLineId = (product, color, size) =>
+export const buildLineId = (product, color, size) =>
   [product.slug, color?.name ?? "no-color", size ?? "no-size"].join("::");
 
 const parsePrice = (price) => Number(price.replace(/[₦,]/g, ""));
 
 export const CartProvider = ({ children }) => {
   const [items, setItems] = useState(() => getItem(CART_STORAGE_KEY, []));
+  const { showToast } = useToast();
 
   useEffect(() => {
     setItem(CART_STORAGE_KEY, items);
@@ -32,10 +34,32 @@ export const CartProvider = ({ children }) => {
 
       return [...prev, { id: lineId, product, color, size, qty }];
     });
+
+    showToast(`${product.name} added to cart`, { type: "success" });
   };
 
   const removeFromCart = (lineId) => {
-    setItems((prev) => prev.filter((line) => line.id !== lineId));
+    const line = items.find((l) => l.id === lineId);
+
+    setItems((prev) => prev.filter((l) => l.id !== lineId));
+
+    if (line) {
+      showToast(`${line.product.name} removed from cart`, { type: "info" });
+    }
+  };
+
+  const removeItems = (lineIds) => {
+    const idSet = new Set(lineIds);
+    const removedCount = items.filter((l) => idSet.has(l.id)).length;
+
+    if (removedCount === 0) return;
+
+    setItems((prev) => prev.filter((l) => !idSet.has(l.id)));
+
+    showToast(
+      `${removedCount} item${removedCount > 1 ? "s" : ""} removed from cart`,
+      { type: "info" },
+    );
   };
 
   const updateQty = (lineId, qty) => {
@@ -62,6 +86,7 @@ export const CartProvider = ({ children }) => {
     items,
     addToCart,
     removeFromCart,
+    removeItems,
     updateQty,
     clearCart,
     itemCount,

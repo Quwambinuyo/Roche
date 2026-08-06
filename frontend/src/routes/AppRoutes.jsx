@@ -43,14 +43,7 @@ const AppRoutes = () => {
         <Route path="wishlist" element={<Wishlist />} />
         <Route path="contact" element={<Contact />} />
 
-        <Route
-          path="checkout"
-          element={
-            <PrivateRoute>
-              <Checkout />
-            </PrivateRoute>
-          }
-        />
+        <Route path="checkout" element={<Checkout />} />
         <Route
           path="order-success"
           element={
