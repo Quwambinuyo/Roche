@@ -35,6 +35,7 @@ const ProductCard = ({
 
   const needsSizeDrawer =
     hasSizes && product.sizes.length > SIZE_DRAWER_THRESHOLD;
+
   const quickAddSize = hasSizes && !needsSizeDrawer ? product.sizes[0] : null;
 
   const canAddToCart = !showOutOfStock && (!hasColors || activeColorName);

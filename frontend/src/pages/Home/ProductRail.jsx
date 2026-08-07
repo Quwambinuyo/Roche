@@ -8,6 +8,7 @@ import "swiper/css/pagination";
 import Reveal from "../Landing/Reveal";
 import ProductCard from "./ProductCard";
 import RailEmptyState from "./RailEmptyState";
+import ProductDetailsDrawer from "../../pages/Product/detail/ProductDetailsDrawer";
 
 const ProductRail = ({
   title,
@@ -17,10 +18,18 @@ const ProductRail = ({
   emptyMessage,
   emptyCtaLabel,
   emptyCtaHref = "#",
+  onOpenSizeDrawer,
 }) => {
   const [paginationEl, setPaginationEl] = useState(null);
+  const [drawerSlug, setDrawerSlug] = useState(null);
+
   const safeProducts = (products || []).filter(Boolean);
   const isEmpty = safeProducts.length === 0;
+
+  const handleOpenDrawer = (slug) => {
+    setDrawerSlug(slug);
+    onOpenSizeDrawer?.(slug);
+  };
 
   return (
     <section className="mx-auto py-10">
@@ -75,7 +84,10 @@ const ProductRail = ({
             >
               {safeProducts.map((product, i) => (
                 <SwiperSlide key={`${product.slug ?? product.name ?? i}-${i}`}>
-                  <ProductCard product={product} />
+                  <ProductCard
+                    product={product}
+                    onOpenSizeDrawer={handleOpenDrawer}
+                  />
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -89,6 +101,12 @@ const ProductRail = ({
           </div>
         </>
       )}
+
+      <ProductDetailsDrawer
+        isOpen={Boolean(drawerSlug)}
+        onClose={() => setDrawerSlug(null)}
+        slug={drawerSlug}
+      />
     </section>
   );
 };

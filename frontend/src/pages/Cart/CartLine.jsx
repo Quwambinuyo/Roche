@@ -118,7 +118,8 @@ const CartLine = ({
               </button>
             </div>
 
-            <div className="flex items-center gap-2">
+            {/* Price & Discount container converted to vertical stack */}
+            <div className="flex flex-col items-end">
               {hasDiscount && (
                 <span className="text-xs text-secondary/40 line-through">
                   {formatNaira(parsePriceOriginal(product.price) * qty)}
