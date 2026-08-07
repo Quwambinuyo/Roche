@@ -1,19 +1,28 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { BsCart4 } from "react-icons/bs";
 import { FiPlus, FiMinus, FiHeart } from "react-icons/fi";
 import RevealImage from "../../components/UI/RevealImage";
 import { useCart, buildLineId } from "../../context/CartContext";
 import { useWishlist } from "../../context/WishlistContext";
+import { useControllableState } from "../../hooks/useControllableState";
+import { formatNaira, getDiscountPricing } from "../../utils/price";
+import { getStockStatus } from "../../utils/productStock";
 
-const parsePrice = (price) => Number(String(price).replace(/[^\d]/g, ""));
-const formatNaira = (value) => `₦${Math.round(value).toLocaleString("en-NG")}`;
+const SIZE_DRAWER_THRESHOLD = 2;
 
-const ProductCard = ({ product, selectedColor, onColorChange }) => {
+const ProductCard = ({
+  product,
+  selectedColor,
+  onColorChange,
+  onOpenSizeDrawer,
+}) => {
   const { items, addToCart, updateQty } = useCart();
   const { isInWishlist, toggleWishlist } = useWishlist();
 
-  const [internalColor, setInternalColor] = useState(
+  const [activeColorName, handleSelectColor] = useControllableState(
+    selectedColor,
+    onColorChange,
     product?.colors?.find((c) => c.stock > 0)?.name ??
       product?.colors?.[0]?.name ??
       null,
@@ -21,39 +30,19 @@ const ProductCard = ({ product, selectedColor, onColorChange }) => {
 
   if (!product) return null;
 
-  const isControlled = selectedColor !== undefined;
-  const activeColorName = isControlled ? selectedColor : internalColor;
+  const { hasColors, hasSizes, activeColorData, showOutOfStock } =
+    getStockStatus(product, activeColorName);
 
-  const handleSelectColor = (colorName) => {
-    if (!isControlled) {
-      setInternalColor(colorName);
-    }
-    onColorChange?.(colorName);
-  };
-
-  const activeColorData = product.colors?.find(
-    (c) => c.name === activeColorName,
-  );
-
-  const hasColors = product.colors && product.colors.length > 0;
-  const totalStock = hasColors
-    ? product.colors.reduce((sum, c) => sum + c.stock, 0)
-    : (product.stock ?? 1);
-  const isFullyOutOfStock = totalStock <= 0;
-  const isSelectedColorOutOfStock = hasColors
-    ? activeColorData?.stock <= 0
-    : false;
-  const showOutOfStock = isFullyOutOfStock || isSelectedColorOutOfStock;
+  const needsSizeDrawer =
+    hasSizes && product.sizes.length > SIZE_DRAWER_THRESHOLD;
+  const quickAddSize = hasSizes && !needsSizeDrawer ? product.sizes[0] : null;
 
   const canAddToCart = !showOutOfStock && (!hasColors || activeColorName);
 
-  const hasDiscount = product.discount > 0;
-  const basePrice = parsePrice(product.price);
-  const discountedPrice = hasDiscount
-    ? basePrice - (basePrice * product.discount) / 100
-    : basePrice;
+  const { hasDiscount, basePrice, discountedPrice } =
+    getDiscountPricing(product);
 
-  const lineId = buildLineId(product, activeColorData ?? null, null);
+  const lineId = buildLineId(product, activeColorData ?? null, quickAddSize);
   const cartLine = items.find((line) => line.id === lineId);
   const cartCount = cartLine?.qty ?? 0;
 
@@ -62,9 +51,19 @@ const ProductCard = ({ product, selectedColor, onColorChange }) => {
   const handleAdd = (e) => {
     e.preventDefault();
     e.stopPropagation();
+
+    if (needsSizeDrawer) {
+      onOpenSizeDrawer?.(product.slug);
+      return;
+    }
+
     if (!canAddToCart) return;
 
-    addToCart({ product, color: activeColorData ?? null });
+    addToCart({
+      product,
+      color: activeColorData ?? null,
+      size: quickAddSize,
+    });
   };
 
   const handleRemove = (e) => {
@@ -119,11 +118,11 @@ const ProductCard = ({ product, selectedColor, onColorChange }) => {
 
         {!showOutOfStock && (
           <div className="absolute bottom-3 right-3">
-            {cartCount === 0 ? (
+            {cartCount === 0 || needsSizeDrawer ? (
               <button
                 type="button"
                 onClick={handleAdd}
-                aria-label="Add to cart"
+                aria-label={needsSizeDrawer ? "Choose size" : "Add to cart"}
                 className="w-10 h-10 rounded-full flex items-center justify-center shadow-lg bg-primary text-secondary hover:bg-secondary hover:text-primary transition-all duration-300"
               >
                 <BsCart4 size={16} />

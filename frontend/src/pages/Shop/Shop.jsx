@@ -1,21 +1,21 @@
-import React, { useMemo } from "react";
-import { useSearchParams } from "react-router-dom";
+import React, { useMemo, useState } from "react";
 import ShopFilters from "./ShopFilters";
 import ShopSortDropdown from "./ShopSortDropdown";
 import ShopActiveFilters from "./ShopActiveFilters";
 import ShopProductGrid from "./ShopProductGrid";
 import ShopPagination from "./ShopPagination";
+import ProductDetailsDrawer from "../../pages/Product/detail/ProductDetailsDrawer";
 import { PRODUCTS, BUNDLES } from "../../mock/clothing";
-import {
-  PRICE_RANGES,
-  PRODUCTS_PER_PAGE,
-  parsePrice,
-} from "./shopFilterConfig";
+import { PRICE_RANGES, PRODUCTS_PER_PAGE } from "./shopFilterConfig";
+import { parsePrice } from "../../utils/price";
+import { filterProducts, sortProducts, paginate } from "../../utils/shopQuery";
+import { useSearchParamState } from "../../hooks/useSearchParamState";
 
 const ALL_ITEMS = [...PRODUCTS, ...BUNDLES];
 
 const Shop = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const { searchParams, setParam, clearParams } = useSearchParamState();
+  const [drawerSlug, setDrawerSlug] = useState(null);
 
   const category = searchParams.get("category") || "";
   const size = searchParams.get("size") || "";
@@ -23,65 +23,24 @@ const Shop = () => {
   const sort = searchParams.get("sort") || "newest";
   const page = Number(searchParams.get("page")) || 1;
 
-  const updateParam = (key, value) => {
-    const next = new URLSearchParams(searchParams);
-    if (value) {
-      next.set(key, value);
-    } else {
-      next.delete(key);
-    }
-    next.delete("page");
-    setSearchParams(next);
-  };
-
   const setPage = (nextPage) => {
-    const next = new URLSearchParams(searchParams);
-    next.set("page", String(nextPage));
-    setSearchParams(next);
-  };
-
-  const clearFilters = () => {
-    setSearchParams({});
+    setParam("page", String(nextPage), { resetPage: false });
   };
 
   const filtered = useMemo(() => {
-    let result = [...ALL_ITEMS];
+    const byFilters = filterProducts(
+      ALL_ITEMS,
+      { category, size, priceRange, priceRanges: PRICE_RANGES },
+      parsePrice,
+    );
 
-    if (category) {
-      result = result.filter((p) => p.category === category);
-    }
-
-    if (size) {
-      result = result.filter((p) => p.sizes?.includes(size));
-    }
-
-    if (priceRange) {
-      const range = PRICE_RANGES.find((r) => r.value === priceRange);
-      if (range) {
-        result = result.filter((p) => {
-          const value = parsePrice(p.price);
-          return value >= range.min && value < range.max;
-        });
-      }
-    }
-
-    if (sort === "price-asc") {
-      result.sort((a, b) => parsePrice(a.price) - parsePrice(b.price));
-    } else if (sort === "price-desc") {
-      result.sort((a, b) => parsePrice(b.price) - parsePrice(a.price));
-    }
-
-    return result;
+    return sortProducts(byFilters, sort, parsePrice);
   }, [category, size, priceRange, sort]);
 
-  const totalPages = Math.max(
-    1,
-    Math.ceil(filtered.length / PRODUCTS_PER_PAGE),
-  );
-  const currentPage = Math.min(page, totalPages);
-  const paginated = filtered.slice(
-    (currentPage - 1) * PRODUCTS_PER_PAGE,
-    currentPage * PRODUCTS_PER_PAGE,
+  const { totalPages, currentPage, paginated } = paginate(
+    filtered,
+    page,
+    PRODUCTS_PER_PAGE,
   );
 
   const hasActiveFilters = Boolean(category || size || priceRange);
@@ -103,10 +62,7 @@ const Shop = () => {
         <p className="text-sm text-secondary/50">
           {filtered.length} {filtered.length === 1 ? "result" : "results"}
         </p>
-        <ShopSortDropdown
-          value={sort}
-          onChange={(v) => updateParam("sort", v)}
-        />
+        <ShopSortDropdown value={sort} onChange={(v) => setParam("sort", v)} />
       </div>
 
       {hasActiveFilters && (
@@ -114,8 +70,8 @@ const Shop = () => {
           category={category}
           size={size}
           priceRange={priceRange}
-          onRemove={updateParam}
-          onClearAll={clearFilters}
+          onRemove={setParam}
+          onClearAll={clearParams}
         />
       )}
 
@@ -124,11 +80,15 @@ const Shop = () => {
           category={category}
           size={size}
           priceRange={priceRange}
-          onChange={updateParam}
+          onChange={setParam}
         />
 
         <div>
-          <ShopProductGrid products={paginated} onClearFilters={clearFilters} />
+          <ShopProductGrid
+            products={paginated}
+            onClearFilters={clearParams}
+            onOpenSizeDrawer={setDrawerSlug}
+          />
 
           {filtered.length > 0 && (
             <ShopPagination
@@ -139,6 +99,12 @@ const Shop = () => {
           )}
         </div>
       </div>
+
+      <ProductDetailsDrawer
+        isOpen={Boolean(drawerSlug)}
+        onClose={() => setDrawerSlug(null)}
+        slug={drawerSlug}
+      />
     </div>
   );
 };

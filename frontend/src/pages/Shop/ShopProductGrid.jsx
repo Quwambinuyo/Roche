@@ -1,9 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import ProductCard from "../Home/ProductCard";
 import RailEmptyState from "../Home/RailEmptyState";
 
-const ShopProductGrid = ({ products, onClearFilters }) => {
+const ShopProductGrid = ({ products, onClearFilters, onOpenSizeDrawer }) => {
   if (products.length === 0) {
     return (
       <RailEmptyState
@@ -18,9 +17,11 @@ const ShopProductGrid = ({ products, onClearFilters }) => {
   return (
     <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-10">
       {products.map((product) => (
-        <Link key={product.slug} to={`/shop/${product.slug}`}>
-          <ProductCard product={product} />
-        </Link>
+        <ProductCard
+          key={product.slug}
+          product={product}
+          onOpenSizeDrawer={onOpenSizeDrawer}
+        />
       ))}
     </div>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import { formatNaira, parsePrice } from "../utils";
+import { formatNaira, parsePrice } from "../../../utils/price";
 
 const OrderSummaryCard = ({
   checkoutLines,
