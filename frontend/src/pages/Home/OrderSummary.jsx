@@ -1,55 +1,104 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Clock, CheckCircle2, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 import Reveal from "../Landing/Reveal";
 
 const OrdersSummary = ({ pendingCount = 0, completedCount = 0 }) => {
-  if (!pendingCount && !completedCount) return null;
+  const total = pendingCount + completedCount;
+  if (total === 0) return null;
+
+  const data = [
+    { name: "Pending", value: pendingCount },
+    { name: "Completed", value: completedCount },
+  ];
 
   return (
     <Reveal className="pt-2">
-      <p className="text-xs font-semibold tracking-widest text-secondary/50 uppercase mb-3">
+      <p className="text-xs font-semibold tracking-widest text-secondary uppercase mb-3">
         Your Orders
       </p>
 
-      <div className="rounded-2xl border border-secondary bg-secondary flex divide-x divide-primary/15">
-        <Link
-          to="/orders?status=pending"
-          className="flex-1 flex items-center gap-3 p-5 md:p-6 group"
-        >
-          <span className="w-10 h-10 rounded-full bg-orange-500 text-white flex items-center justify-center shrink-0">
-            <Clock size={18} />
-          </span>
-          <div className="flex-1">
-            <p className="font-bold text-2xl text-primary leading-tight">
-              {pendingCount}
-            </p>
-            <p className="text-xs text-primary/60">Pending</p>
-          </div>
-          <ChevronRight
-            size={16}
-            className="text-primary/30 group-hover:text-primary/60 transition-colors shrink-0"
-          />
-        </Link>
+      <div className=" p-5 md:p-6">
+        <div className="h-40">
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart
+              data={data}
+              margin={{ top: 10, right: 20, left: 0, bottom: 0 }}
+            >
+              <XAxis
+                dataKey="name"
+                axisLine={false}
+                tickLine={false}
+                tick={{
+                  fontSize: 12,
+                  fill: "var(--color-secondary)",
+                  fillOpacity: 0.5,
+                }}
+              />
+              <YAxis hide domain={[0, "dataMax + 2"]} />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: "var(--color-primary)",
+                  border:
+                    "1px solid color-mix(in srgb, var(--color-secondary) 10%, transparent)",
+                  borderRadius: 8,
+                  fontSize: 12,
+                }}
+                labelStyle={{ color: "var(--color-secondary)" }}
+              />
+              <Line
+                type="monotone"
+                dataKey="value"
+                stroke="var(--color-secondary)"
+                strokeWidth={2.5}
+                dot={{ r: 5, fill: "var(--color-secondary)" }}
+                activeDot={{ r: 6 }}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
 
-        <Link
-          to="/orders?status=completed"
-          className="flex-1 flex items-center gap-3 p-5 md:p-6 group"
-        >
-          <span className="w-10 h-10 rounded-full bg-green-800 text-white flex items-center justify-center shrink-0">
-            <CheckCircle2 size={18} />
-          </span>
-          <div className="flex-1">
-            <p className="font-bold text-2xl text-primary leading-tight">
-              {completedCount}
-            </p>
-            <p className="text-xs text-primary/60">Completed</p>
-          </div>
-          <ChevronRight
-            size={16}
-            className="text-primary/30 group-hover:text-primary/60 transition-colors shrink-0"
-          />
-        </Link>
+        <div className="flex divide-x divide-secondary/10 mt-4 pt-4 border-t border-secondary/10">
+          <Link
+            to="/orders?status=pending"
+            className="flex-1 flex items-center justify-between pr-4 group"
+          >
+            <span className="text-sm text-secondary/70">
+              Pending ·{" "}
+              <span className="font-semibold text-secondary">
+                {pendingCount}
+              </span>
+            </span>
+            <ChevronRight
+              size={14}
+              className="text-secondary group-hover:text-secondary/60 transition-colors"
+            />
+          </Link>
+
+          <Link
+            to="/orders?status=completed"
+            className="flex-1 flex items-center justify-between pl-4 group"
+          >
+            <span className="text-sm text-secondary">
+              Completed ·{" "}
+              <span className="font-semibold text-secondary">
+                {completedCount}
+              </span>
+            </span>
+            <ChevronRight
+              size={14}
+              className="text-secondary/30 group-hover:text-secondary/60 transition-colors"
+            />
+          </Link>
+        </div>
       </div>
     </Reveal>
   );
