@@ -9,7 +9,7 @@ import { useControllableState } from "../../hooks/useControllableState";
 import { formatNaira, getDiscountPricing } from "../../utils/price";
 import { getStockStatus } from "../../utils/productStock";
 
-const SIZE_DRAWER_THRESHOLD = 2;
+const SIZE_DRAWER_THRESHOLD = 1;
 
 const ProductCard = ({
   product,
