@@ -1,16 +1,23 @@
 import React from "react";
 import Reveal from "../Landing/Reveal";
-import ActiveOrderBanner from "./ActiveOrderBanner";
+import WelcomePanel from "./WelcomePannel";
+import OrdersSummary from "./OrderSummary";
+import CategoryGrid from "./CategoryGrid";
 import ProductRail from "./ProductRail";
-import QuickLinks from "./QuickLinks";
+import TrustBadges from "./TrustBadges";
+import TestimonialStrip from "./TestimonialStrip";
+import NewsletterSignup from "./NewsletterSignup";
+import Footer from "./Footer";
 import { useTheme } from "../../context/ThemeContext";
 import { useWishlist } from "../../context/WishlistContext";
+import { CATEGORIES } from "../../mock/clothing";
 import {
   USER,
-  ACTIVE_ORDER,
+  ORDERS_SUMMARY,
   RECENTLY_VIEWED,
   FOR_YOU,
   NEW_ARRIVALS,
+  TESTIMONIALS,
 } from "../../mock/home";
 
 const Home = () => {
@@ -23,16 +30,14 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-primary transition-colors duration-300">
-      <Reveal className="">
-        <p className="text-xs font-semibold tracking-widest text-secondary/50 uppercase">
-          Welcome back
-        </p>
-        <h1 className="font-bold text-2xl md:text-3xl text-secondary mt-2">
-          {USER.name}
-        </h1>
-      </Reveal>
+      <WelcomePanel user={USER} />
 
-      <ActiveOrderBanner order={ACTIVE_ORDER} />
+      <OrdersSummary
+        pendingCount={ORDERS_SUMMARY.pendingCount}
+        completedCount={ORDERS_SUMMARY.completedCount}
+      />
+
+      <CategoryGrid categories={CATEGORIES} />
 
       <ProductRail
         title="Continue Where You Left Off"
@@ -52,6 +57,8 @@ const Home = () => {
         viewAllHref="/for-you"
       />
 
+      <TrustBadges />
+
       <ProductRail
         title="Saved For Later"
         subtitle="Your Wishlist"
@@ -69,7 +76,11 @@ const Home = () => {
         viewAllHref="/new-arrivals"
       />
 
-      <QuickLinks />
+      <TestimonialStrip testimonials={TESTIMONIALS} />
+
+      <NewsletterSignup />
+
+      <Footer />
     </div>
   );
 };
