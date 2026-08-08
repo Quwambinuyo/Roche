@@ -5,6 +5,7 @@ import Navbar from "./Navbar";
 import MobileNavbar from "./MobileNavbar";
 import Sidebar from "./Sidebar";
 import MobileSidebar from "./MobileSidebar";
+import FloatingLocaleSwitcher from "../components/UI/FloatingLocaleSwitcher";
 
 const MainLayout = () => {
   return (
@@ -17,6 +18,8 @@ const MainLayout = () => {
       <main className="p-4">
         <Outlet />
       </main>
+
+      <FloatingLocaleSwitcher />
     </div>
   );
 };

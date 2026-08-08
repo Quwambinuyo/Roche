@@ -13,9 +13,10 @@ import {
 } from "react-icons/fi";
 import { FaTiktok } from "react-icons/fa";
 import CountryPicker from "../../components/UI/CountryPicker";
+import CurrencyPicker from "../../components/UI/CurrencyPicker";
 import Reveal from "./Reveal";
 import MagneticButton from "../../components/UI/MagneticButton";
-import { useCountry, CURRENCY_OPTIONS } from "../../context/CountryContext";
+import { useCountry } from "../../context/CountryContext";
 
 const RESOURCE_LINKS = [
   { label: "FAQ", icon: FiHelpCircle },
@@ -55,16 +56,13 @@ const AccordionRow = ({ label, open, onToggle, children }) => (
 const LandingFooter = () => {
   const [supportOpen, setSupportOpen] = useState(false);
   const [addressOpen, setAddressOpen] = useState(false);
-  const { country, setCountry, currency, setCurrency, countryName } =
-    useCountry();
+  const { country, setCountry, currency, setCurrency } = useCountry();
 
   const socials = [
     { icon: FiInstagram, label: "Instagram", size: 16 },
     { icon: FiTwitter, label: "X", size: 16 },
     { icon: FaTiktok, label: "TikTok", size: 14 },
   ];
-
-  // console.log(countryName);
 
   return (
     <footer className="bg-primary text-secondary dark:bg-black pt-14 pb-20 md:pb-6 overflow-hidden">
@@ -151,21 +149,7 @@ const LandingFooter = () => {
         >
           <div className="flex items-center gap-3 relative z-[60]">
             <CountryPicker value={country} onChange={setCountry} />
-            <select
-              value={currency}
-              onChange={(e) => setCurrency(e.target.value)}
-              className="bg-secondary text-primary border border-secondary/20 rounded-full text-xs px-4 py-2 outline-none hover:border-secondary/50 transition-colors duration-300 cursor-pointer"
-            >
-              {CURRENCY_OPTIONS.map(({ code, label }) => (
-                <option
-                  key={code}
-                  value={code}
-                  className="bg-secondary text-primary"
-                >
-                  {label}
-                </option>
-              ))}
-            </select>
+            <CurrencyPicker value={currency} onChange={setCurrency} />
           </div>
           <p className="text-xs text-secondary/40">© 2026 Roche Co.</p>
         </Reveal>
