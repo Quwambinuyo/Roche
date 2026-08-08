@@ -32,10 +32,10 @@ const Home = () => {
     <div className="min-h-screen bg-primary transition-colors duration-300">
       <WelcomePanel user={USER} />
 
-      <OrdersSummary
+      {/* <OrdersSummary
         pendingCount={ORDERS_SUMMARY.pendingCount}
         completedCount={ORDERS_SUMMARY.completedCount}
-      />
+      /> */}
 
       <CategoryGrid categories={CATEGORIES} />
 

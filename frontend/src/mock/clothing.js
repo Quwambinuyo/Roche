@@ -48,8 +48,8 @@ export const CATEGORIES = [
 
 export const PRODUCTS = [
   {
-    slug: "roche-overshirt",
-    name: "Roche Overshirt",
+    slug: "bstrt-overshirt",
+    name: "BSTRT Overshirt",
     price: "₦48,500",
     discount: 10,
     fabric: "COTTON TWILL",
@@ -97,8 +97,8 @@ export const PRODUCTS = [
     ],
   },
   {
-    slug: "waxed-roche-jacket",
-    name: "Waxed Roche Jacket",
+    slug: "waxed-bstrt-jacket",
+    name: "Waxed BSTRT Jacket",
     price: "₦74,000",
     discount: 0,
     fabric: "WAXED CANVAS",
@@ -130,8 +130,8 @@ export const PRODUCTS = [
     ],
   },
   {
-    slug: "roche-field-cap",
-    name: "Roche Field Cap",
+    slug: "bstrt-field-cap",
+    name: "BSTRT Field Cap",
     price: "₦14,000",
     discount: 0,
     fabric: "COTTON TWILL",
@@ -204,8 +204,8 @@ export const PRODUCTS = [
     ],
   },
   {
-    slug: "roche-aviators",
-    name: "Roche Aviators",
+    slug: "bstrt-aviators",
+    name: "BSTRT Aviators",
     price: "₦22,000",
     discount: 0,
     fabric: "ACETATE",
@@ -291,8 +291,8 @@ export const PRODUCTS = [
     colors: [{ name: "Steel", hex: "#7a7f85", stock: 5 }],
   },
   {
-    slug: "roche-chrono",
-    name: "Roche Chrono",
+    slug: "bstrt-chrono",
+    name: "BSTRT Chrono",
     price: "₦112,000",
     discount: 7,
     fabric: "STAINLESS STEEL",
@@ -380,7 +380,7 @@ export const BUNDLES = [
     sizes: ["S", "M", "L", "XL"],
     category: "bundles",
     minUnits: 10,
-    items: ["ribbed-tee", "utility-cargo", "roche-field-cap"],
+    items: ["ribbed-tee", "utility-cargo", "bstrt-field-cap"],
     image: fullkitshop,
     images: [fullkitshop, wearshop],
     colors: [
@@ -400,7 +400,7 @@ export const BUNDLES = [
     sizes: ["S", "M", "L", "XL"],
     category: "bundles",
     minUnits: 20,
-    items: ["roche-overshirt", "waxed-roche-jacket", "waterfront-windbreaker"],
+    items: ["bstrt-overshirt", "waxed-bstrt-jacket", "waterfront-windbreaker"],
     image: jacketshop,
     images: [jacketshop, outwear],
     colors: [
@@ -421,7 +421,7 @@ export const BUNDLES = [
     sizes: ["M"],
     category: "bundles",
     minUnits: 25,
-    items: ["canvas-tote", "waxed-belt", "roche-field-cap", "roche-aviators"],
+    items: ["canvas-tote", "waxed-belt", "bstrt-field-cap", "bstrt-aviators"],
     image: accessoryshop,
     images: [accessoryshop, accessoryshop1],
     colors: [
@@ -441,7 +441,7 @@ export const BUNDLES = [
     sizes: ["M", "L", "XL"],
     category: "bundles",
     minUnits: 15,
-    items: ["loading-dock-boot", "dockside-field-watch", "roche-chrono"],
+    items: ["loading-dock-boot", "dockside-field-watch", "bstrt-chrono"],
     image: shoeshop,
     images: [shoeshop, watchshop],
     colors: [

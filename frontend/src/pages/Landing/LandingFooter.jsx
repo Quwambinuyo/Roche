@@ -151,7 +151,7 @@ const LandingFooter = () => {
             <CountryPicker value={country} onChange={setCountry} />
             <CurrencyPicker value={currency} onChange={setCurrency} />
           </div>
-          <p className="text-xs text-secondary/40">© 2026 Roche Co.</p>
+          <p className="text-xs text-secondary/40">© 2026 BSTRT Co.</p>
         </Reveal>
       </div>
 

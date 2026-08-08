@@ -35,7 +35,7 @@ const Navbar = () => {
           to={ROUTES.HOME}
           className="bricolage-grotesqu text-xl font-semibold text-secondary"
         >
-          Roche<span className="text-tertiary-600">.</span>
+          BSTRT<span className="text-tertiary-600">.</span>
         </Link>
       </div>
 

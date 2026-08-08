@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FiMenu, FiShoppingCart, FiSun, FiMoon } from "react-icons/fi";
+import Logo from "../assets/icons/bodestrt-navbar.png";
 
 import { useTheme } from "../context/ThemeContext";
 import { useCart } from "../context/CartContext";
@@ -11,7 +12,7 @@ const MobileNavbar = () => {
   const { itemCount } = useCart();
 
   return (
-    <header className="flex md:hidden sticky top-0 z-30 w-full items-center justify-between border-b border-tertiary-100 bg-primary px-4 py-3">
+    <header className=" flex md:hidden sticky top-0 z-30 w-full items-center justify-between border-b border-tertiary-100 bg-primary px-4 py-5">
       <button
         onClick={toggleSidebar}
         aria-label="Open menu"
@@ -22,9 +23,14 @@ const MobileNavbar = () => {
 
       <Link
         to={ROUTES.HOME}
-        className="bricolage-grotesqu text-lg font-semibold text-secondary"
+        aria-label="BODE S.T.R.T home"
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
       >
-        Roche<span className="text-tertiary-600">.</span>
+        <img
+          src={Logo}
+          alt="BODE S.T.R.T"
+          className="h-25 w-auto object-contain"
+        />
       </Link>
 
       <div className="flex items-center gap-1">

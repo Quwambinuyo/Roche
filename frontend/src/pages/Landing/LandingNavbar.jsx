@@ -41,7 +41,7 @@ const LandingNavbar = () => {
         ].join(" ")}
       >
         <span className="font-bold text-lg tracking-tight text-secondary transition-transform duration-300 hover:-translate-y-0.5 cursor-pointer">
-          Roche&nbsp;<span className="text-tertiary-700">CO.</span>
+          BSTRT
         </span>
 
         <nav className="hidden md:flex items-center gap-8">

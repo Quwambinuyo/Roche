@@ -14,8 +14,8 @@ const CONTACT_INFO = [
   {
     icon: FiMail,
     label: "Email",
-    value: "hello@roche.com",
-    href: "mailto:hello@roche.com",
+    value: "hello@bstrt.com",
+    href: "mailto:hello@bstrt.com",
   },
   {
     icon: FiPhone,
