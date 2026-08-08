@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FiMenu, FiShoppingCart, FiSun, FiMoon } from "react-icons/fi";
-import Logo from "../assets/icons/bodestrt-navbar.png";
+import Logo from "../assets/icons/bodestrt-navbar-black.png";
+import LogoWhite from "../assets/icons/bodestrt-navbar-white.png";
 
 import { useTheme } from "../context/ThemeContext";
 import { useCart } from "../context/CartContext";
@@ -27,9 +28,9 @@ const MobileNavbar = () => {
         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
       >
         <img
-          src={Logo}
+          src={theme === "dark" ? LogoWhite : Logo}
           alt="BODE S.T.R.T"
-          className="h-25 w-auto object-contain"
+          className="h-20 w-auto object-contain"
         />
       </Link>
 

@@ -10,6 +10,9 @@ import {
   FiMoon,
 } from "react-icons/fi";
 
+import Logo from "../assets/icons/bodestrt-navbar-black.png";
+import LogoWhite from "../assets/icons/bodestrt-navbar-white.png";
+
 import { useTheme } from "../context/ThemeContext";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
@@ -31,11 +34,12 @@ const Navbar = () => {
           <FiMenu size={20} />
         </button>
 
-        <Link
-          to={ROUTES.HOME}
-          className="bricolage-grotesqu text-xl font-semibold text-secondary"
-        >
-          BSTRT<span className="text-tertiary-600">.</span>
+        <Link to={ROUTES.HOME} aria-label="BODE S.T.R.T home">
+          <img
+            src={theme === "dark" ? LogoWhite : Logo}
+            alt="BODE S.T.R.T"
+            className="h-14 w-auto object-contain"
+          />
         </Link>
       </div>
 
