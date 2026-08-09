@@ -1,13 +1,30 @@
+import overshirt from "../assets/shop/overshirt.jfif";
+import overshirt1 from "../assets/shop/overshirt1.jfif";
+import ribbedtee from "../assets/shop/ribbedtee.jfif";
+import tops from "../assets/shop/tops.jfif";
+import bottom from "../assets/shop/bottom.jfif";
+import topbottomshop from "../assets/shop/topbottomshop.jfif";
+import jacket from "../assets/shop/jacket.jfif";
+import jacketshop from "../assets/shop/jacketshop.jfif";
+import capshop from "../assets/shop/capshop.jfif";
+import capshop1 from "../assets/shop/capshop1.jfif";
+import fullkitshop from "../assets/shop/fullkitshop.jfif";
+import wearshop from "../assets/shop/wearshop.jfif";
+import accessory from "../assets/shop/accessory.jfif";
+import watch from "../assets/shop/watch.jfif";
+import footwear from "../assets/shop/footwear.jfif";
+import glasses from "../assets/shop/glasses.jfif";
+
 export const CATEGORIES = [
-  { name: "Outerwear", slug: "outerwear", count: 18 },
-  { name: "Tops", slug: "tops", count: 32 },
-  { name: "Bottoms", slug: "bottoms", count: 21 },
-  { name: "Accessories", slug: "accessories", count: 14 },
-  { name: "Watches", slug: "watches", count: 9 },
-  { name: "Foot wear", slug: "footwear", count: 26 },
-  { name: "Caps", slug: "caps", count: 17 },
-  { name: "Glasses", slug: "glasses", count: 12 },
-  { name: "Bundles", slug: "bundles", count: 4 },
+  { name: "Outerwear", slug: "outerwear", count: 18, image: jacket },
+  { name: "Tops", slug: "tops", count: 32, image: tops },
+  { name: "Bottoms", slug: "bottoms", count: 21, image: bottom },
+  { name: "Accessories", slug: "accessories", count: 14, image: accessory },
+  { name: "Watches", slug: "watches", count: 9, image: watch },
+  { name: "Foot wear", slug: "footwear", count: 26, image: footwear },
+  { name: "Caps", slug: "caps", count: 17, image: capshop },
+  { name: "Glasses", slug: "glasses", count: 12, image: glasses },
+  { name: "Bundles", slug: "bundles", count: 4, image: fullkitshop },
 ];
 
 export const FABRIC_WORDS = [
@@ -33,8 +50,8 @@ export const PRODUCTS = [
       { size: "XL", stock: 3 },
     ],
     category: "outerwear",
-    image: "/placeholder/overshirt.jpg",
-    images: ["/placeholder/overshirt.jpg", "/placeholder/overshirt1.jpg"],
+    image: overshirt,
+    images: [overshirt, overshirt1],
     colors: [
       { name: "Olive", hex: "#4a4f36", stock: 12 },
       { name: "Black", hex: "#0a0a0a", stock: 0 },
@@ -57,8 +74,8 @@ export const PRODUCTS = [
       { size: "XL", stock: 4 },
     ],
     category: "tops",
-    image: "/placeholder/ribbedtee.jpg",
-    images: ["/placeholder/ribbedtee.jpg", "/placeholder/tops.jpg"],
+    image: ribbedtee,
+    images: [ribbedtee, tops],
     colors: [
       { name: "Black", hex: "#0a0a0a", stock: 20 },
       { name: "White", hex: "#f5f5f0", stock: 14 },
@@ -80,8 +97,8 @@ export const PRODUCTS = [
       { size: "XL", stock: 0 },
     ],
     category: "bottoms",
-    image: "/placeholder/overshirt1.jpg",
-    images: ["/placeholder/overshirt1.jpg", "/placeholder/bottoms.jpg"],
+    image: bottom,
+    images: [bottom, topbottomshop],
     colors: [
       { name: "Khaki", hex: "#a89a72", stock: 0 },
       { name: "Black", hex: "#0a0a0a", stock: 0 },
@@ -103,8 +120,8 @@ export const PRODUCTS = [
       { size: "XL", stock: 2 },
     ],
     category: "outerwear",
-    image: "/placeholder/jacket.jpg",
-    images: ["/placeholder/jacket.jpg", "/placeholder/jacketshop.jpg"],
+    image: jacket,
+    images: [jacket, jacketshop],
     colors: [
       { name: "Rust", hex: "#8a3b23", stock: 6 },
       { name: "Forest", hex: "#2e3b2c", stock: 3 },
@@ -122,8 +139,8 @@ export const PRODUCTS = [
     size: "One Size",
     sizes: [{ size: "M", stock: 22 }],
     category: "caps",
-    image: "/placeholder/capshop.jpg",
-    images: ["/placeholder/capshop.jpg", "/placeholder/capshop1.jpg"],
+    image: capshop,
+    images: [capshop, capshop1],
     colors: [
       { name: "Black", hex: "#0a0a0a", stock: 22 },
       { name: "Olive", hex: "#4a4f36", stock: 9 },
@@ -150,14 +167,12 @@ export const BUNDLES = [
     category: "bundles",
     minUnits: 10,
     items: ["ribbed-tee", "utility-cargo", "bstrt-field-cap"],
-    image: "/placeholder/fullkitshop.jpg",
-    images: ["/placeholder/fullkitshop.jpg", "/placeholder/wearshop.jpg"],
+    image: fullkitshop,
+    images: [fullkitshop, wearshop],
     status: "active",
     createdAt: "2026-01-20",
   },
 ];
-
-// ── Helpers ──────────────────────────────────────────────
 
 export const getProductBySlug = (slug) => PRODUCTS.find((p) => p.slug === slug);
 

@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FiUpload, FiTrash2, FiStar } from "react-icons/fi";
 import CustomSelect from "../../components/ui/CustomSelect";
+import RevealImage from "../../components/ui/RevealImage";
 
 const STATUS_OPTIONS = [
   { label: "Active", value: "active" },
@@ -31,10 +32,11 @@ const ProductMediaPanel = ({
 
         <div className="w-full aspect-square bg-secondary border border-primary/10 overflow-hidden flex items-center justify-center">
           {form.image ? (
-            <img
+            <RevealImage
+              key={form.image}
               src={form.image}
               alt={form.name}
-              className="w-full h-full object-cover"
+              className="w-full h-full"
             />
           ) : (
             <span className="text-primary/30 text-sm">No cover image</span>
@@ -43,14 +45,19 @@ const ProductMediaPanel = ({
 
         {form.images.length > 0 && (
           <div className="grid grid-cols-4 gap-2">
-            {form.images.map((img) => (
+            {form.images.map((img, index) => (
               <div
                 key={img}
                 className={`relative group aspect-square border overflow-hidden ${
                   form.image === img ? "border-primary" : "border-primary/10"
                 }`}
               >
-                <img src={img} alt="" className="w-full h-full object-cover" />
+                <RevealImage
+                  src={img}
+                  alt=""
+                  className="w-full h-full"
+                  delay={index * 60}
+                />
                 <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-150 flex items-center justify-center gap-1.5">
                   <button
                     type="button"

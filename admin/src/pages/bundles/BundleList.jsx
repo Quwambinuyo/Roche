@@ -2,6 +2,7 @@ import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { FiPlus, FiEdit2, FiTrash2, FiSearch } from "react-icons/fi";
 import { BUNDLES, PRODUCTS } from "../../mock/product";
+import RevealImage from "../../components/ui/RevealImage";
 
 const StatusBadge = ({ status }) => {
   const styles = {
@@ -82,19 +83,20 @@ const BundleList = () => {
             </tr>
           </thead>
           <tbody>
-            {filtered.map((bundle) => {
+            {filtered.map((bundle, index) => {
               const itemNames = getItemNames(bundle);
               return (
                 <tr
                   key={bundle.slug}
-                  className="border-b border-primary/10 last:border-b-0 text-primary hover:bg-primary/5"
+                  className="border-b border-primary/10  text-primary hover:bg-primary/5"
                 >
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-3">
-                      <img
+                      <RevealImage
                         src={bundle.image}
                         alt={bundle.name}
-                        className="w-10 h-10 object-cover bg-primary/5"
+                        className="w-10 h-10 bg-primary/5 flex-shrink-0"
+                        delay={index * 40}
                       />
                       <span className="font-medium">{bundle.name}</span>
                     </div>

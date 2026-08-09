@@ -10,8 +10,8 @@ const BundleCreate = () => {
   const [form, setForm] = useState({
     name: "",
     price: "",
-    discount: 0,
-    minUnits: 1,
+    discount: "",
+    minUnits: "",
     items: [],
     image: "",
     images: [],
@@ -60,6 +60,14 @@ const BundleCreate = () => {
   };
 
   const handleSave = () => {
+    const payload = {
+      ...form,
+      discount: Number(form.discount) || 0,
+      minUnits: Number(form.minUnits) || 1,
+    };
+
+    console.log("New bundle:", payload);
+
     navigate("/bundles");
   };
 

@@ -11,7 +11,7 @@ import { slugify } from "../../utils/slugify";
 const PRODUCT_CATEGORIES = CATEGORIES.filter((c) => c.slug !== "bundles");
 const FABRIC_APPLICABLE_CATEGORIES = ["outerwear", "tops", "bottoms", "caps"];
 
-const emptySize = { size: "", stock: 0 };
+const emptySize = { size: "", stock: "" };
 
 const ProductCreate = () => {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ const ProductCreate = () => {
   const [form, setForm] = useState({
     name: "",
     price: "",
-    discount: 0,
+    discount: "",
     fabric: "",
     size: "",
     category: PRODUCT_CATEGORIES[0]?.slug || "",
@@ -142,6 +142,7 @@ const ProductCreate = () => {
               type="number"
               min="0"
               max="100"
+              placeholder="0"
               value={form.discount}
               onChange={(e) => updateField("discount", e.target.value)}
               className="w-full mt-1 px-3 py-2 bg-secondary border border-primary/10 text-primary"
