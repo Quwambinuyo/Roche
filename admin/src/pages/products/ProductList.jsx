@@ -1,8 +1,8 @@
-// pages/ProductList.jsx
 import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { FiPlus, FiEdit2, FiTrash2, FiSearch } from "react-icons/fi";
-import { PRODUCTS, CATEGORIES } from "../../mock/product"; // adjust path
+import { PRODUCTS, CATEGORIES } from "../../mock/product";
+import CustomSelect from "../../components/ui/CustomSelect";
 
 const StatusBadge = ({ status }) => {
   const styles = {
@@ -26,12 +26,21 @@ const totalStock = (product) =>
   product.sizes?.reduce((sum, s) => sum + (s.stock || 0), 0) || 0;
 
 const ProductList = () => {
-  // Local state seeded from mock data. Swap for context/API data later —
-  // deleting here won't persist since PRODUCTS is a static import.
   const [products, setProducts] = useState(PRODUCTS);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
   const [productToDelete, setProductToDelete] = useState(null);
+
+  const categoryOptions = useMemo(
+    () => [
+      { label: "All Categories", value: "all" },
+      ...CATEGORIES.filter((c) => c.slug !== "bundles").map((c) => ({
+        label: c.name,
+        value: c.slug,
+      })),
+    ],
+    [],
+  );
 
   const filtered = useMemo(() => {
     return products.filter((p) => {
@@ -50,8 +59,7 @@ const ProductList = () => {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-xl font-bold text-primary">Products</h1>
+      <div className="flex items-center mb-6">
         <Link
           to="/products/create"
           className="flex items-center gap-2 px-4 py-2 bg-primary text-secondary font-medium text-sm"
@@ -76,18 +84,14 @@ const ProductList = () => {
           />
         </div>
 
-        <select
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          className="px-3 py-2 bg-secondary border border-primary/10 text-primary text-sm"
-        >
-          <option value="all">All Categories</option>
-          {CATEGORIES.filter((c) => c.slug !== "bundles").map((c) => (
-            <option key={c.slug} value={c.slug}>
-              {c.name}
-            </option>
-          ))}
-        </select>
+        <div className="sm:w-56">
+          <CustomSelect
+            value={category}
+            onChange={setCategory}
+            options={categoryOptions}
+            position="down"
+          />
+        </div>
       </div>
 
       <div className="overflow-x-auto border border-primary/10">

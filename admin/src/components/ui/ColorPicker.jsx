@@ -44,14 +44,14 @@ const ColorPicker = ({ value = [], onChange }) => {
       </button>
 
       {value.length > 0 && (
-        <div className="mt-3 grid grid-cols-1 md:grid-cols-4 gap-x-2 gap-y-2">
+        <div className="mt-3 border border-primary/10 divide-y divide-primary/10">
           {value.map((c) => (
-            <div key={c.name} className="flex items-center gap-2">
+            <div key={c.name} className="flex items-center gap-3 px-3 py-2.5">
               <span
                 className="w-4 h-4 rounded-full flex-shrink-0 border border-primary/10"
                 style={{ backgroundColor: c.hex }}
               />
-              <span className="text-sm text-primary/70 w-20 flex-shrink-0">
+              <span className="text-sm text-primary/70 flex-1 min-w-0 truncate">
                 {c.name}
               </span>
               <input
@@ -59,12 +59,13 @@ const ColorPicker = ({ value = [], onChange }) => {
                 min="0"
                 value={c.stock}
                 onChange={(e) => updateStock(c.name, e.target.value)}
-                className="w-24 px-3 py-1.5 bg-secondary border border-primary/10 text-primary text-sm"
+                className="w-20 flex-shrink-0 px-2.5 py-1.5 bg-secondary border border-primary/10 text-primary text-sm text-right"
               />
               <button
                 type="button"
                 onClick={() => removeColor(c.name)}
-                className="text-primary/40 hover:text-red-500"
+                className="flex-shrink-0 text-primary/40 hover:text-red-500"
+                aria-label={`Remove ${c.name}`}
               >
                 <FiX size={14} />
               </button>
@@ -87,7 +88,7 @@ const ColorPicker = ({ value = [], onChange }) => {
               </button>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
               {COLOR_PALETTE.map((color) => {
                 const selected = isSelected(color.name);
                 const isWhite = color.hex.toLowerCase() === "#ffffff";

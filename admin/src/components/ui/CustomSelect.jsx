@@ -11,6 +11,7 @@ const CustomSelect = ({
   options = [],
   placeholder = "Select...",
   disabled = false,
+  position = "up",
 }) => {
   const [open, setOpen] = useState(false);
   const [coords, setCoords] = useState({ top: 0, left: 0, width: 0 });
@@ -41,7 +42,10 @@ const CustomSelect = ({
     const updatePosition = () => {
       const rect = containerRef.current.getBoundingClientRect();
       setCoords({
-        top: rect.top + window.scrollY,
+        top:
+          position === "down"
+            ? rect.bottom + window.scrollY
+            : rect.top + window.scrollY,
         left: rect.left + window.scrollX,
         width: rect.width,
       });
@@ -54,7 +58,7 @@ const CustomSelect = ({
       window.removeEventListener("scroll", updatePosition, true);
       window.removeEventListener("resize", updatePosition);
     };
-  }, [open]);
+  }, [open, position]);
 
   const handleSelect = (val) => {
     onChange(val);
@@ -94,8 +98,8 @@ const CustomSelect = ({
               top: coords.top,
               left: coords.left,
               width: coords.width,
-              transform: "translateY(-100%)",
-              marginTop: "-4px",
+              transform: position === "down" ? "none" : "translateY(-100%)",
+              marginTop: position === "down" ? "4px" : "-4px",
             }}
             className="z-[9999] max-h-56 overflow-y-auto bg-secondary border border-primary/10 shadow-lg"
           >
