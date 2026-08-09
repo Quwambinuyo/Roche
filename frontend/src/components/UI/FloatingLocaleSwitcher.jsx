@@ -15,6 +15,7 @@ const FloatingLocaleSwitcher = () => {
         value={currency}
         onChange={setCurrency}
         currencies={["GBP", "EUR", "USD", "CAD", "NGN"]}
+        searchThreshold={10}
       />
     </div>
   );

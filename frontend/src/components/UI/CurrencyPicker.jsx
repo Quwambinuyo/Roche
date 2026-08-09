@@ -1,13 +1,33 @@
 import React, { useState, useRef, useEffect, useMemo } from "react";
-import { FiChevronDown, FiSearch, FiCheck, FiDollarSign } from "react-icons/fi";
+import { FiChevronDown, FiSearch, FiCheck } from "react-icons/fi";
 import currencyCodes from "currency-codes";
+
+const getCurrencySymbol = (code) => {
+  if (!code) return "$";
+  try {
+    const parts = new Intl.NumberFormat("en", {
+      style: "currency",
+      currency: code,
+      currencyDisplay: "narrowSymbol",
+    }).formatToParts(0);
+    const symbolPart = parts.find((p) => p.type === "currency");
+    return symbolPart ? symbolPart.value : code;
+  } catch {
+    return code;
+  }
+};
 
 const ALL_CURRENCIES = currencyCodes.data
   .filter((c) => c.currency && c.code)
   .map((c) => ({ value: c.code, label: `${c.currency} (${c.code})` }))
   .sort((a, b) => a.label.localeCompare(b.label));
 
-const CurrencyPicker = ({ value, onChange, currencies }) => {
+const CurrencyPicker = ({
+  value,
+  onChange,
+  currencies,
+  searchThreshold = 10,
+}) => {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const wrapperRef = useRef(null);
@@ -18,11 +38,13 @@ const CurrencyPicker = ({ value, onChange, currencies }) => {
     return ALL_CURRENCIES.filter((c) => allowed.has(c.value));
   }, [currencies]);
 
+  const showSearch = CURRENCIES.length >= searchThreshold;
+
   const filtered = useMemo(() => {
-    if (!query.trim()) return CURRENCIES;
+    if (!showSearch || !query.trim()) return CURRENCIES;
     const q = query.toLowerCase();
     return CURRENCIES.filter((c) => c.label.toLowerCase().includes(q));
-  }, [CURRENCIES, query]);
+  }, [CURRENCIES, query, showSearch]);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -48,14 +70,16 @@ const CurrencyPicker = ({ value, onChange, currencies }) => {
   const selected = CURRENCIES.find((c) => c.value === value);
 
   return (
-    <div ref={wrapperRef} className="relative">
+    <div ref={wrapperRef} className="relative shrink-0 w-fit">
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
-        className="flex items-center gap-2 h-11 bg-secondary text-primary border border-secondary/20 rounded-full text-xs px-4 py-2 outline-none hover:border-secondary/50 transition-colors duration-300"
+        className="flex items-center gap-2 h-11 w-fit shrink-0 bg-secondary text-primary border border-secondary/20 rounded-full text-xs px-4 py-2 outline-none hover:border-secondary/50 transition-colors duration-300"
       >
-        <FiDollarSign size={13} className="shrink-0" />
-        <span className="truncate">
+        <span className="shrink-0 font-semibold">
+          {getCurrencySymbol(value)}
+        </span>
+        <span className="shrink-0 whitespace-nowrap">
           {selected ? selected.value : "Currency"}
         </span>
         <FiChevronDown
@@ -66,16 +90,18 @@ const CurrencyPicker = ({ value, onChange, currencies }) => {
 
       {open && (
         <div className="absolute bottom-full mb-2 left-0 w-64 max-h-72 bg-primary border border-secondary/15 rounded-2xl shadow-2xl overflow-hidden origin-bottom animate-dropdownIn z-50">
-          <div className="flex items-center gap-2 px-3 py-2.5 border-b border-secondary/10">
-            <FiSearch size={14} className="text-secondary/40 shrink-0" />
-            <input
-              autoFocus
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search currency..."
-              className="w-full bg-transparent text-xs outline-none placeholder:text-secondary/30 text-secondary"
-            />
-          </div>
+          {showSearch && (
+            <div className="flex items-center gap-2 px-3 py-2.5 border-b border-secondary/10">
+              <FiSearch size={14} className="text-secondary/40 shrink-0" />
+              <input
+                autoFocus
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search currency..."
+                className="w-full bg-transparent text-xs outline-none placeholder:text-secondary/30 text-secondary"
+              />
+            </div>
+          )}
           <div className="max-h-56 overflow-y-auto py-1">
             {filtered.length === 0 && (
               <p className="text-xs text-secondary/40 px-4 py-3">

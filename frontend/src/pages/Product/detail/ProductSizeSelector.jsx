@@ -10,7 +10,7 @@ const ProductSizeSelector = ({
   <div className="mt-6">
     <div className="flex items-center justify-between mb-3">
       <p className="text-xs font-semibold tracking-widest text-secondary/50 uppercase">
-        Size — {selectedSize || "Select"}
+        Size — {selectedSize?.size || "Select"}
       </p>
       {!isBundle && (
         <button
@@ -22,19 +22,30 @@ const ProductSizeSelector = ({
       )}
     </div>
     <div className="flex flex-wrap gap-2">
-      {sizes.map((size) => (
-        <button
-          key={size}
-          onClick={() => onSelectSize(size)}
-          className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
-            selectedSize === size
-              ? "bg-secondary text-primary"
-              : "bg-secondary/5 text-secondary hover:bg-secondary/10"
-          }`}
-        >
-          {size}
-        </button>
-      ))}
+      {sizes.map((size) => {
+        const isOutOfStock = size.stock === 0;
+        const isSelected = selectedSize?.size === size.size;
+
+        return (
+          <button
+            key={size.size}
+            onClick={() => !isOutOfStock && onSelectSize(size)}
+            disabled={isOutOfStock}
+            title={isOutOfStock ? `${size.size} — out of stock` : size.size}
+            className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
+              isSelected
+                ? "bg-secondary text-primary"
+                : "bg-secondary/5 text-secondary hover:bg-secondary/10"
+            } ${
+              isOutOfStock
+                ? "opacity-40 cursor-not-allowed line-through"
+                : "cursor-pointer"
+            }`}
+          >
+            {size.size}
+          </button>
+        );
+      })}
     </div>
   </div>
 );

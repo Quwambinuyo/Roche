@@ -34,7 +34,10 @@ const ProductDetails = ({ slugOverride }) => {
     () => product?.colors?.find((c) => c.stock > 0) || product?.colors?.[0],
   );
   const [selectedColorNames, setSelectedColorNames] = useState([]);
-  const [selectedSize, setSelectedSize] = useState(product?.sizes?.[0] || "");
+  const [selectedSize, setSelectedSize] = useState(
+    () =>
+      product?.sizes?.find((s) => s.stock > 0) ?? product?.sizes?.[0] ?? null,
+  );
   const [qty, setQty] = useState(isBundle ? product?.minUnits || 1 : 1);
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
 
@@ -93,9 +96,13 @@ const ProductDetails = ({ slugOverride }) => {
     );
   }
 
+  const hasSizes = !isBundle && product.sizes?.length > 0;
+  const isSizeOutOfStock =
+    hasSizes && (!selectedSize || selectedSize.stock === 0);
+
   const isOutOfStock = isBundle
     ? bundleColors.every((c) => c.stock === 0)
-    : !selectedColor || selectedColor.stock === 0;
+    : !selectedColor || selectedColor.stock === 0 || isSizeOutOfStock;
   const canAddBundleToCart = !isBundle || selectedColorNames.length > 0;
   const wishlisted = isInWishlist(product.slug);
 
@@ -172,7 +179,7 @@ const ProductDetails = ({ slugOverride }) => {
             isOutOfStock={isOutOfStock}
           />
 
-          {product.sizes?.length > 0 && (
+          {hasSizes && (
             <ProductSizeSelector
               sizes={product.sizes}
               selectedSize={selectedSize}

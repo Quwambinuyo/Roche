@@ -36,9 +36,15 @@ const ProductCard = ({
   const needsSizeDrawer =
     hasSizes && product.sizes.length > SIZE_DRAWER_THRESHOLD;
 
-  const quickAddSize = hasSizes && !needsSizeDrawer ? product.sizes[0] : null;
+  const quickAddSize =
+    hasSizes && !needsSizeDrawer
+      ? (product.sizes.find((s) => s.stock > 0) ?? product.sizes[0])
+      : null;
 
-  const canAddToCart = !showOutOfStock && (!hasColors || activeColorName);
+  const canAddToCart =
+    !showOutOfStock &&
+    (!hasColors || activeColorName) &&
+    (!quickAddSize || quickAddSize.stock > 0);
 
   const { hasDiscount, basePrice, discountedPrice } =
     getDiscountPricing(product);
@@ -123,8 +129,9 @@ const ProductCard = ({
               <button
                 type="button"
                 onClick={handleAdd}
+                disabled={!needsSizeDrawer && !canAddToCart}
                 aria-label={needsSizeDrawer ? "Choose size" : "Add to cart"}
-                className="w-10 h-10 rounded-full flex items-center justify-center shadow-lg bg-primary text-secondary hover:bg-secondary hover:text-primary transition-all duration-300"
+                className="w-10 h-10 rounded-full flex items-center justify-center shadow-lg bg-primary text-secondary hover:bg-secondary hover:text-primary transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 <BsCart4 size={16} />
               </button>

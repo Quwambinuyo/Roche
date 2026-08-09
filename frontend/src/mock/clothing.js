@@ -54,7 +54,12 @@ export const PRODUCTS = [
     discount: 10,
     fabric: "COTTON TWILL",
     size: "S — XL",
-    sizes: ["S", "M", "L", "XL"],
+    sizes: [
+      { size: "S", stock: 8 },
+      { size: "M", stock: 6 },
+      { size: "L", stock: 0 },
+      { size: "XL", stock: 3 },
+    ],
     category: "outerwear",
     image: overshirt,
     images: [overshirt, overshirt1],
@@ -71,7 +76,12 @@ export const PRODUCTS = [
     discount: 0,
     fabric: "HEAVY COTTON",
     size: "S — XL",
-    sizes: ["S", "M", "L", "XL"],
+    sizes: [
+      { size: "S", stock: 10 },
+      { size: "M", stock: 12 },
+      { size: "L", stock: 8 },
+      { size: "XL", stock: 4 },
+    ],
     category: "tops",
     image: ribbedTee,
     images: [ribbedTee, tops],
@@ -87,7 +97,12 @@ export const PRODUCTS = [
     discount: 15,
     fabric: "RIPSTOP CANVAS",
     size: "28 — 36",
-    sizes: ["S", "M", "L", "XL"],
+    sizes: [
+      { size: "S", stock: 0 },
+      { size: "M", stock: 0 },
+      { size: "L", stock: 0 },
+      { size: "XL", stock: 0 },
+    ],
     category: "bottoms",
     image: overshirt1,
     images: [overshirt1, bottoms],
@@ -103,7 +118,12 @@ export const PRODUCTS = [
     discount: 0,
     fabric: "WAXED CANVAS",
     size: "S — XXL",
-    sizes: ["S", "M", "L", "XL"],
+    sizes: [
+      { size: "S", stock: 4 },
+      { size: "M", stock: 7 },
+      { size: "L", stock: 5 },
+      { size: "XL", stock: 2 },
+    ],
     category: "outerwear",
     image: jacket,
     images: [jacket, jacketshop],
@@ -120,7 +140,12 @@ export const PRODUCTS = [
     discount: 5,
     fabric: "HEAVY COTTON",
     size: "S — XL",
-    sizes: ["XS", "S", "M", "L"],
+    sizes: [
+      { size: "XS", stock: 6 },
+      { size: "S", stock: 9 },
+      { size: "M", stock: 11 },
+      { size: "L", stock: 0 },
+    ],
     category: "tops",
     image: ribbedTee,
     images: [ribbedTee, tops],
@@ -136,7 +161,7 @@ export const PRODUCTS = [
     discount: 0,
     fabric: "COTTON TWILL",
     size: "One Size",
-    sizes: ["M"],
+    sizes: [{ size: "M", stock: 22 }],
     category: "caps",
     image: capshop,
     images: [capshop, capshop1],
@@ -152,7 +177,7 @@ export const PRODUCTS = [
     discount: 12,
     fabric: "WAXED CANVAS",
     size: "One Size",
-    sizes: ["M"],
+    sizes: [{ size: "M", stock: 7 }],
     category: "caps",
     image: capshop1,
     images: [capshop1, capshop2],
@@ -165,7 +190,7 @@ export const PRODUCTS = [
     discount: 0,
     fabric: "HEAVY JERSEY",
     size: "One Size",
-    sizes: ["M"],
+    sizes: [{ size: "M", stock: 15 }],
     category: "caps",
     image: capshop2,
     images: [capshop2, capshop3],
@@ -181,7 +206,7 @@ export const PRODUCTS = [
     discount: 8,
     fabric: "RIPSTOP CANVAS",
     size: "One Size",
-    sizes: ["M"],
+    sizes: [{ size: "M", stock: 11 }],
     category: "caps",
     image: capshop3,
     images: [capshop3, caps],
@@ -194,7 +219,12 @@ export const PRODUCTS = [
     discount: 20,
     fabric: "MIXED",
     size: "S — XL",
-    sizes: ["S", "M", "L", "XL"],
+    sizes: [
+      { size: "S", stock: 2 },
+      { size: "M", stock: 3 },
+      { size: "L", stock: 1 },
+      { size: "XL", stock: 0 },
+    ],
     category: "outerwear",
     image: fullkitshop,
     images: [fullkitshop, outwear],
@@ -210,7 +240,7 @@ export const PRODUCTS = [
     discount: 0,
     fabric: "ACETATE",
     size: "One Size",
-    sizes: ["M"],
+    sizes: [{ size: "M", stock: 18 }],
     category: "glasses",
     image: glassesshop,
     images: [glassesshop, glassesshop1],
@@ -223,7 +253,7 @@ export const PRODUCTS = [
     discount: 10,
     fabric: "ACETATE",
     size: "One Size",
-    sizes: ["M"],
+    sizes: [{ size: "M", stock: 16 }],
     category: "glasses",
     image: glassesshop1,
     images: [glassesshop1, glasses],
@@ -239,7 +269,12 @@ export const PRODUCTS = [
     discount: 0,
     fabric: "WAXED CANVAS",
     size: "S — XXL",
-    sizes: ["S", "M", "L", "XL"],
+    sizes: [
+      { size: "S", stock: 2 },
+      { size: "M", stock: 3 },
+      { size: "L", stock: 2 },
+      { size: "XL", stock: 1 },
+    ],
     category: "outerwear",
     image: jacketshop,
     images: [jacketshop, jacket],
@@ -255,7 +290,11 @@ export const PRODUCTS = [
     discount: 18,
     fabric: "FULL GRAIN LEATHER",
     size: "40 — 45",
-    sizes: ["M", "L", "XL"],
+    sizes: [
+      { size: "M", stock: 3 },
+      { size: "L", stock: 4 },
+      { size: "XL", stock: 1 },
+    ],
     category: "footwear",
     image: shoeshop,
     images: [shoeshop, footwear],
@@ -268,7 +307,12 @@ export const PRODUCTS = [
     discount: 0,
     fabric: "COTTON TWILL",
     size: "S — XL",
-    sizes: ["S", "M", "L", "XL"],
+    sizes: [
+      { size: "S", stock: 4 },
+      { size: "M", stock: 5 },
+      { size: "L", stock: 3 },
+      { size: "XL", stock: 3 },
+    ],
     category: "tops",
     image: topbottomshop,
     images: [topbottomshop, tops],
@@ -284,7 +328,7 @@ export const PRODUCTS = [
     discount: 0,
     fabric: "STAINLESS STEEL",
     size: "One Size",
-    sizes: ["M"],
+    sizes: [{ size: "M", stock: 5 }],
     category: "watches",
     image: watchshop,
     images: [watchshop, watchshop1],
@@ -297,7 +341,7 @@ export const PRODUCTS = [
     discount: 7,
     fabric: "STAINLESS STEEL",
     size: "One Size",
-    sizes: ["M"],
+    sizes: [{ size: "M", stock: 0 }],
     category: "watches",
     image: watchshop1,
     images: [watchshop1, watches],
@@ -313,7 +357,12 @@ export const PRODUCTS = [
     discount: 0,
     fabric: "RIPSTOP",
     size: "S — XXL",
-    sizes: ["S", "M", "L", "XL"],
+    sizes: [
+      { size: "S", stock: 6 },
+      { size: "M", stock: 8 },
+      { size: "L", stock: 4 },
+      { size: "XL", stock: 1 },
+    ],
     category: "outerwear",
     image: wearshop,
     images: [wearshop, outwear],
@@ -329,7 +378,7 @@ export const PRODUCTS = [
     discount: 0,
     fabric: "CANVAS",
     size: "One Size",
-    sizes: ["M"],
+    sizes: [{ size: "M", stock: 20 }],
     category: "accessories",
     image: accessoryshop,
     images: [accessoryshop, accessoryshop1],
@@ -342,7 +391,11 @@ export const PRODUCTS = [
     discount: 10,
     fabric: "WAXED LEATHER",
     size: "One Size",
-    sizes: ["S", "M", "L"],
+    sizes: [
+      { size: "S", stock: 9 },
+      { size: "M", stock: 15 },
+      { size: "L", stock: 6 },
+    ],
     category: "accessories",
     image: accessoryshop1,
     images: [accessoryshop1, accessoryshop2],
@@ -358,7 +411,11 @@ export const PRODUCTS = [
     discount: 0,
     fabric: "WAXED LEATHER",
     size: "One Size",
-    sizes: ["S", "M", "L"],
+    sizes: [
+      { size: "S", stock: 9 },
+      { size: "M", stock: 15 },
+      { size: "L", stock: 0 },
+    ],
     category: "accessories",
     image: accessoryshop2,
     images: [accessoryshop2, accessories],
@@ -377,7 +434,12 @@ export const BUNDLES = [
     discount: 25,
     fabric: "MIXED",
     size: "Assorted",
-    sizes: ["S", "M", "L", "XL"],
+    sizes: [
+      { size: "S", stock: 10 },
+      { size: "M", stock: 12 },
+      { size: "L", stock: 8 },
+      { size: "XL", stock: 4 },
+    ],
     category: "bundles",
     minUnits: 10,
     items: ["ribbed-tee", "utility-cargo", "bstrt-field-cap"],
@@ -397,7 +459,12 @@ export const BUNDLES = [
     discount: 30,
     fabric: "MIXED",
     size: "Assorted",
-    sizes: ["S", "M", "L", "XL"],
+    sizes: [
+      { size: "S", stock: 8 },
+      { size: "M", stock: 14 },
+      { size: "L", stock: 9 },
+      { size: "XL", stock: 5 },
+    ],
     category: "bundles",
     minUnits: 20,
     items: ["bstrt-overshirt", "waxed-bstrt-jacket", "waterfront-windbreaker"],
@@ -418,7 +485,7 @@ export const BUNDLES = [
     discount: 20,
     fabric: "MIXED",
     size: "One Size",
-    sizes: ["M"],
+    sizes: [{ size: "M", stock: 40 }],
     category: "bundles",
     minUnits: 25,
     items: ["canvas-tote", "waxed-belt", "bstrt-field-cap", "bstrt-aviators"],
@@ -438,7 +505,11 @@ export const BUNDLES = [
     discount: 22,
     fabric: "MIXED",
     size: "Assorted",
-    sizes: ["M", "L", "XL"],
+    sizes: [
+      { size: "M", stock: 4 },
+      { size: "L", stock: 5 },
+      { size: "XL", stock: 2 },
+    ],
     category: "bundles",
     minUnits: 15,
     items: ["loading-dock-boot", "dockside-field-watch", "bstrt-chrono"],
@@ -466,6 +537,24 @@ export const getBundleColors = (bundle) => {
         existing.stock += c.stock;
       } else {
         seen.set(c.name, { ...c });
+      }
+    });
+  });
+
+  return Array.from(seen.values());
+};
+
+export const getBundleSizes = (bundle) => {
+  const seen = new Map();
+
+  bundle.items?.forEach((itemSlug) => {
+    const item = getProductBySlug(itemSlug);
+    item?.sizes?.forEach((s) => {
+      const existing = seen.get(s.size);
+      if (existing) {
+        existing.stock += s.stock;
+      } else {
+        seen.set(s.size, { ...s });
       }
     });
   });
