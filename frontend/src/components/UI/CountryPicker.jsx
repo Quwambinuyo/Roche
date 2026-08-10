@@ -1,11 +1,7 @@
 import React, { useState, useRef, useEffect, useMemo } from "react";
 import { FiChevronDown, FiSearch, FiCheck, FiGlobe } from "react-icons/fi";
 import countryList from "react-select-country-list";
-
-const getFlagEmoji = (isoCode) =>
-  isoCode
-    .toUpperCase()
-    .replace(/./g, (char) => String.fromCodePoint(127397 + char.charCodeAt()));
+import "flag-icons/css/flag-icons.min.css";
 
 const CountryPicker = ({ value, onChange }) => {
   const [open, setOpen] = useState(false);
@@ -53,9 +49,9 @@ const CountryPicker = ({ value, onChange }) => {
         className="w-full flex items-center gap-2 bg-transparent border border-secondary/20 rounded-full text-sm px-3.5 h-11 outline-none hover:border-secondary/50 transition-colors duration-300"
       >
         {selected ? (
-          <span className="text-sm leading-none shrink-0">
-            {getFlagEmoji(selected.value)}
-          </span>
+          <span
+            className={`fi fi-${selected.value.toLowerCase()} shrink-0 rounded-sm w-4 h-3 bg-cover bg-center`}
+          />
         ) : (
           <FiGlobe size={14} className="text-secondary/40 shrink-0" />
         )}
@@ -64,7 +60,9 @@ const CountryPicker = ({ value, onChange }) => {
         </span>
         <FiChevronDown
           size={13}
-          className={`shrink-0 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+          className={`shrink-0 transition-transform duration-300 ${
+            open ? "rotate-180" : ""
+          }`}
         />
       </button>
 
@@ -101,9 +99,9 @@ const CountryPicker = ({ value, onChange }) => {
                     isSelected ? "bg-secondary/5" : ""
                   }`}
                 >
-                  <span className="text-sm leading-none w-4 shrink-0">
-                    {getFlagEmoji(c.value)}
-                  </span>
+                  <span
+                    className={`fi fi-${c.value.toLowerCase()} shrink-0 rounded-sm w-4 h-3 bg-cover bg-center`}
+                  />
                   <span className="flex-1 truncate">{c.label}</span>
                   {isSelected && <FiCheck size={13} className="shrink-0" />}
                 </button>

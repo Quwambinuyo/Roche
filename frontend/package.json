@@ -18,6 +18,7 @@
     "country-state-city": "^3.2.1",
     "currency-codes": "^2.2.0",
     "dayjs": "^1.11.21",
+    "flag-icons": "^7.5.0",
     "install": "^0.13.0",
     "js-cookie": "^3.0.8",
     "jwt-decode": "^4.0.0",

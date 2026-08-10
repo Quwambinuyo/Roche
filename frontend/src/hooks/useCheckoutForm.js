@@ -1,23 +1,28 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { useToast } from "../context/ToastContext";
 import { DELIVERY_METHODS } from "../pages/Checkout/constant";
 import { parsePrice } from "../pages/Checkout/utils";
 
+const parseVal = (v) =>
+  v?.target?.value ??
+  v?.value ??
+  v?.label ??
+  (typeof v === "object" ? "" : (v ?? ""));
+
 export const useCheckoutForm = () => {
-  const location = useLocation();
+  const { state: locState } = useLocation();
   const navigate = useNavigate();
   const { items, removeItems } = useCart();
   const { showToast } = useToast();
 
-  const selectedIds = location.state?.selectedIds;
-
   const checkoutLines = useMemo(() => {
+    const selectedIds = locState?.selectedIds;
     if (!selectedIds?.length) return items;
     const idSet = new Set(selectedIds);
     return items.filter((line) => idSet.has(line.id));
-  }, [items, selectedIds]);
+  }, [items, locState]);
 
   const [form, setForm] = useState({
     fullName: "",
@@ -34,42 +39,47 @@ export const useCheckoutForm = () => {
   const [paymentMethod, setPaymentMethod] = useState(null);
   const [placing, setPlacing] = useState(false);
 
+  // console.log(form);
+
   const updateField = (key) => (e) =>
-    setForm((prev) => ({ ...prev, [key]: e.target.value }));
+    setForm((prev) => ({ ...prev, [key]: parseVal(e) }));
 
-  const setCountry = (isoCode, name) => {
-    setForm((prev) => ({
-      ...prev,
-      country: isoCode || "",
-      countryName: name || isoCode || "",
-      state: "",
-      stateName: "",
-    }));
+  const setLocationField = (type, val1, val2) => {
+    const code = parseVal(val1.value ?? val1.isoCode ?? val1);
+    const name = parseVal(val1.label ?? val1.name ?? val2) || code;
+
+    setForm((prev) =>
+      type === "country"
+        ? {
+            ...prev,
+            country: code || "NG",
+            countryName: name || "Nigeria",
+            state: "",
+            stateName: "",
+          }
+        : { ...prev, state: code || name, stateName: name || code },
+    );
   };
 
-  const setState = (isoCode, name) => {
-    setForm((prev) => ({
-      ...prev,
-      state: isoCode || name || "",
-      stateName: name || isoCode || "",
-    }));
-  };
-
-  const subtotal = checkoutLines.reduce(
-    (sum, line) => sum + parsePrice(line.product.price) * line.qty,
-    0,
+  const subtotal = useMemo(
+    () =>
+      checkoutLines.reduce(
+        (sum, l) => sum + parsePrice(l.product.price) * l.qty,
+        0,
+      ),
+    [checkoutLines],
   );
 
-  const selectedDelivery = DELIVERY_METHODS.find(
-    (d) => d.id === deliveryMethod,
-  );
-  const deliveryFee =
-    checkoutLines.length > 0 ? (selectedDelivery?.price ?? 0) : 0;
+  const deliveryFee = checkoutLines.length
+    ? (DELIVERY_METHODS.find((d) => d.id === deliveryMethod)?.price ?? 0)
+    : 0;
+
   const total = subtotal + deliveryFee;
+  const digitsOnly = form.phone.replace(/\D/g, "");
 
   const isAddressValid = Boolean(
     form.fullName.trim() &&
-    form.phone.trim().length >= 10 &&
+    (digitsOnly.length >= 10 || form.phone.trim().length >= 7) &&
     form.address.trim() &&
     form.city.trim() &&
     (form.country || form.countryName) &&
@@ -82,30 +92,12 @@ export const useCheckoutForm = () => {
     Boolean(paymentMethod) &&
     !placing;
 
-  useEffect(() => {
-    console.log("=== CHECKOUT FORM DEBUG ===", {
-      form,
-      paymentMethod,
-      isAddressValid,
-      canPlaceOrder,
-      fieldChecks: {
-        fullName: Boolean(form.fullName.trim()),
-        phone: form.phone.trim().length >= 10,
-        address: Boolean(form.address.trim()),
-        city: Boolean(form.city.trim()),
-        country: Boolean(form.country || form.countryName),
-        state: Boolean(form.state || form.stateName),
-      },
-    });
-  }, [form, paymentMethod, isAddressValid, canPlaceOrder]);
-
   const handlePlaceOrder = async () => {
     if (!canPlaceOrder) return;
     setPlacing(true);
-    await new Promise((resolve) => setTimeout(resolve, 900));
+    await new Promise((res) => setTimeout(res, 900));
 
-    removeItems(checkoutLines.map((line) => line.id));
-
+    removeItems(checkoutLines.map((l) => l.id));
     showToast("Order placed successfully", { type: "success" });
     setPlacing(false);
     navigate("/shop");
@@ -115,12 +107,12 @@ export const useCheckoutForm = () => {
     checkoutLines,
     form,
     updateField,
-    setCountry,
-    setState,
+    setCountry: (v1, v2) => setLocationField("country", v1, v2),
+    setState: (v1, v2) => setLocationField("state", v1, v2),
     deliveryMethod,
     setDeliveryMethod,
     paymentMethod,
-    setPaymentMethod,
+    setPaymentMethod: (v) => setPaymentMethod(parseVal(v) || null),
     placing,
     subtotal,
     deliveryFee,
