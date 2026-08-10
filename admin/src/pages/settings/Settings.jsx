@@ -12,7 +12,7 @@ const Settings = () => {
 
   return (
     <div className="flex min-h-screen flex-col gap-8 bg-secondary ">
-      <div className="flex gap-6 border-b border-primary">
+      <div className="flex gap-6 border-b border-primary/20">
         {TABS.map((tab) => (
           <button
             key={tab.key}

@@ -52,7 +52,7 @@ const Field = ({ label, children }) => (
 const TextInput = ({ className = "", ...props }) => (
   <input
     {...props}
-    className={`h-10 w-full border border-primary  bg-secondary px-3 text-sm  outline-none   text-primary  ${className}`}
+    className={`h-10 w-full border border-primary/20  bg-secondary px-3 text-sm  outline-none   text-primary ${className}`}
   />
 );
 
