@@ -9,7 +9,7 @@ import RevealImage from "../../components/ui/RevealImage";
 import SearchInput from "../../components/ui/SearchInput";
 import AddButton from "../../components/ui/AddButton";
 import StatusBadge from "../../components/ui/StatusBadge";
-import ConfirmDeleteModal from "../../components/ui/ConfirmDeleteModal";
+import ConfirmDeleteModal from "../../components/ui/ConfirmdeleteModal";
 import DataTable from "../../components/ui/DataTable";
 
 const PRODUCT_STATUS_STYLES = {
