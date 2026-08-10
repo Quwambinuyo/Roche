@@ -18,7 +18,6 @@ const NAV_ITEMS = [
   { label: "Categories", to: "/categories", icon: FiTag },
   { label: "Orders", to: "/orders", icon: FiClipboard },
   { label: "Customers", to: "/customers", icon: FiUsers },
-  { label: "Settings", to: "/settings", icon: FiSettings },
 ];
 
 const MobileSidebar = ({ isOpen, onClose }) => {
@@ -37,16 +36,12 @@ const MobileSidebar = ({ isOpen, onClose }) => {
       />
 
       <aside
-        className={`absolute inset-y-0 left-0 w-72 flex flex-col bg-secondary text-primary transition-transform duration-300 ease-out ${
+        className={`absolute inset-y-0 left-0 w-full flex flex-col bg-secondary text-primary transition-transform duration-300 ease-out ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         <div className="flex items-center justify-between px-6 pt-7 pb-6 border-b border-primary/10">
-          <div>
-            <p className="text-lg font-bold tracking-tight uppercase">
-              BODESTRT
-            </p>
-          </div>
+          <p className="text-lg font-bold tracking-tight uppercase">BODESTRT</p>
 
           <button
             type="button"
@@ -80,6 +75,23 @@ const MobileSidebar = ({ isOpen, onClose }) => {
             ))}
           </ul>
         </nav>
+
+        <div className="px-3 py-4 border-t border-primary/10">
+          <NavLink
+            to="/settings"
+            onClick={onClose}
+            className={({ isActive }) =>
+              `flex items-center gap-3 px-3 py-2.5 text-sm transition-colors duration-200 ${
+                isActive
+                  ? "bg-primary/10 text-primary font-semibold"
+                  : "text-primary/60 hover:bg-primary/5 hover:text-primary"
+              }`
+            }
+          >
+            <FiSettings size={16} className="shrink-0" />
+            <span>Settings</span>
+          </NavLink>
+        </div>
       </aside>
     </div>
   );
