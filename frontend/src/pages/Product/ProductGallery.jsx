@@ -19,46 +19,10 @@ const ProductGallery = ({ images, alt }) => {
   };
 
   return (
-    <div className="flex flex-col gap-3 md:gap-4 w-full">
-      <div className="relative w-full">
-        <button
-          type="button"
-          onClick={() => setIsLightboxOpen(true)}
-          className="group block w-full cursor-zoom-in"
-        >
-          <div
-            className={`transition-all duration-200 ease-in-out ${
-              isAnimating ? "opacity-40 scale-95" : "opacity-100 scale-100"
-            }`}
-          >
-            <RevealImage
-              key={active}
-              src={images[active]}
-              alt={alt}
-              className="w-full aspect-square rounded-2xl overflow-hidden"
-              imgClassName="object-cover w-full h-full"
-            />
-          </div>
-
-          <span className="absolute bottom-3 left-3 w-9 h-9 rounded-full bg-primary/90 backdrop-blur flex items-center justify-center text-secondary shadow-md opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
-            <Eye size={16} />
-          </span>
-        </button>
-
-        {images.length > 1 && (
-          <button
-            type="button"
-            onClick={() => goTo(active + 1)}
-            aria-label="Next image"
-            className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-primary/90 backdrop-blur flex items-center justify-center text-secondary hover:bg-primary transition-colors shadow-md z-10"
-          >
-            <ChevronRight size={18} />
-          </button>
-        )}
-      </div>
-
+    <div className="w-full flex flex-col md:flex-row gap-4 relative">
+      {/* Thumbnails list */}
       {images.length > 1 && (
-        <div className="flex flex-row gap-3 overflow-x-auto pb-1 scrollbar-none">
+        <div className="order-2 md:order-1 flex md:flex-col gap-3 overflow-x-auto md:overflow-y-auto max-h-[500px] shrink-0 p-1 scrollbar-none">
           {images.map((img, index) => (
             <button
               key={index}
@@ -79,6 +43,47 @@ const ProductGallery = ({ images, alt }) => {
           ))}
         </div>
       )}
+
+      {/* Main Image Stage */}
+      <div className="order-1 md:order-2 flex-1 w-full min-w-0 relative">
+        <button
+          type="button"
+          onClick={() => setIsLightboxOpen(true)}
+          className="group relative block w-full rounded-2xl overflow-hidden cursor-zoom-in p-0 m-0 border-0 outline-none"
+        >
+          <div
+            className={`w-full transition-all duration-200 ease-in-out ${
+              isAnimating ? "opacity-40 scale-95" : "opacity-100 scale-100"
+            }`}
+          >
+            <RevealImage
+              key={active}
+              src={images[active]}
+              alt={alt}
+              className="w-full aspect-square rounded-2xl overflow-hidden p-0 m-0 block"
+              imgClassName="object-cover w-full h-full block"
+            />
+          </div>
+
+          <span className="absolute bottom-3 left-3 w-9 h-9 rounded-full bg-primary/90 backdrop-blur flex items-center justify-center text-secondary shadow-md opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity z-20">
+            <Eye size={16} />
+          </span>
+        </button>
+
+        {images.length > 1 && (
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              goTo(active + 1);
+            }}
+            aria-label="Next image"
+            className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-primary/90 backdrop-blur flex items-center justify-center text-secondary hover:bg-primary transition-colors shadow-md z-20"
+          >
+            <ChevronRight size={18} />
+          </button>
+        )}
+      </div>
 
       {isLightboxOpen && (
         <ProductImageLightbox

@@ -27,7 +27,7 @@ const ProductDetails = ({ slugOverride }) => {
   const slug = slugOverride || paramSlug;
   const product = getProductBySlug(slug) || getBundleBySlug(slug);
   const isBundle = Boolean(product && !getProductBySlug(slug));
-  const { items, addToCart, updateQty } = useCart();
+  const { items, addToCart } = useCart();
   const { isInWishlist, toggleWishlist } = useWishlist();
 
   const [selectedColor, setSelectedColor] = useState(
@@ -140,34 +140,36 @@ const ProductDetails = ({ slugOverride }) => {
   };
 
   return (
-    <div className="">
+    <div className="w-full">
       <Reveal className="mb-6">
         <ProductBreadcrumb product={product} />
       </Reveal>
 
-      <div className="grid md:grid-cols-2 gap-10 md:gap-14 ">
-        <Reveal>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-start w-full">
+        <div className="w-full md:sticky md:top-24">
           <ProductGallery
             images={product.images || [product.image]}
             alt={product.name}
           />
-        </Reveal>
+        </div>
 
-        <Reveal delay={50}>
-          <p className="text-xs font-semibold tracking-widest text-secondary/50 uppercase">
-            {isBundle ? "Wholesale Bundle" : product.category}
-          </p>
-          <h1 className="font-bold text-2xl md:text-3xl text-secondary mt-2">
-            {product.name}
-          </h1>
-          <p className="text-xl font-semibold text-secondary mt-2">
-            {product.price}
-          </p>
-          {isBundle && product.minUnits && (
-            <p className="text-sm text-secondary/60 mt-1">
-              Minimum order: {product.minUnits} units
+        <Reveal delay={50} className="w-full space-y-4">
+          <div>
+            <p className="text-xs font-semibold tracking-widest text-secondary/50 uppercase">
+              {isBundle ? "Wholesale Bundle" : product.category}
             </p>
-          )}
+            <h1 className="font-bold text-2xl md:text-3xl text-secondary mt-1">
+              {product.name}
+            </h1>
+            <p className="text-xl font-semibold text-secondary mt-2">
+              {product.price}
+            </p>
+            {isBundle && product.minUnits && (
+              <p className="text-sm text-secondary/60 mt-1">
+                Minimum order: {product.minUnits} units
+              </p>
+            )}
+          </div>
 
           <ProductColorSelector
             isBundle={isBundle}
