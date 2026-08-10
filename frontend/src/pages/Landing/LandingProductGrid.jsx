@@ -48,7 +48,7 @@ const LandingProductGrid = () => {
 
   return (
     <section className="max-w-7xl mx-auto px-6 md:px-10 py-16">
-      <SectionHeader title="Latest" />
+      <SectionHeader title="Latest" link={"/register"} />
 
       {paginationEl && (
         <Swiper

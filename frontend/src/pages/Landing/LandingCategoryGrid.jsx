@@ -18,7 +18,7 @@ const LandingCategoryGrid = () => {
           Shop by Category
         </h2>
         <a
-          href="#"
+          href="/login"
           className="hidden sm:inline-flex items-center gap-1 text-sm font-semibold text-tertiary-700"
         >
           View all <ArrowUpRight size={14} />

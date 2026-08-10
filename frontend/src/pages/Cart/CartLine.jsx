@@ -118,7 +118,6 @@ const CartLine = ({
               </button>
             </div>
 
-            {/* Price & Discount container converted to vertical stack */}
             <div className="flex flex-col items-end">
               {hasDiscount && (
                 <span className="text-xs text-secondary/40 line-through">

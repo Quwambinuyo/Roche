@@ -5,6 +5,7 @@ import RevealImage from "../../components/UI/RevealImage";
 import shopthelook from "../../assets/images/landing/shopthelook.jfif";
 import shopthelook1 from "../../assets/images/landing/shopthelook1.jfif";
 import shopthelook2 from "../../assets/images/landing/shopthelook2.jfif";
+import { useNavigate } from "react-router-dom";
 
 const LOOKS = [
   {
@@ -63,6 +64,8 @@ const LandingShopTheLook = () => {
     "w-[46%] top-[38%] left-[54%] -translate-x-1/2 z-20",
     "w-[54%] top-[62%] left-[46%] -translate-x-1/2 z-30",
   ];
+
+  const navigate = useNavigate();
 
   return (
     <section className="max-w-7xl mx-auto px-6 md:px-10 py-16">
@@ -157,7 +160,10 @@ const LandingShopTheLook = () => {
                 {formatNaira(total)}
               </span>
             </div>
-            <button className="w-full bg-secondary text-primary text-sm font-semibold tracking-widest uppercase py-3.5 rounded-full hover:opacity-90 transition-opacity duration-300">
+            <button
+              onClick={() => navigate("/login")}
+              className="w-full bg-secondary text-primary text-sm font-semibold tracking-widest uppercase py-3.5 rounded-full hover:opacity-90 transition-opacity duration-300"
+            >
               Add Look to Cart
             </button>
           </div>

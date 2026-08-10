@@ -18,12 +18,14 @@ export const buildLineId = (product, color, size, colors) => {
   const colorPart =
     colors && colors.length > 0
       ? [...colors]
-          .map((c) => c.name)
+          .map((c) => (typeof c === "object" ? c?.name : c))
           .sort()
           .join("+")
-      : (color?.name ?? "no-color");
+      : ((typeof color === "object" ? color?.name : color) ?? "no-color");
 
-  return [product.slug, colorPart, size ?? "no-size"].join("::");
+  const sizePart = typeof size === "object" ? size?.size : size;
+
+  return [product.slug, colorPart, sizePart ?? "no-size"].join("::");
 };
 
 const parsePrice = (price) => Number(price.replace(/[₦,]/g, ""));
@@ -83,7 +85,10 @@ export const CartProvider = ({ children }) => {
     size = null,
     qty = 1,
   }) => {
-    const lineId = buildLineId(product, color, size, colors);
+    const sizeValue =
+      typeof size === "object" && size !== null ? size.size : size;
+
+    const lineId = buildLineId(product, color, sizeValue, colors);
 
     setItems((prev) => {
       const existing = prev.find((line) => line.id === lineId);
@@ -94,7 +99,17 @@ export const CartProvider = ({ children }) => {
         );
       }
 
-      return [...prev, { id: lineId, product, color, colors, size, qty }];
+      return [
+        ...prev,
+        {
+          id: lineId,
+          product,
+          color,
+          colors,
+          size: sizeValue,
+          qty,
+        },
+      ];
     });
 
     showToast(`${product.name} added to cart`, { type: "success" });

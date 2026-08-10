@@ -65,7 +65,7 @@ const LandingFooter = () => {
   ];
 
   return (
-    <footer className="bg-primary text-secondary dark:bg-black pt-14 pb-20 md:pb-6 overflow-hidden">
+    <footer className="bg-primary text-secondary pt-14 pb-20 md:pb-6 overflow-hidden">
       <style>{`
         @keyframes dropdownIn {
           from { opacity: 0; transform: translateY(6px) scale(0.97); }
@@ -149,7 +149,11 @@ const LandingFooter = () => {
         >
           <div className="flex items-center gap-3 relative z-[60]">
             <CountryPicker value={country} onChange={setCountry} />
-            <CurrencyPicker value={currency} onChange={setCurrency} />
+            <CurrencyPicker
+              value={currency}
+              onChange={setCurrency}
+              currencies={["GBP", "EUR", "USD", "CAD", "NGN"]}
+            />
           </div>
           <p className="text-xs text-secondary/40">© 2026 BSTRT Co.</p>
         </Reveal>
