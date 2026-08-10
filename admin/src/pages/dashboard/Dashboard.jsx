@@ -6,39 +6,20 @@ import {
   FiUsers,
   FiAlertTriangle,
 } from "react-icons/fi";
-import { PRODUCTS, BUNDLES } from "../../mock/product";
+import { PRODUCTS } from "../../mock/product";
 import { ORDERS } from "../../mock/orders";
 import { CUSTOMERS } from "../../mock/customers";
+import { totalStock } from "../../utils/stock";
+import { parseNaira, formatNaira, formatDate } from "../../utils/format";
 import RevealImage from "../../components/ui/RevealImage";
+import StatusBadge from "../../components/ui/StatusBadge";
 
-const parseNaira = (str) => Number(str.replace(/[₦,]/g, "")) || 0;
-
-const formatNaira = (n) => `₦${n.toLocaleString("en-NG")}`;
-
-const formatDate = (iso) =>
-  new Date(iso).toLocaleDateString("en-NG", {
-    day: "2-digit",
-    month: "short",
-  });
-
-const StatusBadge = ({ status }) => {
-  const styles = {
-    pending: "bg-primary/10 text-primary/60",
-    processing: "bg-blue-500/10 text-blue-500",
-    shipped: "bg-purple-500/10 text-purple-500",
-    delivered: "bg-green-500/10 text-green-500",
-    cancelled: "bg-red-500/10 text-red-500",
-  };
-
-  return (
-    <span
-      className={`px-2 py-0.5 text-xs font-medium rounded-full capitalize ${
-        styles[status] || styles.pending
-      }`}
-    >
-      {status}
-    </span>
-  );
+const ORDER_STATUS_STYLES = {
+  pending: "bg-primary/10 text-primary/60",
+  processing: "bg-blue-500/10 text-blue-500",
+  shipped: "bg-purple-500/10 text-purple-500",
+  delivered: "bg-green-500/10 text-green-500",
+  cancelled: "bg-red-500/10 text-red-500",
 };
 
 const StatCard = ({ icon: Icon, label, value, sub }) => (
@@ -51,9 +32,6 @@ const StatCard = ({ icon: Icon, label, value, sub }) => (
     {sub && <p className="text-xs text-primary/40 mt-1">{sub}</p>}
   </div>
 );
-
-const totalStock = (product) =>
-  product.sizes?.reduce((sum, s) => sum + (s.stock || 0), 0) || 0;
 
 const Dashboard = () => {
   const stats = useMemo(() => {
@@ -153,7 +131,11 @@ const Dashboard = () => {
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="text-sm text-primary">{order.total}</span>
-                  <StatusBadge status={order.status} />
+                  <StatusBadge
+                    status={order.status}
+                    styles={ORDER_STATUS_STYLES}
+                    fallbackKey="pending"
+                  />
                 </div>
               </Link>
             ))}
@@ -174,7 +156,11 @@ const Dashboard = () => {
             <div className="space-y-2.5">
               {Object.entries(statusCounts).map(([status, count]) => (
                 <div key={status} className="flex items-center justify-between">
-                  <StatusBadge status={status} />
+                  <StatusBadge
+                    status={status}
+                    styles={ORDER_STATUS_STYLES}
+                    fallbackKey="pending"
+                  />
                   <span className="text-sm text-primary">{count}</span>
                 </div>
               ))}

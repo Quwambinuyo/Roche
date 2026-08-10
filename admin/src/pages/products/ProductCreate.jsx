@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { FiPlus, FiTrash2 } from "react-icons/fi";
+import { useNavigate, Link } from "react-router-dom";
+import { FiArrowLeft, FiPlus, FiTrash2 } from "react-icons/fi";
 import { CATEGORIES, FABRIC_WORDS } from "../../mock/product";
 import { SIZE_OPTIONS, SIZE_LABEL_OPTIONS } from "../../mock/sizes";
 import CustomSelect from "../../components/ui/CustomSelect";
@@ -96,6 +96,8 @@ const ProductCreate = () => {
       image: form.image,
       images: [form.image],
       colors,
+      status: "active",
+      createdAt: new Date().toISOString(),
     };
 
     console.log("New product:", newProduct);
@@ -105,7 +107,16 @@ const ProductCreate = () => {
 
   return (
     <div>
-      <h1 className="text-xl font-bold text-primary mb-6">Create Product</h1>
+      <div className="flex items-center gap-3 mb-6">
+        <Link
+          to="/products"
+          className="text-primary/50 hover:text-primary"
+          aria-label="Back to products"
+        >
+          <FiArrowLeft size={18} />
+        </Link>
+        <h1 className="text-xl font-bold text-primary">Create Product</h1>
+      </div>
 
       {error && (
         <div className="mb-4 text-sm text-red-500 border border-red-500/30 px-3 py-2">

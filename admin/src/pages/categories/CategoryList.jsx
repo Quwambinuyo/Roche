@@ -1,18 +1,13 @@
 import React, { useMemo, useState } from "react";
-import { FiPlus, FiSearch } from "react-icons/fi";
 import { CATEGORIES, PRODUCTS } from "../../mock/product";
+import { slugify } from "../../utils/slugify";
 import CategoryTable from "./CategoryTable";
 import CategoryFormModal from "./CategoryFormModal";
-import DeleteCategoryModal from "./DeleteCategoryModal";
+import SearchInput from "../../components/ui/SearchInput";
+import AddButton from "../../components/ui/AddButton";
+import ConfirmDeleteModal from "../../components/ui/ConfirmDeleteModal";
 
 const emptyCategory = { name: "", slug: "", image: "" };
-
-const slugify = (str) =>
-  str
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
 
 const CategoryList = () => {
   const [categories, setCategories] = useState(CATEGORIES);
@@ -131,31 +126,16 @@ const CategoryList = () => {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-xl font-bold text-primary">Categories</h1>
-        <button
-          type="button"
-          onClick={handleOpenCreate}
-          className="flex items-center gap-2 px-4 py-2 bg-primary text-secondary font-medium text-sm"
-        >
-          <FiPlus size={16} />
-          Add Category
-        </button>
+      <div className="flex items-center mb-6">
+        <AddButton label="Add Category" onClick={handleOpenCreate} />
       </div>
 
-      <div className="relative mb-4 max-w-sm">
-        <FiSearch
-          size={16}
-          className="absolute left-3 top-1/2 -translate-y-1/2 text-primary/40"
-        />
-        <input
-          type="text"
-          placeholder="Search categories..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-full pl-9 pr-3 py-2 bg-secondary border border-primary/10 text-primary text-sm"
-        />
-      </div>
+      <SearchInput
+        value={search}
+        onChange={setSearch}
+        placeholder="Search categories..."
+        className="mb-4 max-w-sm"
+      />
 
       <CategoryTable
         categories={filtered}
@@ -176,8 +156,17 @@ const CategoryList = () => {
         onClose={handleCloseModal}
       />
 
-      <DeleteCategoryModal
-        category={categoryToDelete}
+      <ConfirmDeleteModal
+        open={!!categoryToDelete}
+        title="Delete category?"
+        message={
+          <>
+            This will remove{" "}
+            <span className="text-primary">{categoryToDelete?.name}</span> from
+            the list. Products already assigned to it won't be deleted, but
+            they'll no longer match a valid category.
+          </>
+        }
         onCancel={() => setCategoryToDelete(null)}
         onConfirm={confirmDelete}
       />
