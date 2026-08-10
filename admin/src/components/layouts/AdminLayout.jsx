@@ -24,7 +24,10 @@ const AdminLayout = () => {
           <Topbar />
         </div>
 
-        <main className="flex-1 overflow-y-auto p-6 bg-secondary text-primary ">
+        <main
+          id="main-scroll"
+          className="flex-1 overflow-y-auto p-6 bg-secondary text-primary "
+        >
           <Outlet />
         </main>
       </div>
