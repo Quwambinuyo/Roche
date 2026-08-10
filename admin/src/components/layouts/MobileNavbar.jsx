@@ -1,16 +1,20 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import { FiMenu, FiSun, FiMoon } from "react-icons/fi";
 import { useTheme } from "../../context/ThemeContext";
+import { getPageTitle } from "../../utils/getPageTitle";
 
 const MobileNavbar = ({ onMenuClick }) => {
   const { theme, toggleTheme } = useTheme();
+  const location = useLocation();
+  const title = getPageTitle(location.pathname);
 
   return (
     <header className="flex md:hidden items-center justify-between px-4 py-3.5 border-b border-primary/10 bg-secondary text-primary">
       <div>
-        <p className="text-base font-bold text-primary tracking-tight uppercase">
-          BODESTRT
-        </p>
+        <h1 className="text-base font-bold text-primary tracking-tight">
+          {title}
+        </h1>
       </div>
 
       <div className="flex items-center gap-1">

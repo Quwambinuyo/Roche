@@ -2,23 +2,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import { FiSun, FiMoon, FiBell, FiUser } from "react-icons/fi";
 import { useTheme } from "../../context/ThemeContext";
-
-const PAGE_TITLES = {
-  "/dashboard": "Dashboard",
-  "/products": "Products",
-  "/bundles": "Bundles",
-  "/categories": "Categories",
-  "/orders": "Orders",
-  "/customers": "Customers",
-  "/settings": "Settings",
-};
-
-const getPageTitle = (pathname) => {
-  const match = Object.keys(PAGE_TITLES).find((path) =>
-    pathname.startsWith(path),
-  );
-  return match ? PAGE_TITLES[match] : "Dashboard";
-};
+import { getPageTitle } from "../../utils/getPageTitle";
 
 const Topbar = () => {
   const location = useLocation();
