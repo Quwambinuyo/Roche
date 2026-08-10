@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSearchParams } from "react-router-dom";
 import PaymentsSection from "./PaymentSection";
 import StaffSection from "./StaffSection";
 import OrderSettingsSection from "./OrderSettingsSection";
@@ -15,8 +16,27 @@ const TABS = [
   { key: "notifications", label: "Notifications" },
 ];
 
+const TAB_KEYS = TABS.map((t) => t.key);
+
 const Settings = () => {
-  const [activeTab, setActiveTab] = useState("payments");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const rawTab = searchParams.get("tab");
+  const activeTab = TAB_KEYS.includes(rawTab) ? rawTab : "payments";
+
+  const setActiveTab = (key) => {
+    setSearchParams(
+      (prev) => {
+        const next = new URLSearchParams(prev);
+        if (key === "payments") {
+          next.delete("tab");
+        } else {
+          next.set("tab", key);
+        }
+        return next;
+      },
+      { replace: false },
+    );
+  };
 
   const renderTab = () => {
     switch (activeTab) {

@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { ORDERS, ORDER_STATUSES, orderTotalItems } from "../../mock/orders";
 import CustomSelect from "../../components/ui/CustomSelect";
 import SearchInput from "../../components/ui/SearchInput";
@@ -30,6 +30,8 @@ const TABS = [
   { key: "transactions", label: "Transactions" },
 ];
 
+const TAB_KEYS = TABS.map((t) => t.key);
+
 const formatOrderItems = (order) => {
   return order.items
     .map((item) => `${item.product?.name || "Unknown"} x${item.quantity}`)
@@ -37,9 +39,27 @@ const formatOrderItems = (order) => {
 };
 
 const OrderList = () => {
-  const [tab, setTab] = useState("orders");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const rawTab = searchParams.get("tab");
+  const tab = TAB_KEYS.includes(rawTab) ? rawTab : "orders";
+
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("all");
+
+  const setTab = (key) => {
+    setSearchParams(
+      (prev) => {
+        const next = new URLSearchParams(prev);
+        if (key === "orders") {
+          next.delete("tab");
+        } else {
+          next.set("tab", key);
+        }
+        return next;
+      },
+      { replace: false },
+    );
+  };
 
   const statusOptions = useMemo(
     () => [{ label: "All Statuses", value: "all" }, ...ORDER_STATUSES],
