@@ -6,6 +6,7 @@ import CustomSelect from "../../components/ui/CustomSelect";
 import SearchInput from "../../components/ui/SearchInput";
 import StatusBadge from "../../components/ui/StatusBadge";
 import DataTable from "../../components/ui/DataTable";
+import OrderSalesTable from "./OrderSalesTable";
 
 const ORDER_STATUS_STYLES = {
   pending: "bg-primary/10 text-primary/60",
@@ -22,7 +23,19 @@ const PAYMENT_STATUS_STYLES = {
   refunded: "text-primary/40",
 };
 
+const TABS = [
+  { key: "orders", label: "Orders" },
+  { key: "sales", label: "Product Sales" },
+];
+
+const formatOrderItems = (order) => {
+  return order.items
+    .map((item) => `${item.product?.name || "Unknown"} x${item.quantity}`)
+    .join(", ");
+};
+
 const OrderList = () => {
+  const [tab, setTab] = useState("orders");
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("all");
 
@@ -64,9 +77,15 @@ const OrderList = () => {
     {
       key: "items",
       header: "Items",
-      cellClassName: "text-primary/70",
-      render: (order) =>
-        `${orderTotalItems(order)} item${orderTotalItems(order) > 1 ? "s" : ""}`,
+      render: (order) => (
+        <div>
+          <p className="text-primary/70">
+            {orderTotalItems(order)} item
+            {orderTotalItems(order) > 1 ? "s" : ""}
+          </p>
+          <p className="text-xs text-primary/40">{formatOrderItems(order)}</p>
+        </div>
+      ),
     },
     {
       key: "total",
@@ -121,30 +140,52 @@ const OrderList = () => {
 
   return (
     <div>
-      <div className="flex flex-col sm:flex-row gap-3 mb-4">
-        <SearchInput
-          value={search}
-          onChange={setSearch}
-          placeholder="Search by order ID, customer name or email..."
-          className="flex-1"
-        />
-
-        <div className="sm:w-56">
-          <CustomSelect
-            value={status}
-            onChange={setStatus}
-            options={statusOptions}
-            position="down"
-          />
-        </div>
+      <div className="flex items-center gap-1 mb-4 border-b border-primary/10">
+        {TABS.map((t) => (
+          <button
+            key={t.key}
+            onClick={() => setTab(t.key)}
+            className={`text-xs font-medium px-4 py-2 -mb-px border-b-2 transition-colors ${
+              tab === t.key
+                ? "border-primary text-primary"
+                : "border-transparent text-primary/40 hover:text-primary"
+            }`}
+          >
+            {t.label}
+          </button>
+        ))}
       </div>
 
-      <DataTable
-        columns={columns}
-        data={filtered}
-        rowKey={(order) => order.id}
-        emptyMessage="No orders match your search."
-      />
+      {tab === "orders" && (
+        <>
+          <div className="flex flex-col sm:flex-row gap-3 mb-4">
+            <SearchInput
+              value={search}
+              onChange={setSearch}
+              placeholder="Search by order ID, customer name or email..."
+              className="flex-1"
+            />
+
+            <div className="sm:w-56">
+              <CustomSelect
+                value={status}
+                onChange={setStatus}
+                options={statusOptions}
+                position="down"
+              />
+            </div>
+          </div>
+
+          <DataTable
+            columns={columns}
+            data={filtered}
+            rowKey={(order) => order.id}
+            emptyMessage="No orders match your search."
+          />
+        </>
+      )}
+
+      {tab === "sales" && <OrderSalesTable />}
     </div>
   );
 };

@@ -13,6 +13,7 @@ import { totalStock } from "../../utils/stock";
 import { parseNaira, formatNaira, formatDate } from "../../utils/format";
 import RevealImage from "../../components/ui/RevealImage";
 import StatusBadge from "../../components/ui/StatusBadge";
+import OrderSalesChart from "../orders/OrderSalesChart";
 
 const ORDER_STATUS_STYLES = {
   pending: "bg-primary/10 text-primary/60",
@@ -75,8 +76,6 @@ const Dashboard = () => {
 
   return (
     <div>
-      <h1 className="text-xl font-bold text-primary mb-6">Dashboard</h1>
-
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <StatCard
           icon={FiDollarSign}
@@ -103,7 +102,7 @@ const Dashboard = () => {
         />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
         <div className="lg:col-span-2 border border-primary/10 bg-secondary/40">
           <div className="flex items-center justify-between p-5 pb-0">
             <h2 className="text-sm font-semibold text-primary">
@@ -219,6 +218,10 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="border border-primary/10">
+        <OrderSalesChart />
       </div>
     </div>
   );
