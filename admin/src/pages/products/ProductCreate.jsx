@@ -168,6 +168,7 @@ const ProductCreate = () => {
                 onChange={(val) => updateField("size", val)}
                 options={SIZE_LABEL_OPTIONS}
                 placeholder="Select a size label"
+                position="down"
               />
             </div>
           </div>
