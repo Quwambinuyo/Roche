@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "../../context/ThemeContext";
 import { NAV_LINKS } from "../../mock/clothing";
@@ -56,6 +57,14 @@ const LandingNavbar = () => {
               <span className="absolute left-0 -bottom-0.5 h-[1.5px] w-0 bg-tertiary-700 transition-all duration-300 ease-out group-hover:w-full" />
             </button>
           ))}
+
+          <Link
+            to="/gallery"
+            className="relative text-sm font-medium text-secondary/70 hover:text-tertiary-700 transition-colors duration-200 group py-1"
+          >
+            Gallery
+            <span className="absolute left-0 -bottom-0.5 h-[1.5px] w-0 bg-tertiary-700 transition-all duration-300 ease-out group-hover:w-full" />
+          </Link>
         </nav>
 
         <div className="flex items-center gap-3">
@@ -112,6 +121,18 @@ const LandingNavbar = () => {
                 {link.label}
               </button>
             ))}
+            <Link
+              to="/gallery"
+              onClick={() => setOpen(false)}
+              className="text-sm font-medium text-secondary text-left"
+              style={{
+                opacity: open ? 1 : 0,
+                transform: open ? "translateX(0)" : "translateX(-8px)",
+                transition: `opacity 300ms ease-out ${open ? NAV_LINKS.length * 60 : 0}ms, transform 300ms ease-out ${open ? NAV_LINKS.length * 60 : 0}ms`,
+              }}
+            >
+              Gallery
+            </Link>
           </div>
         </div>
       </div>

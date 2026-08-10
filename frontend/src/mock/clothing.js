@@ -32,6 +32,7 @@ export const NAV_LINKS = [
   { label: "Collections", id: "collections" },
   { label: "Fabric", id: "fabric" },
   { label: "Journal", id: "journal" },
+  // { label: "Gallery", id: "gallery" },
 ];
 
 export const CATEGORIES = [

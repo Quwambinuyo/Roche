@@ -24,12 +24,14 @@ import {
   NotFound,
   Wishlist,
   Categories,
+  Gallery,
 } from "../pages/index";
 
 const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Landing />} />
+      <Route path="gallery" element={<Gallery />} />
 
       <Route
         path="login"
