@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
 import { PRODUCTS, CATEGORIES } from "../../mock/product";
 import { totalStock } from "../../utils/stock";
-import { formatDate } from "../../utils/format";
+import { formatDateTime } from "../../utils/format";
 import CustomSelect from "../../components/ui/CustomSelect";
 import RevealImage from "../../components/ui/RevealImage";
 import SearchInput from "../../components/ui/SearchInput";
@@ -63,6 +63,8 @@ const ProductList = () => {
     {
       key: "product",
       header: "Product",
+      headerClassName: "min-w-[220px]",
+      cellClassName: "whitespace-nowrap",
       render: (product, index) => (
         <div className="flex items-center gap-3">
           <RevealImage
@@ -78,17 +80,22 @@ const ProductList = () => {
     {
       key: "category",
       header: "Category",
-      cellClassName: "capitalize text-primary/70",
+      headerClassName: "min-w-[120px]",
+      cellClassName: "capitalize text-primary/70 whitespace-nowrap",
       render: (product) => product.category,
     },
     {
       key: "price",
       header: "Price",
+      headerClassName: "min-w-[100px]",
+      cellClassName: "whitespace-nowrap",
       render: (product) => product.price,
     },
     {
       key: "stock",
       header: "Stock",
+      headerClassName: "min-w-[90px]",
+      cellClassName: "whitespace-nowrap",
       render: (product) =>
         totalStock(product) === 0 ? (
           <span className="text-red-500">0</span>
@@ -99,6 +106,7 @@ const ProductList = () => {
     {
       key: "status",
       header: "Status",
+      headerClassName: "min-w-[110px]",
       render: (product) => (
         <StatusBadge
           status={product.status}
@@ -110,14 +118,15 @@ const ProductList = () => {
     {
       key: "dateAdded",
       header: "Date Added",
-      cellClassName: "text-primary/60",
-      render: (product) =>
-        product.createdAt ? formatDate(product.createdAt) : "—",
+      headerClassName: "min-w-[170px]",
+      cellClassName: "text-primary/60 whitespace-nowrap",
+      render: (product) => formatDateTime(product.createdAt),
     },
     {
       key: "actions",
       header: "Actions",
-      headerClassName: "text-right",
+      headerClassName: "text-right min-w-[90px]",
+      cellClassName: "whitespace-nowrap",
       render: (product) => (
         <div className="flex items-center justify-end gap-3">
           <Link

@@ -2,13 +2,13 @@ import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
 import { BUNDLES, PRODUCTS } from "../../mock/product";
-import { formatDate } from "../../utils/format";
 import RevealImage from "../../components/ui/RevealImage";
 import SearchInput from "../../components/ui/SearchInput";
 import AddButton from "../../components/ui/AddButton";
 import StatusBadge from "../../components/ui/StatusBadge";
 import ConfirmDeleteModal from "../../components/ui/ConfirmDeleteModal";
 import DataTable from "../../components/ui/DataTable";
+import { formatDateTime } from "../../utils/format";
 
 const BUNDLE_STATUS_STYLES = {
   active: "bg-green-500/10 text-green-500",
@@ -41,6 +41,8 @@ const BundleList = () => {
     {
       key: "bundle",
       header: "Bundle",
+      headerClassName: "min-w-[220px]",
+      cellClassName: "whitespace-nowrap",
       render: (bundle, index) => (
         <div className="flex items-center gap-3">
           <RevealImage
@@ -56,6 +58,7 @@ const BundleList = () => {
     {
       key: "items",
       header: "Items Included",
+      headerClassName: "min-w-[240px]",
       cellClassName: "text-primary/70",
       render: (bundle) => (
         <span className="line-clamp-1">
@@ -66,21 +69,28 @@ const BundleList = () => {
     {
       key: "price",
       header: "Price",
+      headerClassName: "min-w-[100px]",
+      cellClassName: "whitespace-nowrap",
       render: (bundle) => bundle.price,
     },
     {
       key: "discount",
       header: "Discount",
+      headerClassName: "min-w-[100px]",
+      cellClassName: "whitespace-nowrap",
       render: (bundle) => (bundle.discount > 0 ? `${bundle.discount}%` : "—"),
     },
     {
       key: "minUnits",
       header: "Min Units",
+      headerClassName: "min-w-[100px]",
+      cellClassName: "whitespace-nowrap",
       render: (bundle) => bundle.minUnits,
     },
     {
       key: "status",
       header: "Status",
+      headerClassName: "min-w-[110px]",
       render: (bundle) => (
         <StatusBadge
           status={bundle.status}
@@ -92,14 +102,15 @@ const BundleList = () => {
     {
       key: "dateAdded",
       header: "Date Added",
-      cellClassName: "text-primary/60",
-      render: (bundle) =>
-        bundle.createdAt ? formatDate(bundle.createdAt) : "—",
+      headerClassName: "min-w-[170px]",
+      cellClassName: "text-primary/60 whitespace-nowrap",
+      render: (bundle) => formatDateTime(bundle.createdAt),
     },
     {
       key: "actions",
       header: "Actions",
-      headerClassName: "text-right",
+      headerClassName: "text-right min-w-[90px]",
+      cellClassName: "whitespace-nowrap",
       render: (bundle) => (
         <div className="flex items-center justify-end gap-3">
           <Link

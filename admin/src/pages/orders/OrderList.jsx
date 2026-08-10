@@ -1,12 +1,13 @@
 import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { ORDERS, ORDER_STATUSES, orderTotalItems } from "../../mock/orders";
-import { formatDate } from "../../utils/format";
 import CustomSelect from "../../components/ui/CustomSelect";
 import SearchInput from "../../components/ui/SearchInput";
 import StatusBadge from "../../components/ui/StatusBadge";
 import DataTable from "../../components/ui/DataTable";
 import OrderSalesTable from "./OrderSalesTable";
+import TransactionsTable from "./TransactionsTable";
+import { formatDateTime } from "../../utils/format";
 
 const ORDER_STATUS_STYLES = {
   pending: "bg-primary/10 text-primary/60",
@@ -26,6 +27,7 @@ const PAYMENT_STATUS_STYLES = {
 const TABS = [
   { key: "orders", label: "Orders" },
   { key: "sales", label: "Product Sales" },
+  { key: "transactions", label: "Transactions" },
 ];
 
 const formatOrderItems = (order) => {
@@ -61,12 +63,15 @@ const OrderList = () => {
     {
       key: "order",
       header: "Order",
-      cellClassName: "font-medium",
+      headerClassName: "min-w-[120px]",
+      cellClassName: "font-medium whitespace-nowrap",
       render: (order) => order.id,
     },
     {
       key: "customer",
       header: "Customer",
+      headerClassName: "min-w-[200px]",
+      cellClassName: "whitespace-nowrap",
       render: (order) => (
         <div>
           <p className="text-primary">{order.customer.name}</p>
@@ -77,6 +82,7 @@ const OrderList = () => {
     {
       key: "items",
       header: "Items",
+      headerClassName: "min-w-[220px]",
       render: (order) => (
         <div>
           <p className="text-primary/70">
@@ -90,11 +96,15 @@ const OrderList = () => {
     {
       key: "total",
       header: "Total",
+      headerClassName: "min-w-[110px]",
+      cellClassName: "whitespace-nowrap",
       render: (order) => order.total,
     },
     {
       key: "payment",
       header: "Payment",
+      headerClassName: "min-w-[110px]",
+      cellClassName: "whitespace-nowrap",
       render: (order) => (
         <span
           className={`text-xs font-medium capitalize ${
@@ -108,6 +118,7 @@ const OrderList = () => {
     {
       key: "status",
       header: "Status",
+      headerClassName: "min-w-[110px]",
       render: (order) => (
         <StatusBadge
           status={order.status}
@@ -119,14 +130,15 @@ const OrderList = () => {
     {
       key: "date",
       header: "Date",
-      cellClassName: "text-primary/60",
-      render: (order) => formatDate(order.createdAt),
+      headerClassName: "min-w-[170px]",
+      cellClassName: "text-primary/60 whitespace-nowrap",
+      render: (order) => formatDateTime(order.createdAt),
     },
     {
       key: "actions",
       header: "Actions",
-      headerClassName: "text-right",
-      cellClassName: "text-right",
+      headerClassName: "text-right min-w-[90px]",
+      cellClassName: "text-right whitespace-nowrap",
       render: (order) => (
         <Link
           to={`/orders/${order.id}`}
@@ -186,6 +198,8 @@ const OrderList = () => {
       )}
 
       {tab === "sales" && <OrderSalesTable />}
+
+      {tab === "transactions" && <TransactionsTable />}
     </div>
   );
 };
