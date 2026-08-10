@@ -98,7 +98,7 @@ const CurrencyPicker = ({
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search currency..."
-                className="w-full bg-transparent text-xs outline-none placeholder:text-secondary/30 text-secondary"
+                className="w-full bg-transparent text-xs outline-none  text-secondary"
               />
             </div>
           )}

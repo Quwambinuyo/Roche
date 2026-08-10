@@ -6,26 +6,39 @@ import ProductImageLightbox from "./ProductImageLightbox";
 const ProductGallery = ({ images, alt }) => {
   const [active, setActive] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const goTo = (index) => {
-    setActive((index + images.length) % images.length);
+    const nextIndex = (index + images.length) % images.length;
+    if (nextIndex === active) return;
+    setIsAnimating(true);
+    setActive(nextIndex);
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 250);
   };
 
   return (
-    <div className="flex flex-col md:flex-row gap-3 md:gap-4">
-      <div className="relative order-1 md:order-2 flex-1 min-w-0">
+    <div className="flex flex-col gap-3 md:gap-4 w-full">
+      <div className="relative w-full">
         <button
           type="button"
           onClick={() => setIsLightboxOpen(true)}
           className="group block w-full cursor-zoom-in"
         >
-          <RevealImage
-            key={active}
-            src={images[active]}
-            alt={alt}
-            className="w-full aspect-square rounded-2xl"
-            imgClassName="object-cover"
-          />
+          <div
+            className={`transition-all duration-200 ease-in-out ${
+              isAnimating ? "opacity-40 scale-95" : "opacity-100 scale-100"
+            }`}
+          >
+            <RevealImage
+              key={active}
+              src={images[active]}
+              alt={alt}
+              className="w-full aspect-square rounded-2xl overflow-hidden"
+              imgClassName="object-cover w-full h-full"
+            />
+          </div>
 
           <span className="absolute bottom-3 left-3 w-9 h-9 rounded-full bg-primary/90 backdrop-blur flex items-center justify-center text-secondary shadow-md opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
             <Eye size={16} />
@@ -34,9 +47,10 @@ const ProductGallery = ({ images, alt }) => {
 
         {images.length > 1 && (
           <button
+            type="button"
             onClick={() => goTo(active + 1)}
             aria-label="Next image"
-            className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-primary/90 backdrop-blur flex items-center justify-center text-secondary hover:bg-primary transition-colors shadow-md"
+            className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-primary/90 backdrop-blur flex items-center justify-center text-secondary hover:bg-primary transition-colors shadow-md z-10"
           >
             <ChevronRight size={18} />
           </button>
@@ -44,15 +58,16 @@ const ProductGallery = ({ images, alt }) => {
       </div>
 
       {images.length > 1 && (
-        <div className="order-2 md:order-1 flex md:flex-col gap-3 overflow-x-auto md:overflow-y-auto md:max-h-[560px] shrink-0">
+        <div className="flex flex-row gap-3 overflow-x-auto pb-1 scrollbar-none">
           {images.map((img, index) => (
             <button
               key={index}
+              type="button"
               onClick={() => goTo(index)}
-              className={`shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden ring-2 transition-all ${
+              className={`shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden ring-2 transition-all duration-200 cursor-pointer ${
                 active === index
-                  ? "ring-secondary"
-                  : "ring-secondary/10 opacity-70 hover:opacity-100"
+                  ? "ring-secondary scale-105 shadow-sm"
+                  : "ring-secondary/10 opacity-70 hover:opacity-100 hover:scale-100"
               }`}
             >
               <img

@@ -33,7 +33,7 @@ export const TextInput = ({ className = "", ...props }) => {
   return (
     <input
       {...props}
-      className={`h-10 w-full rounded-md border border-primary/20 bg-secondary px-3 text-sm text-primary outline-none transition-all duration-200 placeholder:text-primary/30 focus:border-primary/50 focus:ring-2 focus:ring-primary/5 ${className}`}
+      className={`h-10 w-full rounded-md border border-primary/20 bg-secondary px-3 text-sm text-primary outline-none transition-all duration  focus:ring-2 focus:ring-primary/5 ${className}`}
     />
   );
 };
