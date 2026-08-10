@@ -29,16 +29,12 @@ const DEFAULT_PAYMENTS = {
 };
 
 const SectionCard = ({ title, description, children }) => (
-  <div className="flex flex-col gap-4 border border-secondary/10 bg-primary p-5 sm:p-6 dark:border-primary/10 dark:bg-secondary">
+  <div className="flex flex-col gap-4 border border-primary/20 rounded-md bg-secondary p-5 sm:p-6 ">
     <div className="flex flex-col gap-1">
-      <h2 className="text-sm font-medium text-secondary dark:text-primary">
-        {title}
-      </h2>
+      <h2 className="text-sm font-medium text-primary">{title}</h2>
 
       {description ? (
-        <p className="font-mono text-xs text-secondary/60 dark:text-primary/60">
-          {description}
-        </p>
+        <p className="font-mono text-xs text-primary">{description}</p>
       ) : null}
     </div>
 
@@ -48,9 +44,7 @@ const SectionCard = ({ title, description, children }) => (
 
 const Field = ({ label, children }) => (
   <label className="flex flex-col gap-1.5">
-    <span className="font-mono text-xs text-secondary/60 dark:text-primary/60">
-      {label}
-    </span>
+    <span className="font-mono text-xs text-primary">{label}</span>
     {children}
   </label>
 );
@@ -58,7 +52,7 @@ const Field = ({ label, children }) => (
 const TextInput = ({ className = "", ...props }) => (
   <input
     {...props}
-    className={`h-10 w-full border border-secondary/10 bg-primary px-3 text-sm text-secondary placeholder:text-secondary/30 outline-none focus:border-tertiary-500 dark:border-primary/10 dark:bg-secondary dark:text-primary dark:placeholder:text-primary/30 dark:focus:border-tertiary-600 ${className}`}
+    className={`h-10 w-full border border-primary  bg-secondary px-3 text-sm  outline-none   text-primary  ${className}`}
   />
 );
 
@@ -74,26 +68,20 @@ const SelectInput = ({ options, value, onChange, className = "" }) => (
 
 const Toggle = ({ checked, onChange, label }) => (
   <label className="flex cursor-pointer items-center justify-between gap-4">
-    {label ? (
-      <span className="text-sm text-secondary dark:text-primary">{label}</span>
-    ) : null}
+    {label ? <span className="text-sm text-secondary ">{label}</span> : null}
 
     <button
       type="button"
       role="switch"
       aria-checked={checked}
       onClick={() => onChange(!checked)}
-      className={`inline-flex h-5 w-9 shrink-0 items-center rounded-full border border-secondary/15 p-0.5 transition-colors dark:border-primary/15 ${
-        checked
-          ? "justify-end bg-secondary dark:bg-primary"
-          : "justify-start bg-secondary/10 dark:bg-primary/10"
+      className={`inline-flex h-5 w-9 shrink-0 items-center rounded-full  p-0.5 transition-colors border-primary/15 ${
+        checked ? "justify-end bg-primary" : "justify-start  bg-primary/10"
       }`}
     >
       <span
         className={`h-3.5 w-3.5 rounded-full shadow-sm ${
-          checked
-            ? "bg-primary dark:bg-secondary"
-            : "bg-secondary/40 dark:bg-primary/40"
+          checked ? "bg-secondary" : "bg-secondary "
         }`}
       />
     </button>
@@ -105,7 +93,7 @@ const PrimaryButton = ({ children, disabled, onClick }) => (
     type="button"
     onClick={onClick}
     disabled={disabled}
-    className="bg-secondary px-5 py-2.5 text-sm font-medium text-primary transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-30 dark:bg-primary dark:text-secondary"
+    className="bg-primary px-5 py-2.5 text-sm font-medium text-secondary transition-opacity hover:opacity-90 [disabled]:cursor-not-allowed disabled:opacity-30 rounded-md border-secondary/30"
   >
     {children}
   </button>
@@ -128,7 +116,7 @@ const SecretField = ({ label, value, onChange, placeholder }) => {
         <button
           type="button"
           onClick={() => setVisible((v) => !v)}
-          className="flex items-center justify-center border border-secondary/10 bg-primary px-3 text-secondary/40 transition-colors hover:bg-secondary hover:text-primary dark:border-primary/10 dark:bg-secondary dark:text-primary/40 dark:hover:bg-primary dark:hover:text-secondary"
+          className="flex items-center justify-center border border-primary bg-secondary px-3 text-primary transition-colors hover:bg-secondary hover:text-primary   dark:hover:bg-primary dark:hover:text-secondary"
         >
           {visible ? <EyeOff size={14} /> : <Eye size={14} />}
         </button>
@@ -231,15 +219,13 @@ const PaymentsSection = ({ initialData, onSave }) => {
         title="Accepted payment methods"
         description="Shown to customers at checkout."
       >
-        <div className="flex flex-col divide-y divide-secondary/10 dark:divide-primary/10">
+        <div className="flex flex-col divide-y divide-primary/10">
           {Object.entries(METHOD_LABELS).map(([key, label]) => (
             <div
               key={key}
               className="flex items-center justify-between gap-4 py-3"
             >
-              <span className="text-sm text-secondary dark:text-primary">
-                {label}
-              </span>
+              <span className="text-sm text-primary ">{label}</span>
 
               <Toggle
                 checked={form.acceptedMethods[key]}
@@ -252,7 +238,7 @@ const PaymentsSection = ({ initialData, onSave }) => {
 
       <div className="flex items-center justify-end gap-3">
         {dirty ? (
-          <span className="font-mono text-xs text-secondary/50 dark:text-primary/50">
+          <span className="font-mono text-xs text-primary ">
             Unsaved changes
           </span>
         ) : null}
