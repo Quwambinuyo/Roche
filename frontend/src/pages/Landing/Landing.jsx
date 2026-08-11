@@ -1,7 +1,7 @@
 import React from "react";
 import LandingNavbar from "./LandingNavbar";
-import LandingMarquee from "./LandingMarquee";
 import LandingHero from "./LandingHero";
+import LandingMarquee from "./LandingMarquee";
 import LandingTrustBar from "./LandingTrustBar";
 import LandingCategoryGrid from "./LandingCategoryGrid";
 import LandingProductGrid from "./LandingProductGrid";
@@ -18,8 +18,8 @@ const Landing = () => {
   return (
     <div className="min-h-screen bg-primary transition-colors duration-300">
       <LandingNavbar />
-      <LandingMarquee />
       <LandingHero />
+      <LandingMarquee />
       <LandingTrustBar />
       <Divider />
       <div id="collections" className="scroll-mt-24">

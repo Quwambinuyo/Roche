@@ -28,11 +28,18 @@ const LandingNavbar = () => {
     scrollToSection(id);
   };
 
+  const textColor = scrolled ? "text-secondary" : "text-white";
+  const mutedText = scrolled ? "text-secondary/70" : "text-white/80";
+  const hoverText = scrolled ? "hover:text-tertiary-700" : "hover:text-white";
+  const iconBorder = scrolled ? "border-secondary/10" : "border-white/30";
+
   return (
     <header
       className={[
-        "sticky top-0 z-50 border-b bg-primary/90 backdrop-blur transition-all duration-300",
-        scrolled ? "border-secondary/10 shadow-sm" : "border-transparent",
+        "fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300",
+        scrolled
+          ? "bg-primary/90 backdrop-blur border-secondary/10 shadow-sm"
+          : "bg-transparent border-transparent",
       ].join(" ")}
     >
       <div
@@ -41,7 +48,9 @@ const LandingNavbar = () => {
           scrolled ? "h-14" : "h-16",
         ].join(" ")}
       >
-        <span className="font-bold text-lg tracking-tight text-secondary transition-transform duration-300 hover:-translate-y-0.5 cursor-pointer">
+        <span
+          className={`font-bold text-lg tracking-tight ${textColor} transition-all duration-300 hover:-translate-y-0.5 cursor-pointer`}
+        >
           BSTRT
         </span>
 
@@ -51,19 +60,27 @@ const LandingNavbar = () => {
               key={link.id}
               type="button"
               onClick={() => handleNavClick(link.id)}
-              className="relative text-sm font-medium text-secondary/70 hover:text-tertiary-700 transition-colors duration-200 group py-1"
+              className={`relative text-sm font-medium ${mutedText} ${hoverText} transition-colors duration-200 group py-1`}
             >
               {link.label}
-              <span className="absolute left-0 -bottom-0.5 h-[1.5px] w-0 bg-tertiary-700 transition-all duration-300 ease-out group-hover:w-full" />
+              <span
+                className={`absolute left-0 -bottom-0.5 h-[1.5px] w-0 transition-all duration-300 ease-out group-hover:w-full ${
+                  scrolled ? "bg-tertiary-700" : "bg-white"
+                }`}
+              />
             </button>
           ))}
 
           <Link
             to="/gallery"
-            className="relative text-sm font-medium text-secondary/70 hover:text-tertiary-700 transition-colors duration-200 group py-1"
+            className={`relative text-sm font-medium ${mutedText} ${hoverText} transition-colors duration-200 group py-1`}
           >
             Gallery
-            <span className="absolute left-0 -bottom-0.5 h-[1.5px] w-0 bg-tertiary-700 transition-all duration-300 ease-out group-hover:w-full" />
+            <span
+              className={`absolute left-0 -bottom-0.5 h-[1.5px] w-0 transition-all duration-300 ease-out group-hover:w-full ${
+                scrolled ? "bg-tertiary-700" : "bg-white"
+              }`}
+            />
           </Link>
         </nav>
 
@@ -71,14 +88,14 @@ const LandingNavbar = () => {
           <button
             onClick={toggleTheme}
             aria-label="Toggle theme"
-            className="w-9 h-9 flex items-center justify-center rounded-full border border-secondary/10 text-secondary hover:border-tertiary-700 transition-all duration-300 hover:rotate-12"
+            className={`w-9 h-9 flex items-center justify-center rounded-full border ${iconBorder} ${textColor} hover:border-tertiary-700 transition-all duration-300 hover:rotate-12`}
           >
             {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
           </button>
 
           <button
             onClick={() => setOpen(!open)}
-            className="md:hidden w-9 h-9 flex items-center justify-center text-secondary relative"
+            className={`md:hidden w-9 h-9 flex items-center justify-center relative ${textColor}`}
           >
             <Menu
               size={18}
@@ -101,7 +118,12 @@ const LandingNavbar = () => {
       </div>
 
       <div
-        className="md:hidden grid transition-[grid-template-rows] duration-300 ease-in-out overflow-hidden border-t border-secondary/10 bg-primary"
+        className={[
+          "md:hidden grid transition-[grid-template-rows] duration-300 ease-in-out overflow-hidden border-t",
+          scrolled
+            ? "border-secondary/10 bg-primary"
+            : "border-white/20 bg-black/60 backdrop-blur",
+        ].join(" ")}
         style={{ gridTemplateRows: open ? "1fr" : "0fr" }}
       >
         <div className="overflow-hidden">
@@ -111,7 +133,7 @@ const LandingNavbar = () => {
                 key={link.id}
                 type="button"
                 onClick={() => handleNavClick(link.id)}
-                className="text-sm font-medium text-secondary text-left"
+                className={`text-sm font-medium text-left ${textColor}`}
                 style={{
                   opacity: open ? 1 : 0,
                   transform: open ? "translateX(0)" : "translateX(-8px)",
@@ -124,7 +146,7 @@ const LandingNavbar = () => {
             <Link
               to="/gallery"
               onClick={() => setOpen(false)}
-              className="text-sm font-medium text-secondary text-left"
+              className={`text-sm font-medium text-left ${textColor}`}
               style={{
                 opacity: open ? 1 : 0,
                 transform: open ? "translateX(0)" : "translateX(-8px)",
