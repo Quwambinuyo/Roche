@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useCallback } from "react";
 import ShopFilters from "./ShopFilters";
 import ShopSortDropdown from "./ShopSortDropdown";
 import ShopActiveFilters from "./ShopActiveFilters";
@@ -26,6 +26,8 @@ const Shop = () => {
   const setPage = (nextPage) => {
     setParam("page", String(nextPage), { resetPage: false });
   };
+
+  const closeDrawer = useCallback(() => setDrawerSlug(null), []);
 
   const filtered = useMemo(() => {
     const byFilters = filterProducts(
@@ -102,7 +104,7 @@ const Shop = () => {
 
       <ProductDetailsDrawer
         isOpen={Boolean(drawerSlug)}
-        onClose={() => setDrawerSlug(null)}
+        onClose={closeDrawer}
         slug={drawerSlug}
       />
     </div>

@@ -42,21 +42,25 @@ const ProductColorSelector = ({
               }
               disabled={outOfStock}
               title={outOfStock ? `${color.name} — out of stock` : color.name}
-              className={`relative w-9 h-9 rounded-full flex items-center justify-center transition-all ${
+              className={`relative w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 ease-out transform ${
                 isSelected
-                  ? "ring-2 ring-offset-2 ring-secondary ring-offset-primary"
-                  : "ring-1 ring-secondary/15"
-              } ${outOfStock ? "opacity-30 cursor-not-allowed" : ""}`}
+                  ? "ring-2 ring-offset-2 ring-secondary ring-offset-primary scale-110 -translate-y-0.5"
+                  : "ring-1 ring-secondary/15 hover:scale-105 hover:-translate-y-0.5"
+              } ${
+                outOfStock
+                  ? "opacity-30 cursor-not-allowed"
+                  : "cursor-pointer active:scale-90 active:translate-y-0"
+              }`}
               style={{ backgroundColor: color.hex }}
             >
               {isSelected && !outOfStock && (
                 <FiCheck
                   size={14}
-                  className={
+                  className={`transition-transform duration-200 ease-out scale-100 ${
                     color.hex === "#f5f5f0" || color.hex === "#90EE90"
                       ? "text-secondary"
                       : "text-white"
-                  }
+                  }`}
                 />
               )}
               {outOfStock && (

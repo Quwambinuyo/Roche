@@ -31,9 +31,7 @@ const NewArrival = () => {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-10">
         {featured.map((product, i) => (
           <Reveal key={product.slug} delay={i * 50}>
-            <Link to={`/shop/${product.slug}`}>
-              <ProductCard product={product} />
-            </Link>
+            <ProductCard product={product} />
           </Reveal>
         ))}
       </div>

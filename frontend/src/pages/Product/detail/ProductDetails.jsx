@@ -145,12 +145,14 @@ const ProductDetails = ({ slugOverride }) => {
         <ProductBreadcrumb product={product} />
       </Reveal>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-start w-full">
-        <div className="w-full md:sticky md:top-24">
-          <ProductGallery
-            images={product.images || [product.image]}
-            alt={product.name}
-          />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 md:items-stretch w-full">
+        <div className="w-full">
+          <div className="md:sticky no-scrollbar md:top-24 md:max-h-[calc(100vh-6rem)] md:overflow-y-auto md:no-scrollbar md:pb-2">
+            <ProductGallery
+              images={product.images || [product.image]}
+              alt={product.name}
+            />
+          </div>
         </div>
 
         <Reveal delay={50} className="w-full space-y-4">

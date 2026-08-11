@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { BsCart4 } from "react-icons/bs";
-import { FiPlus, FiMinus, FiHeart } from "react-icons/fi";
+import {
+  FiPlus,
+  FiMinus,
+  FiHeart,
+  FiChevronLeft,
+  FiChevronRight,
+} from "react-icons/fi";
 import RevealImage from "../../components/UI/RevealImage";
 import { useCart, buildLineId } from "../../context/CartContext";
 import { useWishlist } from "../../context/WishlistContext";
@@ -28,10 +34,20 @@ const ProductCard = ({
       null,
   );
 
+  const [isHovering, setIsHovering] = useState(false);
+  const [imageIndex, setImageIndex] = useState(0);
+
   if (!product) return null;
 
   const { hasColors, hasSizes, activeColorData, showOutOfStock } =
     getStockStatus(product, activeColorName);
+
+  const images =
+    product.images && product.images.length > 0
+      ? product.images
+      : [product.image];
+
+  const hasMultipleImages = images.length > 1;
 
   const needsSizeDrawer =
     hasSizes && product.sizes.length > SIZE_DRAWER_THRESHOLD;
@@ -87,17 +103,61 @@ const ProductCard = ({
     toggleWishlist(product);
   };
 
+  const handleMouseEnter = () => {
+    setIsHovering(true);
+    if (images.length > 1) setImageIndex(1);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovering(false);
+    setImageIndex(0);
+  };
+
+  const handlePrevImage = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+  };
+
+  const handleNextImage = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+  };
+
   return (
-    <Link to={`/shop/${product.slug}`} className="group block">
+    <Link
+      to={`/shop/${product.slug}`}
+      className="group block"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <div className="relative rounded-lg overflow-hidden aspect-[3/4] bg-secondary/5">
         <RevealImage
-          src={product.image}
+          src={images[0]}
           alt={product.name}
           className={`w-full h-full transition-opacity duration-300 ${
             showOutOfStock ? "opacity-60" : ""
           }`}
           imgClassName="transition-transform duration-500 group-hover:scale-105"
         />
+
+        {hasMultipleImages &&
+          images.slice(1).map((src, idx) => {
+            const actualIndex = idx + 1;
+            const isActive = imageIndex === actualIndex;
+
+            return (
+              <img
+                key={src}
+                src={src}
+                alt={product.name}
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
+                  isActive ? "opacity-100" : "opacity-0"
+                } ${showOutOfStock ? "opacity-60" : ""}`}
+              />
+            );
+          })}
 
         <button
           type="button"
@@ -121,6 +181,46 @@ const ProductCard = ({
               -{product.discount}%
             </span>
           )
+        )}
+
+        {hasMultipleImages && (
+          <>
+            <button
+              type="button"
+              onClick={handlePrevImage}
+              aria-label="Previous image"
+              className={`absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center bg-primary/90 text-secondary shadow-md transition-all duration-300 ease-out ${
+                isHovering
+                  ? "opacity-100 scale-100"
+                  : "opacity-0 scale-0 pointer-events-none"
+              }`}
+            >
+              <FiChevronLeft size={16} />
+            </button>
+            <button
+              type="button"
+              onClick={handleNextImage}
+              aria-label="Next image"
+              className={`absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center bg-primary/90 text-secondary shadow-md transition-all duration-300 ease-out delay-75 ${
+                isHovering
+                  ? "opacity-100 scale-100"
+                  : "opacity-0 scale-0 pointer-events-none"
+              }`}
+            >
+              <FiChevronRight size={16} />
+            </button>
+
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1">
+              {images.map((_, idx) => (
+                <span
+                  key={idx}
+                  className={`h-1 rounded-full transition-all duration-300 ${
+                    idx === imageIndex ? "w-4 bg-primary" : "w-1 bg-primary/50"
+                  }`}
+                />
+              ))}
+            </div>
+          </>
         )}
 
         {!showOutOfStock && (

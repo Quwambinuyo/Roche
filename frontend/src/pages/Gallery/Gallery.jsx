@@ -25,6 +25,7 @@ import "swiper/css/thumbs";
 import "swiper/css/effect-creative";
 
 import { GALLERY_IMAGES } from "../../mock/gallery";
+import RevealImage from "../../components/UI/RevealImage";
 
 const Gallery = () => {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -104,10 +105,12 @@ const Gallery = () => {
             className="aspect-square overflow-hidden bg-tertiary-50"
             aria-label={`View ${image.alt} in lookbook`}
           >
-            <img
+            <RevealImage
               src={image.src}
               alt={image.alt}
-              className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+              className="h-full w-full"
+              imgClassName="transition-transform duration-300 hover:scale-105"
+              delay={(index % 4) * 80}
             />
           </button>
         ))}

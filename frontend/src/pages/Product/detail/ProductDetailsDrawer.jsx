@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { FiX } from "react-icons/fi";
 import ProductDetails from "./ProductDetails";
 
@@ -33,7 +34,7 @@ const ProductDetailsDrawer = ({ isOpen, onClose, slug }) => {
 
   if (!mounted) return null;
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 z-50">
       <div
         onClick={onClose}
@@ -65,7 +66,8 @@ const ProductDetailsDrawer = ({ isOpen, onClose, slug }) => {
           {slug && <ProductDetails slugOverride={slug} />}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 };
 

@@ -51,7 +51,7 @@ export const PRODUCTS = [
   {
     slug: "bstrt-overshirt",
     name: "BSTRT Overshirt",
-    price: "₦48,500",
+    price: "₦1,484,500",
     discount: 10,
     fabric: "COTTON TWILL",
     size: "S — XL",
@@ -63,7 +63,7 @@ export const PRODUCTS = [
     ],
     category: "outerwear",
     image: overshirt,
-    images: [overshirt, overshirt1],
+    images: [overshirt, overshirt1, jacket, jacketshop],
     colors: [
       { name: "Olive", hex: "#4a4f36", stock: 12 },
       { name: "Black", hex: "#0a0a0a", stock: 0 },
@@ -85,7 +85,7 @@ export const PRODUCTS = [
     ],
     category: "tops",
     image: ribbedTee,
-    images: [ribbedTee, tops],
+    images: [ribbedTee, tops, topbottomshop, wearshop],
     colors: [
       { name: "Black", hex: "#0a0a0a", stock: 20 },
       { name: "White", hex: "#f5f5f0", stock: 14 },
@@ -106,7 +106,7 @@ export const PRODUCTS = [
     ],
     category: "bottoms",
     image: overshirt1,
-    images: [overshirt1, bottoms],
+    images: [overshirt1, bottoms, topbottomshop, wearshop],
     colors: [
       { name: "Khaki", hex: "#a89a72", stock: 0 },
       { name: "Black", hex: "#0a0a0a", stock: 0 },
@@ -127,7 +127,7 @@ export const PRODUCTS = [
     ],
     category: "outerwear",
     image: jacket,
-    images: [jacket, jacketshop],
+    images: [jacket, jacketshop, overshirt, wearshop],
     colors: [
       { name: "Rust", hex: "#8a3b23", stock: 6 },
       { name: "Forest", hex: "#2e3b2c", stock: 3 },
@@ -149,7 +149,7 @@ export const PRODUCTS = [
     ],
     category: "tops",
     image: ribbedTee,
-    images: [ribbedTee, tops],
+    images: [ribbedTee, tops, wearshop, topbottomshop],
     colors: [
       { name: "Black", hex: "#0a0a0a", stock: 20 },
       { name: "White", hex: "#f5f5f0", stock: 14 },
@@ -165,7 +165,7 @@ export const PRODUCTS = [
     sizes: [{ size: "M", stock: 22 }],
     category: "caps",
     image: capshop,
-    images: [capshop, capshop1],
+    images: [capshop, capshop1, capshop2, capshop3],
     colors: [
       { name: "Black", hex: "#0a0a0a", stock: 22 },
       { name: "Olive", hex: "#4a4f36", stock: 9 },
@@ -181,7 +181,7 @@ export const PRODUCTS = [
     sizes: [{ size: "M", stock: 7 }],
     category: "caps",
     image: capshop1,
-    images: [capshop1, capshop2],
+    images: [capshop1, capshop2, capshop3, capshop],
     colors: [{ name: "Rust", hex: "#8a3b23", stock: 7 }],
   },
   {
@@ -194,7 +194,7 @@ export const PRODUCTS = [
     sizes: [{ size: "M", stock: 15 }],
     category: "caps",
     image: capshop2,
-    images: [capshop2, capshop3],
+    images: [capshop2, capshop3, capshop, capshop1],
     colors: [
       { name: "Black", hex: "#0a0a0a", stock: 15 },
       { name: "Sand", hex: "#c8b89e", stock: 0 },
@@ -210,7 +210,7 @@ export const PRODUCTS = [
     sizes: [{ size: "M", stock: 11 }],
     category: "caps",
     image: capshop3,
-    images: [capshop3, caps],
+    images: [capshop3, caps, capshop, capshop1],
     colors: [{ name: "Khaki", hex: "#a89a72", stock: 11 }],
   },
   {
@@ -228,7 +228,7 @@ export const PRODUCTS = [
     ],
     category: "outerwear",
     image: fullkitshop,
-    images: [fullkitshop, outwear],
+    images: [fullkitshop, outwear, jacketshop, wearshop],
     colors: [
       { name: "Black", hex: "#0a0a0a", stock: 4 },
       { name: "Olive", hex: "#4a4f36", stock: 2 },
@@ -244,7 +244,7 @@ export const PRODUCTS = [
     sizes: [{ size: "M", stock: 18 }],
     category: "glasses",
     image: glassesshop,
-    images: [glassesshop, glassesshop1],
+    images: [glassesshop, glassesshop1, glasses, accessoryshop],
     colors: [{ name: "Black", hex: "#0a0a0a", stock: 18 }],
   },
   {
@@ -257,7 +257,7 @@ export const PRODUCTS = [
     sizes: [{ size: "M", stock: 16 }],
     category: "glasses",
     image: glassesshop1,
-    images: [glassesshop1, glasses],
+    images: [glassesshop1, glasses, glassesshop, accessoryshop1],
     colors: [
       { name: "Tortoise", hex: "#6b4a2c", stock: 6 },
       { name: "Black", hex: "#0a0a0a", stock: 10 },
@@ -278,7 +278,7 @@ export const PRODUCTS = [
     ],
     category: "outerwear",
     image: jacketshop,
-    images: [jacketshop, jacket],
+    images: [jacketshop, jacket, overshirt, wearshop],
     colors: [
       { name: "Forest", hex: "#2e3b2c", stock: 5 },
       { name: "Black", hex: "#0a0a0a", stock: 3 },
@@ -298,7 +298,7 @@ export const PRODUCTS = [
     ],
     category: "footwear",
     image: shoeshop,
-    images: [shoeshop, footwear],
+    images: [shoeshop, footwear, wearshop, topbottomshop],
     colors: [{ name: "Black", hex: "#0a0a0a", stock: 8 }],
   },
   {
@@ -316,7 +316,7 @@ export const PRODUCTS = [
     ],
     category: "tops",
     image: topbottomshop,
-    images: [topbottomshop, tops],
+    images: [topbottomshop, tops, ribbedTee, wearshop],
     colors: [
       { name: "Sand", hex: "#c8b89e", stock: 9 },
       { name: "Olive", hex: "#4a4f36", stock: 6 },
@@ -332,7 +332,7 @@ export const PRODUCTS = [
     sizes: [{ size: "M", stock: 5 }],
     category: "watches",
     image: watchshop,
-    images: [watchshop, watchshop1],
+    images: [watchshop, watchshop1, watches, accessoryshop],
     colors: [{ name: "Steel", hex: "#7a7f85", stock: 5 }],
   },
   {
@@ -345,7 +345,7 @@ export const PRODUCTS = [
     sizes: [{ size: "M", stock: 0 }],
     category: "watches",
     image: watchshop1,
-    images: [watchshop1, watches],
+    images: [watchshop1, watches, watchshop, accessoryshop1],
     colors: [
       { name: "Black", hex: "#0a0a0a", stock: 3 },
       { name: "Steel", hex: "#7a7f85", stock: 0 },
@@ -366,7 +366,7 @@ export const PRODUCTS = [
     ],
     category: "outerwear",
     image: wearshop,
-    images: [wearshop, outwear],
+    images: [wearshop, outwear, jacket, jacketshop],
     colors: [
       { name: "Black", hex: "#0a0a0a", stock: 12 },
       { name: "Rust", hex: "#8a3b23", stock: 7 },
@@ -382,7 +382,7 @@ export const PRODUCTS = [
     sizes: [{ size: "M", stock: 20 }],
     category: "accessories",
     image: accessoryshop,
-    images: [accessoryshop, accessoryshop1],
+    images: [accessoryshop, accessoryshop1, accessoryshop2, accessories],
     colors: [{ name: "Sand", hex: "#c8b89e", stock: 20 }],
   },
   {
@@ -399,7 +399,7 @@ export const PRODUCTS = [
     ],
     category: "accessories",
     image: accessoryshop1,
-    images: [accessoryshop1, accessoryshop2],
+    images: [accessoryshop1, accessoryshop2, accessoryshop, accessories],
     colors: [
       { name: "Black", hex: "#0a0a0a", stock: 25 },
       { name: "Brown", hex: "#5a4634", stock: 14 },
@@ -419,7 +419,7 @@ export const PRODUCTS = [
     ],
     category: "accessories",
     image: accessoryshop2,
-    images: [accessoryshop2, accessories],
+    images: [accessoryshop2, accessories, accessoryshop, accessoryshop1],
     colors: [
       { name: "Black", hex: "#0a0a0a", stock: 25 },
       { name: "Green", hex: "#90EE90", stock: 14 },
@@ -445,7 +445,7 @@ export const BUNDLES = [
     minUnits: 10,
     items: ["ribbed-tee", "utility-cargo", "bstrt-field-cap"],
     image: fullkitshop,
-    images: [fullkitshop, wearshop],
+    images: [fullkitshop, wearshop, ribbedTee, capshop],
     colors: [
       { name: "Black", hex: "#0a0a0a", stock: 42 },
       { name: "White", hex: "#f5f5f0", stock: 14 },
@@ -470,7 +470,7 @@ export const BUNDLES = [
     minUnits: 20,
     items: ["bstrt-overshirt", "waxed-bstrt-jacket", "waterfront-windbreaker"],
     image: jacketshop,
-    images: [jacketshop, outwear],
+    images: [jacketshop, outwear, jacket, wearshop],
     colors: [
       { name: "Olive", hex: "#4a4f36", stock: 12 },
       { name: "Black", hex: "#0a0a0a", stock: 21 },
@@ -491,7 +491,7 @@ export const BUNDLES = [
     minUnits: 25,
     items: ["canvas-tote", "waxed-belt", "bstrt-field-cap", "bstrt-aviators"],
     image: accessoryshop,
-    images: [accessoryshop, accessoryshop1],
+    images: [accessoryshop, accessoryshop1, capshop, glassesshop],
     colors: [
       { name: "Sand", hex: "#c8b89e", stock: 20 },
       { name: "Black", hex: "#0a0a0a", stock: 65 },
@@ -515,7 +515,7 @@ export const BUNDLES = [
     minUnits: 15,
     items: ["loading-dock-boot", "dockside-field-watch", "bstrt-chrono"],
     image: shoeshop,
-    images: [shoeshop, watchshop],
+    images: [shoeshop, watchshop, footwear, watchshop1],
     colors: [
       { name: "Black", hex: "#0a0a0a", stock: 11 },
       { name: "Steel", hex: "#7a7f85", stock: 5 },
