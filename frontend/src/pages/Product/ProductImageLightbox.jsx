@@ -83,7 +83,7 @@ const ProductImageLightbox = ({
             <img
               src={img}
               alt={`${alt} ${index + 1}`}
-              className="w-screen h-screen object-contain p-4 sm:p-8 pointer-events-none"
+              className="w-full h-full object-contain p-4 sm:p-8 pointer-events-none"
             />
           </SwiperSlide>
         ))}

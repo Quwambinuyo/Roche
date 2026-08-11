@@ -22,7 +22,7 @@ const ProductGallery = ({ images, alt }) => {
 
   return (
     <div className="w-full">
-      <div className="md:hidden w-full relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] ">
+      <div className="md:hidden w-full relative ">
         <Swiper
           onSwiper={(swiper) => {
             swiperRef.current = swiper;
@@ -77,7 +77,6 @@ const ProductGallery = ({ images, alt }) => {
         )}
       </div>
 
-      {/* Desktop: full image grid, no gaps, no rounding */}
       <div className="hidden md:grid grid-cols-2">
         {images.map((img, index) => (
           <button
