@@ -22,7 +22,7 @@ const ProductGallery = ({ images, alt }) => {
 
   return (
     <div className="w-full">
-      <div className="md:hidden w-full relative ">
+      <div className="md:hidden relative w-screen left-1/2 right-1/2 -mx-[50vw]">
         <Swiper
           onSwiper={(swiper) => {
             swiperRef.current = swiper;

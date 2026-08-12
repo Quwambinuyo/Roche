@@ -150,6 +150,48 @@ export const CartProvider = ({ children }) => {
     );
   };
 
+  const updateVariant = (lineId, { color, size } = {}) => {
+    setItems((prev) => {
+      const lineIndex = prev.findIndex((l) => l.id === lineId);
+      if (lineIndex === -1) return prev;
+
+      const line = prev[lineIndex];
+      const nextColor = color !== undefined ? color : line.color;
+      const nextSizeRaw = size !== undefined ? size : line.size;
+      const nextSize =
+        typeof nextSizeRaw === "object" && nextSizeRaw !== null
+          ? nextSizeRaw.size
+          : nextSizeRaw;
+
+      const newId = buildLineId(line.product, nextColor, nextSize, line.colors);
+
+      if (newId === lineId) {
+        return prev.map((l, i) =>
+          i === lineIndex ? { ...l, color: nextColor, size: nextSize } : l,
+        );
+      }
+
+      const existingIndex = prev.findIndex((l) => l.id === newId);
+
+      if (existingIndex !== -1) {
+        const existingLine = prev[existingIndex];
+        const merged = prev.filter(
+          (_, i) => i !== lineIndex && i !== existingIndex,
+        );
+        return [
+          ...merged,
+          { ...existingLine, qty: existingLine.qty + line.qty },
+        ];
+      }
+
+      return prev.map((l, i) =>
+        i === lineIndex
+          ? { ...l, id: newId, color: nextColor, size: nextSize }
+          : l,
+      );
+    });
+  };
+
   const clearCart = () => setItems([]);
 
   const toggleSelect = (lineId) => {
@@ -209,6 +251,7 @@ export const CartProvider = ({ children }) => {
     removeFromCart,
     removeItems,
     updateQty,
+    updateVariant,
     clearCart,
     itemCount,
     subtotal,

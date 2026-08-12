@@ -18,7 +18,6 @@ const MainLayout = () => {
       <main className="p-4">
         <Outlet />
       </main>
-
       <FloatingLocaleSwitcher />
     </div>
   );

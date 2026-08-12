@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FiMinus, FiPlus, FiTrash2, FiCheck } from "react-icons/fi";
+import { FiTrash2, FiCheck } from "react-icons/fi";
 import RevealImage from "../../components/UI/RevealImage";
+import BottomSheetSelect from "../../components/UI/BottomSheetSelect";
 import { useCart } from "../../context/CartContext";
 
 const formatNaira = (value) => `₦${value.toLocaleString("en-NG")}`;
@@ -29,16 +30,50 @@ const CartLine = ({
   isSelected,
   onToggleSelect,
 }) => {
-  const { getUnitPrice } = useCart();
+  const { getUnitPrice, updateVariant } = useCart();
   const { id, product, color, colors, size, qty } = line;
   const unitPrice = getUnitPrice(product);
   const lineTotal = unitPrice * qty;
   const hasDiscount = (product.discount ?? 0) > 0;
 
-  const colorLabel =
-    colors && colors.length > 0
-      ? colors.map((c) => c.name).join(", ")
-      : color?.name;
+  const isMultiColor = Boolean(colors && colors.length > 0);
+
+  const colorLabel = isMultiColor
+    ? colors.map((c) => c.name).join(", ")
+    : color?.name;
+
+  const sizeStock = size
+    ? product.sizes?.find((s) => s.size === size)?.stock
+    : null;
+  const maxQty = Math.max(sizeStock ?? 10, qty, 10);
+  const qtyOptions = Array.from({ length: maxQty }, (_, i) => ({
+    label: String(i + 1),
+    value: String(i + 1),
+  }));
+
+  const sizeOptions =
+    product.sizes?.map((s) => ({
+      label: s.size,
+      value: s.size,
+      disabled: s.stock === 0 && s.size !== size,
+    })) ?? [];
+
+  const colorOptions =
+    product.colors?.map((c) => ({
+      label: c.name,
+      value: c.name,
+      hex: c.hex,
+      disabled: c.stock === 0 && c.name !== color?.name,
+    })) ?? [];
+
+  const handleSizeChange = (nextSize) => {
+    updateVariant(id, { size: nextSize });
+  };
+
+  const handleColorChange = (nextColorName) => {
+    const nextColor = product.colors?.find((c) => c.name === nextColorName);
+    updateVariant(id, { color: nextColor });
+  };
 
   return (
     <div className="flex items-start gap-3 py-5 border-b border-secondary/10">
@@ -77,7 +112,7 @@ const CartLine = ({
             </button>
           </div>
 
-          {colors && colors.length > 0 ? (
+          {isMultiColor ? (
             <div className="flex items-center gap-1.5 mt-1.5">
               {colors.map((c) => (
                 <span
@@ -93,30 +128,65 @@ const CartLine = ({
               </span>
             </div>
           ) : (
-            <p className="text-xs text-secondary/50 mt-1">
-              {colorLabel}
-              {size ? ` · Size ${size}` : ""}
-            </p>
+            <div className="flex items-center gap-2 mt-2 flex-wrap">
+              {colorOptions.length > 0 && (
+                <BottomSheetSelect
+                  title="Select color"
+                  value={color?.name}
+                  onChange={handleColorChange}
+                  options={colorOptions}
+                  renderOption={(opt) => (
+                    <span className="flex items-center gap-2">
+                      <span
+                        className="w-3.5 h-3.5 rounded-full ring-1 ring-secondary/15 shrink-0"
+                        style={{ backgroundColor: opt.hex }}
+                      />
+                      {opt.label}
+                      {opt.disabled ? " (out of stock)" : ""}
+                    </span>
+                  )}
+                  renderTrigger={(selected) => (
+                    <button
+                      type="button"
+                      className="flex items-center gap-1.5 h-8 min-w-[80px] w-full px-2.5  border border-secondary/15 text-xs font-medium text-secondary hover:border-secondary/30 transition-colors"
+                    >
+                      {selected && (
+                        <span
+                          className="w-3 h-3 rounded-full ring-1 ring-secondary/15"
+                          style={{ backgroundColor: selected.hex }}
+                        />
+                      )}
+                      {selected?.label ?? "Color"}
+                    </button>
+                  )}
+                />
+              )}
+              {sizeOptions.length > 0 && (
+                <BottomSheetSelect
+                  title="Select size"
+                  value={size}
+                  onChange={handleSizeChange}
+                  options={sizeOptions}
+                  renderOption={(opt) =>
+                    `${opt.label}${opt.disabled ? " (out of stock)" : ""}`
+                  }
+                  triggerClassName="h-7"
+                  placeholder="Size"
+                />
+              )}
+            </div>
           )}
 
           <div className="flex items-center justify-between mt-3">
-            <div className="flex items-center rounded-full border border-secondary/15">
-              <button
-                onClick={() => onQtyChange(id, Math.max(1, qty - 1))}
-                className="w-7 h-7 flex items-center justify-center text-secondary/60 hover:text-secondary transition-colors"
-              >
-                <FiMinus size={12} />
-              </button>
-              <span className="w-6 text-center text-xs font-semibold text-secondary">
-                {qty}
-              </span>
-              <button
-                onClick={() => onQtyChange(id, qty + 1)}
-                className="w-7 h-7 flex items-center justify-center text-secondary/60 hover:text-secondary transition-colors"
-              >
-                <FiPlus size={12} />
-              </button>
-            </div>
+            <BottomSheetSelect
+              title="Select quantity"
+              value={String(qty)}
+              onChange={(val) => onQtyChange(id, Number(val))}
+              options={qtyOptions}
+              searchable
+              searchLabel="Quantity"
+              triggerClassName="h-7"
+            />
 
             <div className="flex flex-col items-end">
               {hasDiscount && (
