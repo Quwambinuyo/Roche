@@ -28,9 +28,7 @@ const Cart = () => {
         <p className="text-xs font-semibold tracking-widest text-secondary/50 uppercase">
           Cart
         </p>
-        <h1 className="font-bold text-2xl md:text-3xl text-secondary mt-2">
-          Your Cart
-        </h1>
+
         {items.length > 0 && (
           <p className="text-sm text-secondary/50 mt-2">
             {items.length} {items.length === 1 ? "item" : "items"}
