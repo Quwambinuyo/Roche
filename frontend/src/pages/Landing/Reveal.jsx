@@ -7,11 +7,14 @@ const Reveal = ({
   y = 24,
   duration = 700,
   once = true,
+  immediate = false,
 }) => {
   const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(immediate);
 
   useEffect(() => {
+    if (immediate) return;
+
     const el = ref.current;
     if (!el) return;
 
@@ -29,7 +32,7 @@ const Reveal = ({
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [once]);
+  }, [once, immediate]);
 
   return (
     <div

@@ -23,7 +23,7 @@ import { useWishlist } from "../../../context/WishlistContext";
 
 const ALL_ITEMS = [...PRODUCTS, ...BUNDLES];
 
-const ProductDetails = ({ slugOverride }) => {
+const ProductDetails = ({ slugOverride, immediate = false }) => {
   const { slug: paramSlug } = useParams();
   const slug = slugOverride || paramSlug;
   const product = getProductBySlug(slug) || getBundleBySlug(slug);

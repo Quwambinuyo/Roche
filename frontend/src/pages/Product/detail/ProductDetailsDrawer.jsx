@@ -63,7 +63,7 @@ const ProductDetailsDrawer = ({ isOpen, onClose, slug }) => {
         </div>
 
         <div className="flex-1 overflow-y-auto px-5 pb-8">
-          {slug && <ProductDetails slugOverride={slug} />}
+          {slug && <ProductDetails slugOverride={slug} immediate />}
         </div>
       </div>
     </div>,
