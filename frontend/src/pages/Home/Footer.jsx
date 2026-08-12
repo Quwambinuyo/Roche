@@ -31,7 +31,7 @@ const FOOTER_LINKS = [
 
 const Footer = ({ onLogout }) => {
   return (
-    <footer className="mt-10 border-t border-secondary/10 pt-10 pb-8">
+    <footer className="mt-10 border-t border-secondary/10 pt-10 pb-8 overflow-hidden">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
         <div>
           <h3 className="font-bold text-lg text-secondary mb-3">BSTRT</h3>
@@ -95,6 +95,25 @@ const Footer = ({ onLogout }) => {
 
       <div className="mt-10 pt-6 border-t border-secondary/10 text-xs text-secondary/40">
         © {new Date().getFullYear()} BSTRT. All rights reserved.
+      </div>
+
+      <div className="mt-6 select-none w-full">
+        <svg
+          viewBox="0 0 1000 180"
+          preserveAspectRatio="none"
+          className="w-full h-auto"
+        >
+          <text
+            x="0"
+            y="150"
+            textLength="1000"
+            lengthAdjust="spacingAndGlyphs"
+            className="fill-secondary font-extrabold uppercase"
+            style={{ fontSize: "180px" }}
+          >
+            BSTRT
+          </text>
+        </svg>
       </div>
     </footer>
   );
