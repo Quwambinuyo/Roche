@@ -5,6 +5,7 @@ import ShopActiveFilters from "./ShopActiveFilters";
 import ShopProductGrid from "./ShopProductGrid";
 import ShopPagination from "./ShopPagination";
 import ProductDetailsDrawer from "../../pages/Product/detail/ProductDetailsDrawer";
+import PageMeta from "../../layouts/PageMeta";
 import { PRODUCTS, BUNDLES } from "../../mock/clothing";
 import { PRICE_RANGES, PRODUCTS_PER_PAGE } from "./shopFilterConfig";
 import { parsePrice } from "../../utils/price";
@@ -22,6 +23,10 @@ const Shop = () => {
   const priceRange = searchParams.get("price") || "";
   const sort = searchParams.get("sort") || "newest";
   const page = Number(searchParams.get("page")) || 1;
+
+  const categoryLabel = category
+    ? category.charAt(0).toUpperCase() + category.slice(1)
+    : "All Products";
 
   const setPage = (nextPage) => {
     setParam("page", String(nextPage), { resetPage: false });
@@ -49,14 +54,17 @@ const Shop = () => {
 
   return (
     <div className="">
+      <PageMeta
+        overrideTitle={category ? categoryLabel : "Shop"}
+        overrideDescription={`Browse ${categoryLabel.toLowerCase()} from BODE S.T.R.T.`}
+      />
+
       <div className="mb-6">
         <p className="text-xs font-semibold tracking-widest text-secondary/50 uppercase">
           Shop
         </p>
         <h1 className="font-bold text-2xl md:text-3xl text-secondary mt-2">
-          {category
-            ? category.charAt(0).toUpperCase() + category.slice(1)
-            : "All Products"}
+          {categoryLabel}
         </h1>
       </div>
 

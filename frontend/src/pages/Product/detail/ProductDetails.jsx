@@ -11,6 +11,7 @@ import ProductInfoBadges from "./ProductInfoBadges";
 import ProductSpecs from "./ProductSpecs";
 import ProductItemGrid from "./ProductItemGrid";
 import SizeGuide from "../../Shop/SizeGuide";
+import PageMeta from "../../../layouts/PageMeta";
 import {
   PRODUCTS,
   BUNDLES,
@@ -81,18 +82,21 @@ const ProductDetails = ({ slugOverride }) => {
 
   if (!product) {
     return (
-      <div className="max-w-md mx-auto text-center py-24">
-        <p className="text-sm text-secondary/50">
-          We couldn't find that product.
-        </p>
-        <Link
-          to="/shop"
-          className="inline-flex items-center gap-1 mt-4 text-sm font-semibold text-secondary hover:text-tertiary-600 transition-colors"
-        >
-          <FiArrowLeft size={14} />
-          Back to shop
-        </Link>
-      </div>
+      <>
+        <PageMeta overrideTitle="Product Not Found" />
+        <div className="max-w-md mx-auto text-center py-24">
+          <p className="text-sm text-secondary/50">
+            We couldn't find that product.
+          </p>
+          <Link
+            to="/shop"
+            className="inline-flex items-center gap-1 mt-4 text-sm font-semibold text-secondary hover:text-tertiary-600 transition-colors"
+          >
+            <FiArrowLeft size={14} />
+            Back to shop
+          </Link>
+        </div>
+      </>
     );
   }
 
@@ -141,6 +145,16 @@ const ProductDetails = ({ slugOverride }) => {
 
   return (
     <div className="w-full">
+      <PageMeta
+        overrideTitle={product.name}
+        overrideDescription={
+          isBundle
+            ? `${product.name} — wholesale bundle, ${product.price}. Minimum order ${product.minUnits} units.`
+            : `${product.name} — ${product.fabric}, ${product.price}`
+        }
+        overrideImage={product.image}
+      />
+
       <Reveal className="mb-6">
         <ProductBreadcrumb product={product} />
       </Reveal>
