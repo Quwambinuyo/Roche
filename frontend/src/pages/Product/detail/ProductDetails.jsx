@@ -155,7 +155,7 @@ const ProductDetails = ({ slugOverride, immediate = false }) => {
         overrideImage={product.image}
       />
 
-      <Reveal className="mb-6">
+      <Reveal className="mb-6" immediate={immediate}>
         <ProductBreadcrumb product={product} />
       </Reveal>
 
@@ -169,7 +169,7 @@ const ProductDetails = ({ slugOverride, immediate = false }) => {
           </div>
         </div>
 
-        <Reveal delay={50} className="w-full space-y-4">
+        <Reveal delay={50} className="w-full space-y-4" immediate={immediate}>
           <div>
             <p className="text-xs font-semibold tracking-widest text-secondary/50 uppercase">
               {isBundle ? "Wholesale Bundle" : product.category}
@@ -224,17 +224,17 @@ const ProductDetails = ({ slugOverride, immediate = false }) => {
       </div>
 
       {isBundle && bundleItems.length > 0 && (
-        <Reveal delay={80} className="mt-14">
+        <Reveal delay={80} className="mt-14" immediate={immediate}>
           <ProductItemGrid title="What's included" items={bundleItems} />
         </Reveal>
       )}
 
-      <Reveal delay={100} className="mt-14">
+      <Reveal delay={100} className="mt-14" immediate={immediate}>
         <ProductSpecs product={product} />
       </Reveal>
 
       {related.length > 0 && (
-        <Reveal delay={150} className="mt-14">
+        <Reveal delay={150} className="mt-14" immediate={immediate}>
           <ProductItemGrid title="You may also like" items={related} />
         </Reveal>
       )}
