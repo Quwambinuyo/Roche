@@ -1,19 +1,19 @@
 export const routeMeta = {
   "/": {
     title: "Home",
-    description: "Streetwear and high-fashion essentials from ZFZ.",
+    description: "Streetwear and high-fashion essentials from ZF.",
   },
   "/home": {
     title: "Home",
-    description: "Streetwear and high-fashion essentials from ZFZ.",
+    description: "Streetwear and high-fashion essentials from ZF.",
   },
   "/gallery": {
     title: "Gallery",
-    description: "The ZFZ lookbook and editorial gallery.",
+    description: "The ZF lookbook and editorial gallery.",
   },
   "/new-arrivals": {
     title: "New Arrivals",
-    description: "The latest drops from ZFZ.",
+    description: "The latest drops from ZF.",
   },
   "/recently-viewed": {
     title: "Recently Viewed",
@@ -23,7 +23,7 @@ export const routeMeta = {
   },
   "/shop": {
     title: "Shop",
-    description: "Browse the full ZFZ collection.",
+    description: "Browse the full ZF collection.",
   },
   "/shop/:slug": {},
   "/categories": {

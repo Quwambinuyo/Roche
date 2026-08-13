@@ -79,7 +79,7 @@ const LandingLookBook = () => {
         <Reveal className="flex items-end justify-between mb-10">
           <div>
             <p className="text-xs font-semibold tracking-widest text-secondary/50 uppercase">
-              ZFZ Notes
+              ZF Notes
             </p>
             <h2 className="font-bold text-2xl md:text-3xl text-secondary mt-2">
               Dispatches from the last shoot

@@ -33,7 +33,7 @@ const LandingHero = () => {
 
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
         <h1 className="text-primary font-extrabold text-4xl md:text-6xl tracking-tight uppercase drop-shadow-md">
-          <SplitText text="ZFZ " />
+          <SplitText text="ZF " />
         </h1>
 
         <div

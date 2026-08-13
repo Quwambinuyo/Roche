@@ -57,8 +57,8 @@ const Register = () => {
   return (
     <AuthFormLayout
       sidePanel={{
-        eyebrow: "ZFZ Fashion",
-        title: "ZFZ",
+        eyebrow: "ZF Fashion",
+        title: "ZF",
         tagline: "Create Account",
         listLabel: "Perks",
         items: PERKS,

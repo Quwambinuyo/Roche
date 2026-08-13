@@ -1,6 +1,6 @@
 <svg width="540" height="220" viewBox="0 0 540 220" xmlns="http://www.w3.org/2000/svg" role="img">
-  <title>ZFZ logo</title>
-  <desc>Bold bubble-style wordmark reading ZFZ, black fill with white outline, transparent background</desc>
+  <title>ZF logo</title>
+  <desc>Bold bubble-style wordmark reading ZF, black fill with white outline, transparent background</desc>
   <text
     x="270"
     y="150"
@@ -14,5 +14,5 @@
     stroke-width="10"
     stroke-linejoin="round"
     paint-order="stroke fill"
-  >ZFZ</text>
+  >ZF</text>
 </svg>

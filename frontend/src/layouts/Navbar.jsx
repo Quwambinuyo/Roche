@@ -14,8 +14,8 @@ import { useTheme } from "../context/ThemeContext";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
 import { ROUTES, PRIMARY_NAV_LINKS } from "../constants/navLinks";
-import logolight from "../assets/icons/zfz-logo-light.jpg";
-import darklight from "../assets/icons/zfz-logo-dark.jpg";
+import logolight from "../assets/icons/ZF-logo-light.jpg";
+import darklight from "../assets/icons/ZF-logo-dark.jpg";
 
 const Navbar = () => {
   const { theme, toggleTheme, toggleSidebar } = useTheme();
@@ -33,10 +33,10 @@ const Navbar = () => {
           <FiMenu size={20} />
         </button>
 
-        <Link to={ROUTES.HOME} aria-label="ZFZ home">
+        <Link to={ROUTES.HOME} aria-label="ZF home">
           <img
             src={theme === "dark" ? darklight : logolight}
-            alt="ZFZ"
+            alt="ZF"
             className="h-14 w-auto object-contain"
           />
         </Link>
