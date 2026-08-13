@@ -74,14 +74,7 @@ const AppRoutes = () => {
             }
           />
           <Route path="orders" element={<OrderHistory />} />
-          <Route
-            path="profile"
-            element={
-              <PrivateRoute>
-                <Profile />
-              </PrivateRoute>
-            }
-          />
+          <Route path="profile" element={<Profile />} />
 
           <Route path="*" element={<NotFound />} />
         </Route>

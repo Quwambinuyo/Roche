@@ -51,7 +51,7 @@ const LandingNavbar = () => {
         <span
           className={`font-bold text-lg tracking-tight ${textColor} transition-all duration-300 hover:-translate-y-0.5 cursor-pointer`}
         >
-          BSTRT
+          ZFZ
         </span>
 
         <nav className="hidden md:flex items-center gap-8">

@@ -10,13 +10,12 @@ import {
   FiMoon,
 } from "react-icons/fi";
 
-import Logo from "../assets/icons/bodestrt-navbar-black.png";
-import LogoWhite from "../assets/icons/bodestrt-navbar-white.png";
-
 import { useTheme } from "../context/ThemeContext";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
 import { ROUTES, PRIMARY_NAV_LINKS } from "../constants/navLinks";
+import logolight from "../assets/icons/zfz-logo-light.jpg";
+import darklight from "../assets/icons/zfz-logo-dark.jpg";
 
 const Navbar = () => {
   const { theme, toggleTheme, toggleSidebar } = useTheme();
@@ -34,10 +33,10 @@ const Navbar = () => {
           <FiMenu size={20} />
         </button>
 
-        <Link to={ROUTES.HOME} aria-label="BODE S.T.R.T home">
+        <Link to={ROUTES.HOME} aria-label="ZFZ home">
           <img
-            src={theme === "dark" ? LogoWhite : Logo}
-            alt="BODE S.T.R.T"
+            src={theme === "dark" ? darklight : logolight}
+            alt="ZFZ"
             className="h-14 w-auto object-contain"
           />
         </Link>

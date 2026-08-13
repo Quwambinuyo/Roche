@@ -1,19 +1,19 @@
 export const routeMeta = {
   "/": {
     title: "Home",
-    description: "Streetwear and high-fashion essentials from BODE S.T.R.T.",
+    description: "Streetwear and high-fashion essentials from ZFZ.",
   },
   "/home": {
     title: "Home",
-    description: "Streetwear and high-fashion essentials from BODE S.T.R.T.",
+    description: "Streetwear and high-fashion essentials from ZFZ.",
   },
   "/gallery": {
     title: "Gallery",
-    description: "The BODE S.T.R.T lookbook and editorial gallery.",
+    description: "The ZFZ lookbook and editorial gallery.",
   },
   "/new-arrivals": {
     title: "New Arrivals",
-    description: "The latest drops from BODE S.T.R.T.",
+    description: "The latest drops from ZFZ.",
   },
   "/recently-viewed": {
     title: "Recently Viewed",
@@ -23,7 +23,7 @@ export const routeMeta = {
   },
   "/shop": {
     title: "Shop",
-    description: "Browse the full BODE S.T.R.T collection.",
+    description: "Browse the full ZFZ collection.",
   },
   "/shop/:slug": {},
   "/categories": {

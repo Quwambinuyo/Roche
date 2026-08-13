@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { useLocation, matchPath } from "react-router-dom";
 import { routeMeta } from "../routes/routeMeta";
 
-const SITE_NAME = "BODE S.T.R.T";
+const SITE_NAME = "ZFZ";
 
 export default function PageMeta({
   children,

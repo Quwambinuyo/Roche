@@ -155,7 +155,7 @@ const LandingFooter = () => {
               currencies={["GBP", "EUR", "USD", "CAD", "NGN"]}
             />
           </div>
-          <p className="text-xs text-secondary/40">© 2026 BSTRT Co.</p>
+          <p className="text-xs text-secondary/40">© 2026 ZFZ </p>
         </Reveal>
       </div>
 

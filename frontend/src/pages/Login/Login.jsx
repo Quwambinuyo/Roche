@@ -42,12 +42,12 @@ const Login = () => {
     <AuthFormLayout
       sidePanel={{
         eyebrow: "Keep Going",
-        title: "BODESTRT",
+        title: "ZFZ",
         tagline: "Login Console",
         listLabel: "Manifest",
         items: MODULES,
       }}
-      mobileTitle="BODESTRT"
+      mobileTitle="ZFZ"
       mobileTagline="Login Console"
       heading="Sign in"
       subheading="Enter your credentials to access the console."
@@ -62,7 +62,7 @@ const Login = () => {
         icon={FiMail}
         type="email"
         autoComplete="email"
-        placeholder="you@bodestrt.com"
+        placeholder="you@ZFZ.com"
         registration={register("email")}
         error={errors.email}
       />

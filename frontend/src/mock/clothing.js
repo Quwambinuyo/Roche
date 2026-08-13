@@ -49,8 +49,8 @@ export const CATEGORIES = [
 
 export const PRODUCTS = [
   {
-    slug: "bstrt-overshirt",
-    name: "BSTRT Overshirt",
+    slug: "zfz-overshirt",
+    name: "ZFZ Overshirt",
     price: "₦1,484,500",
     discount: 10,
     fabric: "COTTON TWILL",
@@ -113,8 +113,8 @@ export const PRODUCTS = [
     ],
   },
   {
-    slug: "waxed-bstrt-jacket",
-    name: "Waxed BSTRT Jacket",
+    slug: "waxed-zfz-jacket",
+    name: "Waxed ZFZ Jacket",
     price: "₦74,000",
     discount: 0,
     fabric: "WAXED CANVAS",
@@ -156,8 +156,8 @@ export const PRODUCTS = [
     ],
   },
   {
-    slug: "bstrt-field-cap",
-    name: "BSTRT Field Cap",
+    slug: "zfz-field-cap",
+    name: "ZFZ Field Cap",
     price: "₦14,000",
     discount: 0,
     fabric: "COTTON TWILL",
@@ -235,8 +235,8 @@ export const PRODUCTS = [
     ],
   },
   {
-    slug: "bstrt-aviators",
-    name: "BSTRT Aviators",
+    slug: "zfz-aviators",
+    name: "ZFZ Aviators",
     price: "₦22,000",
     discount: 0,
     fabric: "ACETATE",
@@ -336,8 +336,8 @@ export const PRODUCTS = [
     colors: [{ name: "Steel", hex: "#7a7f85", stock: 5 }],
   },
   {
-    slug: "bstrt-chrono",
-    name: "BSTRT Chrono",
+    slug: "zfz-chrono",
+    name: "ZFZ Chrono",
     price: "₦112,000",
     discount: 7,
     fabric: "STAINLESS STEEL",
@@ -443,7 +443,7 @@ export const BUNDLES = [
     ],
     category: "bundles",
     minUnits: 10,
-    items: ["ribbed-tee", "utility-cargo", "bstrt-field-cap"],
+    items: ["ribbed-tee", "utility-cargo", "zfz-field-cap"],
     image: fullkitshop,
     images: [fullkitshop, wearshop, ribbedTee, capshop],
     colors: [
@@ -468,7 +468,7 @@ export const BUNDLES = [
     ],
     category: "bundles",
     minUnits: 20,
-    items: ["bstrt-overshirt", "waxed-bstrt-jacket", "waterfront-windbreaker"],
+    items: ["zfz-overshirt", "waxed-zfz-jacket", "waterfront-windbreaker"],
     image: jacketshop,
     images: [jacketshop, outwear, jacket, wearshop],
     colors: [
@@ -489,7 +489,7 @@ export const BUNDLES = [
     sizes: [{ size: "M", stock: 40 }],
     category: "bundles",
     minUnits: 25,
-    items: ["canvas-tote", "waxed-belt", "bstrt-field-cap", "bstrt-aviators"],
+    items: ["canvas-tote", "waxed-belt", "zfz-field-cap", "zfz-aviators"],
     image: accessoryshop,
     images: [accessoryshop, accessoryshop1, capshop, glassesshop],
     colors: [
@@ -513,7 +513,7 @@ export const BUNDLES = [
     ],
     category: "bundles",
     minUnits: 15,
-    items: ["loading-dock-boot", "dockside-field-watch", "bstrt-chrono"],
+    items: ["loading-dock-boot", "dockside-field-watch", "zfz-chrono"],
     image: shoeshop,
     images: [shoeshop, watchshop, footwear, watchshop1],
     colors: [

@@ -34,7 +34,7 @@ const Footer = ({ onLogout }) => {
     <footer className="mt-10 border-t border-secondary/10 pt-10 pb-8 overflow-hidden">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
         <div>
-          <h3 className="font-bold text-lg text-secondary mb-3">BSTRT</h3>
+          <h3 className="font-bold text-lg text-secondary mb-3">ZFZ</h3>
           <p className="text-sm text-secondary/50">
             Considered pieces, built to last beyond a season.
           </p>
@@ -94,7 +94,7 @@ const Footer = ({ onLogout }) => {
       </div>
 
       <div className="mt-10 pt-6 border-t border-secondary/10 text-xs text-secondary/40">
-        © {new Date().getFullYear()} BSTRT. All rights reserved.
+        © {new Date().getFullYear()} ZFZ. All rights reserved.
       </div>
 
       <div className="mt-6 select-none w-full">
@@ -111,7 +111,7 @@ const Footer = ({ onLogout }) => {
             className="fill-secondary font-extrabold uppercase"
             style={{ fontSize: "180px" }}
           >
-            BSTRT
+            ZFZ
           </text>
         </svg>
       </div>

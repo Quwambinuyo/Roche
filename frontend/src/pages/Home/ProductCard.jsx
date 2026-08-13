@@ -170,15 +170,18 @@ const ProductCard = ({
 
         {showOutOfStock ? (
           <>
-            <span className="absolute top-3 right-3 bg-secondary text-primary text-[10px] font-semibold tracking-widest uppercase px-3 py-1.5 rounded-full">
-              Out of Stock
-            </span>
+            <div className="absolute top-3 right-3 flex flex-col items-center">
+              <div className="w-2.5 h-2.5 rounded-full border-2 border-secondary bg-primary -mb-px z-10" />
+              <span className="bg-primary text-secondary text-[10px] font-semibold tracking-widest uppercase px-3 py-1.5 rounded-md border border-dashed border-secondary/40 shadow-sm">
+                Sold Out
+              </span>
+            </div>
             <div className="absolute inset-0 bg-primary/10" />
           </>
         ) : (
           hasDiscount && (
-            <span className="absolute top-3 right-3 bg-red-500 text-white text-[10px] font-semibold tracking-widest uppercase px-3 py-1.5 rounded-full">
-              -{product.discount}%
+            <span className="absolute top-3 right-3 flex items-center gap-1.5 bg-primary/95 backdrop-blur-sm border border-secondary/15 text-secondary text-[10px] font-medium tracking-[0.15em] uppercase px-3 py-1.5 rounded-full shadow-sm">
+              −{product.discount}%
             </span>
           )
         )}
