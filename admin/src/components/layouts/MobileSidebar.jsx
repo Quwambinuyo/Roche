@@ -41,7 +41,7 @@ const MobileSidebar = ({ isOpen, onClose }) => {
         }`}
       >
         <div className="flex items-center justify-between px-6 pt-7 pb-6 border-b border-primary/10">
-          <p className="text-lg font-bold tracking-tight uppercase">BODESTRT</p>
+          <p className="text-lg font-bold tracking-tight uppercase">ZF</p>
 
           <button
             type="button"

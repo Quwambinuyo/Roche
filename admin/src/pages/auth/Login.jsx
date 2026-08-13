@@ -48,7 +48,7 @@ const Login = () => {
             Staff Portal
           </p>
           <h1 className="mt-4 text-5xl font-bold tracking-tight uppercase">
-            BODESTRT
+            ZF
           </h1>
           <p className="mt-3 font-mono text-xs tracking-widest uppercase text-primary/50">
             Ops Console
@@ -81,7 +81,7 @@ const Login = () => {
         <div className="w-full max-w-sm reveal reveal-in">
           <div className="lg:hidden mb-10 text-center">
             <h1 className="text-3xl font-bold tracking-tight text-secondary uppercase">
-              BODESTRT
+              ZF
             </h1>
             <p className="mt-1 font-mono text-[10px] tracking-[0.3em] uppercase text-secondary/40">
               Ops Console
@@ -125,7 +125,7 @@ const Login = () => {
                     id="email"
                     type="email"
                     autoComplete="email"
-                    placeholder="you@bodestrt.com"
+                    placeholder="you@ZF.com"
                     className="w-full bg-transparent outline-none text-sm text-secondary placeholder:text-secondary/30"
                     {...register("email")}
                   />

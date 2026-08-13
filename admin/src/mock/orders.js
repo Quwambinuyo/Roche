@@ -27,7 +27,7 @@ export const ORDERS = [
     },
     items: [
       {
-        product: p("bstrt-overshirt"),
+        product: p("ZF-overshirt"),
         size: "M",
         color: "Olive",
         quantity: 1,
@@ -56,7 +56,7 @@ export const ORDERS = [
     },
     items: [
       {
-        product: p("waxed-bstrt-jacket"),
+        product: p("waxed-ZF-jacket"),
         size: "L",
         color: "Forest",
         quantity: 1,
@@ -78,7 +78,7 @@ export const ORDERS = [
     },
     items: [
       {
-        product: p("bstrt-field-cap"),
+        product: p("ZF-field-cap"),
         size: "One Size",
         color: "Black",
         quantity: 3,
@@ -122,14 +122,14 @@ export const ORDERS = [
     },
     items: [
       {
-        product: p("bstrt-overshirt"),
+        product: p("ZF-overshirt"),
         size: "S",
         color: "Sand",
         quantity: 1,
         price: "₦48,500",
       },
       {
-        product: p("bstrt-field-cap"),
+        product: p("ZF-field-cap"),
         size: "One Size",
         color: "Olive",
         quantity: 1,

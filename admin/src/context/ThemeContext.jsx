@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { getItem, setItem } from "../utils/localStorage";
 
-const THEME_KEY = "bodestrt-theme";
+const THEME_KEY = "ZF-theme";
 
 const getInitialTheme = () => {
   const stored = getItem(THEME_KEY);

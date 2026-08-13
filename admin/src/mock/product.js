@@ -37,8 +37,8 @@ export const FABRIC_WORDS = [
 
 export const PRODUCTS = [
   {
-    slug: "bstrt-overshirt",
-    name: "BSTRT Overshirt",
+    slug: "ZF-overshirt",
+    name: "ZF Overshirt",
     price: "₦48,500",
     discount: 10,
     fabric: "COTTON TWILL",
@@ -107,8 +107,8 @@ export const PRODUCTS = [
     createdAt: "2026-01-28",
   },
   {
-    slug: "waxed-bstrt-jacket",
-    name: "Waxed BSTRT Jacket",
+    slug: "waxed-ZF-jacket",
+    name: "Waxed ZF Jacket",
     price: "₦74,000",
     discount: 0,
     fabric: "WAXED CANVAS",
@@ -131,8 +131,8 @@ export const PRODUCTS = [
     createdAt: "2026-03-10",
   },
   {
-    slug: "bstrt-field-cap",
-    name: "BSTRT Field Cap",
+    slug: "ZF-field-cap",
+    name: "ZF Field Cap",
     price: "₦14,000",
     discount: 0,
     fabric: "COTTON TWILL",
@@ -166,7 +166,7 @@ export const BUNDLES = [
     ],
     category: "bundles",
     minUnits: 10,
-    items: ["ribbed-tee", "utility-cargo", "bstrt-field-cap"],
+    items: ["ribbed-tee", "utility-cargo", "ZF-field-cap"],
     image: fullkitshop,
     images: [fullkitshop, wearshop],
     status: "active",

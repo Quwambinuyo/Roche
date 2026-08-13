@@ -23,7 +23,7 @@ const Sidebar = () => {
   return (
     <aside className="hidden md:flex w-60 shrink-0 flex-col bg-secondary text-primary">
       <div className="px-6 pt-7 pb-6 border-b border-primary/10">
-        <p className="text-lg font-bold tracking-tight uppercase">BODESTRT</p>
+        <p className="text-lg font-bold tracking-tight uppercase">ZF</p>
       </div>
 
       <nav className="flex-1 px-3 py-5 overflow-y-auto">
