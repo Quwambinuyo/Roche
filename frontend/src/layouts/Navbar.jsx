@@ -14,8 +14,8 @@ import { useTheme } from "../context/ThemeContext";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
 import { ROUTES, PRIMARY_NAV_LINKS } from "../constants/navLinks";
-import logolight from "../assets/icons/ZF-logo-light.jpg";
-import darklight from "../assets/icons/ZF-logo-dark.jpg";
+import logolight from "../assets/icons/zf-logo-light.jpg";
+import darklight from "../assets/icons/zf-logo-dark.jpg";
 
 const Navbar = () => {
   const { theme, toggleTheme, toggleSidebar } = useTheme();

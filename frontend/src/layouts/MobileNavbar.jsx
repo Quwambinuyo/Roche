@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FiMenu, FiShoppingCart, FiSun, FiMoon } from "react-icons/fi";
-import logolight from "../assets/icons/ZF-logo-light.jpg";
-import darklight from "../assets/icons/ZF-logo-dark.jpg";
+import logolight from "../assets/icons/zf-logo-light.jpg";
+import darklight from "../assets/icons/zf-logo-dark.jpg";
 
 import { useTheme } from "../context/ThemeContext";
 import { useCart } from "../context/CartContext";
