@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import ProductCard from "../Home/ProductCard";
 import ProductDetailsDrawer from "../Product/detail/ProductDetailsDrawer";
 import { PRODUCTS } from "../../mock/clothing";
+import { getSuggestions } from "../../utils/searchSuggestions";
 
 const searchProducts = (products, query) => {
   const q = query.trim().toLowerCase();
@@ -22,10 +23,11 @@ const searchProducts = (products, query) => {
 };
 
 const Search = () => {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("q") || "";
 
   const results = useMemo(() => searchProducts(PRODUCTS, query), [query]);
+  const suggestions = useMemo(() => getSuggestions(query), [query]);
 
   const [selectedColors, setSelectedColors] = useState({});
   const [drawerSlug, setDrawerSlug] = useState(null);
@@ -34,6 +36,10 @@ const Search = () => {
 
   const handleColorChange = (slug, colorName) => {
     setSelectedColors((prev) => ({ ...prev, [slug]: colorName }));
+  };
+
+  const handleSuggestionClick = (term) => {
+    setSearchParams({ q: term });
   };
 
   return (
@@ -45,6 +51,26 @@ const Search = () => {
             : "Enter a search term to see results"}
         </p>
       </div>
+
+      {suggestions.length > 0 && (
+        <div className="mb-8">
+          <p className="mb-3 text-xs font-medium uppercase tracking-wide text-tertiary-400">
+            {query ? "Suggestions" : "Popular searches"}
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {suggestions.map((term) => (
+              <button
+                key={term}
+                type="button"
+                onClick={() => handleSuggestionClick(term)}
+                className="rounded-full border border-tertiary-100 bg-primary px-4 py-1.5 text-sm text-secondary hover:bg-tertiary-50"
+              >
+                {term}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       {query && results.length === 0 && (
         <p className="text-sm text-tertiary-500">
