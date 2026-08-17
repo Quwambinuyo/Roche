@@ -30,7 +30,7 @@ export const SORT_OPTIONS = [
   { label: "Price: High to Low", value: "price-desc" },
 ];
 
-export const PRODUCTS_PER_PAGE = 8;
+export const PRODUCTS_PER_PAGE = 50;
 
 export const parsePrice = (price) =>
   Number(String(price).replace(/[^\d]/g, ""));

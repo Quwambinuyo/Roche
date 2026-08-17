@@ -23,32 +23,42 @@ const STYLES = {
 
 export const ToastProvider = ({ children }) => {
   const [toast, setToast] = useState(null);
+  const [isExiting, setIsExiting] = useState(false);
   const timeoutRef = useRef(null);
+  const exitTimeoutRef = useRef(null);
+
+  const dismissToast = useCallback(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    setIsExiting(true);
+    exitTimeoutRef.current = setTimeout(() => {
+      setToast(null);
+      setIsExiting(false);
+    }, 300);
+  }, []);
 
   const showToast = useCallback(
     (message, { type = "success", duration = 3000 } = {}) => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
+      if (exitTimeoutRef.current) {
+        clearTimeout(exitTimeoutRef.current);
+      }
 
+      setIsExiting(false);
       const id = crypto.randomUUID();
       setToast({ id, message, type });
 
       if (duration > 0) {
         timeoutRef.current = setTimeout(() => {
-          setToast((prev) => (prev?.id === id ? null : prev));
+          dismissToast();
         }, duration);
       }
     },
-    [],
+    [dismissToast],
   );
-
-  const dismissToast = useCallback(() => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-    setToast(null);
-  }, []);
 
   const Icon = toast ? (ICONS[toast.type] ?? Info) : null;
 
@@ -59,7 +69,9 @@ export const ToastProvider = ({ children }) => {
         <div className="fixed bottom-5 right-5 z-[999] w-[calc(100%-2.5rem)] max-w-sm">
           <div
             key={toast.id}
-            className={`flex items-center gap-3 rounded-lg border shadow-lg px-4 py-3 animate-in fade-in slide-in-from-bottom-2 duration-300 ${STYLES[toast.type]}`}
+            className={`flex items-center gap-3 rounded-lg border shadow-lg px-4 py-3 ${
+              isExiting ? "toast-out" : "toast-in"
+            } ${STYLES[toast.type]}`}
           >
             <Icon size={18} className="shrink-0" />
             <p className="text-sm font-medium flex-1">{toast.message}</p>

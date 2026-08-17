@@ -25,8 +25,10 @@ import {
   Wishlist,
   Categories,
   Gallery,
+  Search,
 } from "../pages/index";
 import PageMeta from "../layouts/PageMeta";
+import { ROUTES } from "../constants/navLinks";
 
 const AppRoutes = () => {
   return (
@@ -63,6 +65,7 @@ const AppRoutes = () => {
           <Route path="cart" element={<Cart />} />
           <Route path="wishlist" element={<Wishlist />} />
           <Route path="contact" element={<Contact />} />
+          <Route path={ROUTES.SEARCH} element={<Search />} />
 
           <Route path="checkout" element={<Checkout />} />
           <Route

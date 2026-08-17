@@ -39,6 +39,7 @@
     "requests": "^0.3.0",
     "swiper": "^14.0.7",
     "tailwindcss": "^4.3.3",
+    "tailwindcss-animate": "^1.0.7",
     "zod": "^4.4.3"
   },
   "devDependencies": {

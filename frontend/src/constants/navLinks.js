@@ -8,8 +8,8 @@ export const ROUTES = {
   PROFILE: "/profile",
   CONTACT: "/contact",
   LOGIN: "/login",
+  SEARCH: "/search",
 };
-
 export const PRIMARY_NAV_LINKS = [
   { label: "Home", path: ROUTES.HOME },
   { label: "Shop", path: ROUTES.SHOP },

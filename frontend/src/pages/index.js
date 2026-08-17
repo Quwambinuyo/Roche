@@ -17,3 +17,4 @@ export { default as Shop } from "./Shop/Shop";
 export { default as Landing } from "./Landing/Landing";
 export { default as Categories } from "./Categories/Categories";
 export { default as Gallery } from "./Gallery/Gallery";
+export { default as Search } from "./Search/Search";
