@@ -14,6 +14,8 @@ import { useSearchParamState } from "../../hooks/useSearchParamState";
 
 const ALL_ITEMS = [...PRODUCTS, ...BUNDLES];
 
+//
+
 const Shop = () => {
   const { searchParams, setParam, clearParams } = useSearchParamState();
   const [drawerSlug, setDrawerSlug] = useState(null);
