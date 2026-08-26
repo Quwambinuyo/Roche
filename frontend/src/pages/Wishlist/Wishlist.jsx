@@ -58,7 +58,7 @@ const WishlistCard = ({ product, onRemove, onAddToCart }) => {
       <p className="text-sm font-medium text-secondary mt-3">{product.name}</p>
 
       <div className="flex items-center justify-between mt-1">
-        <span className="text-sm text-secondary/70">
+        <span className="text-sm text-secondary/70 quicksand">
           {isOutOfStock ? "Out of Stock" : product.price}
         </span>
 

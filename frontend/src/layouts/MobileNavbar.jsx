@@ -9,8 +9,6 @@ import {
   FiX,
   FiArrowLeft,
 } from "react-icons/fi";
-import logolight from "../assets/icons/zf-logo-light.jpg";
-import darklight from "../assets/icons/zf-logo-dark.jpg";
 
 import { useTheme } from "../context/ThemeContext";
 import { useCart } from "../context/CartContext";
@@ -76,7 +74,7 @@ const MobileNavbar = () => {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search products..."
-              className="w-full rounded-full border border-tertiary-100 bg-tertiary-50/60 py-2.5 pl-10 pr-9 text-sm text-secondary placeholder:text-secondary/40 focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:bg-primary transition-colors duration-200"
+              className="w-full rounded-full border border-tertiary-100 py-2.5 pl-10 pr-9 text-sm text-secondary  focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:bg-primary transition-colors duration-200"
             />
             {query && (
               <button
@@ -105,11 +103,9 @@ const MobileNavbar = () => {
             aria-label="ZF home"
             className="justify-self-center"
           >
-            <img
-              src={theme === "dark" ? darklight : logolight}
-              alt="ZF"
-              className="h-15 w-auto object-contain"
-            />
+            <span className="oldenburg-regular text-5xl text-secondary">
+              ZF
+            </span>
           </Link>
 
           <div className="flex items-center gap-0.5 justify-self-end">
@@ -140,7 +136,7 @@ const MobileNavbar = () => {
             >
               <FiShoppingCart size={19} />
               {itemCount > 0 && (
-                <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-tertiary-600 text-[10px] font-semibold text-primary">
+                <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-800 text-[10px] font-semibold text-primary">
                   {itemCount}
                 </span>
               )}

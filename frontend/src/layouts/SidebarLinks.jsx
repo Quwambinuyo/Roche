@@ -24,17 +24,23 @@ const LINKS = [
   { label: "Contact", path: ROUTES.CONTACT, icon: FiPhone },
 ];
 
-const SidebarLinks = ({ onLinkClick }) => {
+const SidebarLinks = ({ onLinkClick, isOpen }) => {
   return (
     <nav className="flex flex-col gap-1">
-      {LINKS.map(({ label, path, icon: Icon }) => (
+      {LINKS.map(({ label, path, icon: Icon }, index) => (
         <NavLink
           key={path}
           to={path}
           onClick={onLinkClick}
+          style={{
+            transitionDelay: isOpen ? `${index * 60 + 100}ms` : "0ms",
+          }}
           className={({ isActive }) =>
             [
-              "flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-colors",
+              "flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium oldenburg-regular",
+              isOpen
+                ? "motion-opacity-in-0 motion-translate-x-in-25 motion-duration-300 motion-ease-spring-smooth"
+                : "opacity-0 -translate-x-3",
               isActive
                 ? "bg-secondary text-primary"
                 : "text-secondary hover:bg-secondary/5",

@@ -170,7 +170,7 @@ const ProductDetails = ({ slugOverride, immediate = false }) => {
         </div>
 
         <Reveal delay={50} className="w-full space-y-4" immediate={immediate}>
-          <div>
+          <div className="quicksand">
             <p className="text-xs font-semibold tracking-widest text-secondary/50 uppercase">
               {isBundle ? "Wholesale Bundle" : product.category}
             </p>

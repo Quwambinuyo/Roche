@@ -23,7 +23,7 @@ const Cart = () => {
   } = useCart();
 
   return (
-    <div className="">
+    <div className="quicksand">
       <Reveal className="mb-8">
         <p className="text-xs font-semibold tracking-widest text-secondary/50 uppercase">
           Cart

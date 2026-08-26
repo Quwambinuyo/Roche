@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "tailwindcss-motion";
 
 /* Tells Tailwind's dark: variant to key off a .dark class on an ancestor
    (added to <html> by ThemeContext) instead of the OS prefers-color-scheme. */
@@ -60,6 +61,19 @@
   font-weight: 500;
   font-style: normal;
   font-variation-settings: "wdth" 100;
+}
+
+.quicksand {
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.oldenburg-regular {
+  font-family: "Oldenburg", serif;
+  font-weight: 600;
+  font-style: normal;
 }
 
 body {

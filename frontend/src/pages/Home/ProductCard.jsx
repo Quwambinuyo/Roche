@@ -17,6 +17,14 @@ import { getStockStatus } from "../../utils/productStock";
 
 const SIZE_DRAWER_THRESHOLD = 1;
 
+const SWATCH_DELAYS = [
+  "motion-delay-0",
+  "motion-delay-50",
+  "motion-delay-100",
+  "motion-delay-150",
+  "motion-delay-200",
+];
+
 const ProductCard = ({
   product,
   selectedColor,
@@ -36,6 +44,7 @@ const ProductCard = ({
 
   const [isHovering, setIsHovering] = useState(false);
   const [imageIndex, setImageIndex] = useState(0);
+  const [wishlistPulse, setWishlistPulse] = useState(false);
 
   if (!product) return null;
 
@@ -101,6 +110,8 @@ const ProductCard = ({
     e.preventDefault();
     e.stopPropagation();
     toggleWishlist(product);
+    setWishlistPulse(true);
+    setTimeout(() => setWishlistPulse(false), 250);
   };
 
   const handleMouseEnter = () => {
@@ -136,10 +147,10 @@ const ProductCard = ({
         <RevealImage
           src={images[0]}
           alt={product.name}
-          className={`w-full h-full transition-opacity duration-300 ${
+          className={`w-full h-full transition-opacity duration-150 ${
             showOutOfStock ? "opacity-60" : ""
           }`}
-          imgClassName="transition-transform duration-500 group-hover:scale-105"
+          imgClassName="transition-transform duration-200 ease-out group-hover:scale-105"
         />
 
         {hasMultipleImages &&
@@ -152,7 +163,7 @@ const ProductCard = ({
                 key={src}
                 src={src}
                 alt={product.name}
-                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-150 ${
                   isActive ? "opacity-100" : "opacity-0"
                 } ${showOutOfStock ? "opacity-60" : ""}`}
               />
@@ -163,7 +174,11 @@ const ProductCard = ({
           type="button"
           onClick={handleToggleWishlist}
           aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
-          className="absolute top-3 left-3 w-9 h-9 rounded-full flex items-center justify-center shadow-lg bg-primary text-secondary hover:bg-secondary hover:text-primary transition-all duration-300"
+          className={`absolute top-3 left-3 w-9 h-9 rounded-full flex items-center justify-center shadow-lg bg-primary text-secondary hover:bg-secondary hover:text-primary transition-colors duration-150 ${
+            wishlistPulse
+              ? "motion-scale-in-125 motion-duration-200 motion-ease-spring-snappy"
+              : ""
+          }`}
         >
           <FiHeart size={15} className={wishlisted ? "fill-current" : ""} />
         </button>
@@ -180,7 +195,7 @@ const ProductCard = ({
           </>
         ) : (
           hasDiscount && (
-            <span className="absolute top-3 right-3 flex items-center gap-1.5 bg-primary/95 backdrop-blur-sm border border-secondary/15 text-secondary text-[10px] font-medium tracking-[0.15em] uppercase px-3 py-1.5 rounded-full shadow-sm">
+            <span className="absolute top-3 right-3 flex items-center gap-1.5 bg-primary/95 backdrop-blur-sm border border-secondary/15 text-secondary text-[10px] font-medium tracking-[0.15em] uppercase px-3 py-1.5 rounded-full shadow-sm motion-preset-pop motion-duration-200 motion-ease-spring-snappy">
               −{product.discount}%
             </span>
           )
@@ -192,10 +207,10 @@ const ProductCard = ({
               type="button"
               onClick={handlePrevImage}
               aria-label="Previous image"
-              className={`absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center bg-primary/90 text-secondary shadow-md transition-all duration-300 ease-out ${
+              className={`absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center bg-primary/90 text-secondary shadow-md ${
                 isHovering
-                  ? "opacity-100 scale-100"
-                  : "opacity-0 scale-0 pointer-events-none"
+                  ? "motion-opacity-in-0 motion-duration-150"
+                  : "opacity-0 pointer-events-none"
               }`}
             >
               <FiChevronLeft size={16} />
@@ -204,10 +219,10 @@ const ProductCard = ({
               type="button"
               onClick={handleNextImage}
               aria-label="Next image"
-              className={`absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center bg-primary/90 text-secondary shadow-md transition-all duration-300 ease-out delay-75 ${
+              className={`absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center bg-primary/90 text-secondary shadow-md ${
                 isHovering
-                  ? "opacity-100 scale-100"
-                  : "opacity-0 scale-0 pointer-events-none"
+                  ? "motion-opacity-in-0 motion-duration-150"
+                  : "opacity-0 pointer-events-none"
               }`}
             >
               <FiChevronRight size={16} />
@@ -217,7 +232,7 @@ const ProductCard = ({
               {images.map((_, idx) => (
                 <span
                   key={idx}
-                  className={`h-1 rounded-full transition-all duration-300 ${
+                  className={`h-1 rounded-full transition-all duration-150 ${
                     idx === imageIndex ? "w-4 bg-primary" : "w-1 bg-primary/50"
                   }`}
                 />
@@ -227,14 +242,14 @@ const ProductCard = ({
         )}
 
         {!showOutOfStock && (
-          <div className="absolute bottom-3 right-3">
+          <div className="absolute bottom-3 right-3 opacity-0 translate-x-3 pointer-events-none transition-none group-hover:opacity-100 group-hover:translate-x-0 group-hover:pointer-events-auto group-hover:motion-opacity-in-0 group-hover:motion-translate-x-in-25 group-hover:motion-duration-150 group-hover:motion-ease-spring-snappy">
             {cartCount === 0 || needsSizeDrawer ? (
               <button
                 type="button"
                 onClick={handleAdd}
                 disabled={!needsSizeDrawer && !canAddToCart}
                 aria-label={needsSizeDrawer ? "Choose size" : "Add to cart"}
-                className="w-10 h-10 rounded-full flex items-center justify-center shadow-lg bg-primary text-secondary hover:bg-secondary hover:text-primary transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed"
+                className="w-10 h-10 rounded-full flex items-center justify-center shadow-lg bg-primary text-secondary hover:bg-secondary hover:text-primary transition-colors duration-150 disabled:opacity-40 disabled:cursor-not-allowed active:scale-90"
               >
                 <BsCart4 size={16} />
               </button>
@@ -244,7 +259,7 @@ const ProductCard = ({
                   type="button"
                   onClick={handleRemove}
                   aria-label="Decrease quantity"
-                  className="w-8 h-8 rounded-full flex items-center justify-center text-secondary hover:bg-secondary hover:text-primary transition-colors duration-200"
+                  className="w-8 h-8 rounded-full flex items-center justify-center text-secondary hover:bg-secondary hover:text-primary transition-colors duration-150 active:scale-90"
                 >
                   <FiMinus size={14} />
                 </button>
@@ -255,7 +270,7 @@ const ProductCard = ({
                   type="button"
                   onClick={handleAdd}
                   aria-label="Increase quantity"
-                  className="w-8 h-8 rounded-full flex items-center justify-center text-secondary hover:bg-secondary hover:text-primary transition-colors duration-200"
+                  className="w-8 h-8 rounded-full flex items-center justify-center text-secondary hover:bg-secondary hover:text-primary transition-colors duration-150 active:scale-90"
                 >
                   <FiPlus size={14} />
                 </button>
@@ -265,7 +280,7 @@ const ProductCard = ({
         )}
       </div>
 
-      <div className="h-px w-10 bg-secondary mt-3" />
+      <div className="h-px w-10 bg-secondary mt-3 transition-all duration-150 group-hover:w-full" />
 
       <p
         className={`text-sm font-medium mt-3 ${
@@ -282,7 +297,7 @@ const ProductCard = ({
           </span>
         )}
         <span
-          className={`text-sm ${
+          className={`quicksand text-sm ${
             showOutOfStock ? "text-secondary/40" : "text-secondary/70"
           }`}
         >
@@ -296,7 +311,7 @@ const ProductCard = ({
 
       {hasColors && (
         <div className="flex items-center gap-1.5 my-2">
-          {product.colors.map((color) => {
+          {product.colors.map((color, idx) => {
             const colorOutOfStock = color.stock <= 0;
             const isActive = activeColorName === color.name;
 
@@ -314,9 +329,11 @@ const ProductCard = ({
                   colorOutOfStock ? `${color.name} — out of stock` : color.name
                 }
                 aria-label={color.name}
-                className={`relative w-4 h-4 rounded-full border transition-all duration-200 ${
+                className={`relative w-4 h-4 rounded-full border transition-transform duration-150 active:scale-90 group-hover:motion-opacity-in-0 group-hover:motion-duration-150 ${
+                  SWATCH_DELAYS[idx % SWATCH_DELAYS.length]
+                } ${
                   isActive
-                    ? "ring-2 ring-secondary ring-offset-2 ring-offset-primary"
+                    ? "ring-2 ring-secondary ring-offset-2 ring-offset-primary scale-110"
                     : "border-secondary/20"
                 } ${
                   colorOutOfStock
