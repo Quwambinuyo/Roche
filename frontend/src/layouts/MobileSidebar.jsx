@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FiX } from "react-icons/fi";
 
 import { useTheme } from "../context/ThemeContext";
@@ -6,6 +6,21 @@ import SidebarLinks from "./SidebarLinks";
 
 const MobileSidebar = () => {
   const { isSidebarOpen, closeSidebar } = useTheme();
+
+  useEffect(() => {
+    if (isSidebarOpen) {
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    };
+  }, [isSidebarOpen]);
 
   return (
     <>
@@ -22,7 +37,7 @@ const MobileSidebar = () => {
 
       <div
         className={[
-          "fixed inset-y-0 left-0 z-50 flex md:hidden h-full transition-transform duration-300 ease-out",
+          "fixed inset-y-0 left-0 z-50 flex h-full md:hidden transition-transform duration-300 ease-out",
           isSidebarOpen ? "translate-x-0" : "-translate-x-[120%]",
         ].join(" ")}
       >

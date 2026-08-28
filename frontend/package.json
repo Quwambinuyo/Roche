@@ -39,7 +39,6 @@
     "requests": "^0.3.0",
     "swiper": "^14.0.7",
     "tailwindcss": "^4.3.3",
-    "tailwindcss-animate": "^1.0.7",
     "zod": "^4.4.3"
   },
   "devDependencies": {
@@ -47,7 +46,6 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.4",
     "oxlint": "^1.75.0",
-    "tailwindcss-motion": "^1.1.1",
     "vite": "^8.2.0"
   }
 }
